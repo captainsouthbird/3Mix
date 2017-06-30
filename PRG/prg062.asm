@@ -1401,7 +1401,7 @@ PRG062_88E9:
 	LDA <Map_Enter2PFlag
 	BEQ PRG062_891A	 	; If not entering 2P Vs mode, jump to PRG062_891A
 
-Begin_BattleMode:	; RAS
+Begin_BattleMode:	; SB
 	; 2P Vs mode begin!
 
 	; Level_Tileset = 18 (2P Vs)
@@ -3619,11 +3619,11 @@ PRG062_93B1:
 	STA PPU_CTL1
 	STA PPU_CTL2
 
-	; Make sure we have GOOD map return status! (RAS)
+	; Make sure we have GOOD map return status! (SB)
 	LDA #0
 	STA Map_ReturnStatus
 
-	; But check loss (RAS)
+	; But check loss (SB)
 	LDA Map_PlayerLost2PVs
 	BNE Battle_PlayerLost
 	
@@ -4655,7 +4655,7 @@ PRG062_980D:
 	LSR A		
 	STA Level_SelXStart	 
 
-	; Finally, bit 7 sets Music_InvertEn (RAS)
+	; Finally, bit 7 sets Music_InvertEn (SB)
 	LDA [Level_LayPtr_AddrL],Y
 	AND #$80
 	ASL A
@@ -4805,7 +4805,7 @@ LLMEVI_NotDDComet:
 	BNE LLMEVI_MusicOverride
 
 LLMEVI_NotPComet
-	; Bits 0-4 (RAS) select a BGM
+	; Bits 0-4 (SB) select a BGM
 	LDA [Level_LayPtr_AddrL],Y
 	AND #%00011111
 	TAX
@@ -6292,7 +6292,7 @@ PRG062_9F52:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Level_SetupCPStart (RAS)
+; Level_SetupCPStart (SB)
 ;
 ; Configures checkpoint start position and scroll for starting
 ; Player at checkpoint rather than level header position

@@ -1659,7 +1659,7 @@ GndMov_Penguin:
 	JSR Player_GroundHControl ; Do Player left/right input control
 	JSR Player_JumpFlyFlutter ; Do Player jump, fly, flutter wag
 
-	; RAS
+	; SB
 	JSR Player_SoarJumpFallFrame ; Do Player soar/jump/fall frame
 	JSR Player_ShootAnim ; Do Player shooting animation
 	JMP Player_YoshiMove	   ; Update Yoshi
@@ -2783,7 +2783,7 @@ Player_AnimTailWag:
 	LDA Player_IsDucking
 	BNE PRG008_B082	 ; If Player is ducking, jump to PRG008_B082
 
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	BPL PRG008_B062	 ; If Player is NOT HOLDING A, jump to PRG008_B062
 
 
@@ -4388,7 +4388,7 @@ PSwitch_NoVibe:
 	STA Sound_QLevel1
 
 	LDA #$DF
-	STA Level_PSwitchCnt	 ; Level_PSwitchCnt = $DF (duration of switch; RAS)
+	STA Level_PSwitchCnt	 ; Level_PSwitchCnt = $DF (duration of switch; SB)
 
 	; Play P-Switch song
 	LDA #MUS2B_PSWITCH

@@ -1327,7 +1327,7 @@ BONUS_UNUSED_2RETURN	= 7	; MAY have been Koopa Troopa's "Prize" Game...
 	; Special Object IDs:
 SOBJ_HAMMER		= $01	; Hammer Bro hammer
 SOBJ_BOOMERANG		= $02	; Boomerangs
-SOBJ_ALTLEVELMOD	= $03	; Alternate Level Modifier (RAS)
+SOBJ_ALTLEVELMOD	= $03	; Alternate Level Modifier (SB)
 SOBJ_NIPPERFIREBALL	= $04 	; Nipper fireball (falls)
 SOBJ_PIRANHAFIREBALL	= $05	; Piranha fireball
 SOBJ_MICROGOOMBA	= $06 	; Micro goombas
@@ -1347,7 +1347,7 @@ SOBJ_BRICKDEBRIS	= $13 	; Brick debris (used for busting e.g. Piledriver Microgr
 SOBJ_BLOOPERKID		= $14 	; Blooper kid
 SOBJ_LASER		= $15 	; Laser
 SOBJ_POOF		= $16 	; Poof
-SOBJ_TOUCHWARP		= $17	; Touch Warp (RAS)
+SOBJ_TOUCHWARP		= $17	; Touch Warp (SB)
 SOBJ_POKEYBODY	= $18	; A segment of Pokey's body
 SOBJ_ALBABOMB	= $19	; Albatoss's bomb!
 	SpecialObj_ID:		.ds 8	; Special object spawn event IDs
@@ -1838,10 +1838,10 @@ CHNGTILE_4WAYCANNON	= $20
 CHNGTILE_GIANTBRICKBUST	= $21	; Giant World brick bust
 CHNGTILE_GIANTBLOCKHIT	= $22	; Giant World [?] block hit to metal
 CHNGTILE_GIANTBRICKFIX	= $23	; Giant World brick restore (small Mario hit giant brick)
-CHNGTILE_PIPERAISE1	= $24	; Pipe raise (RAS) Stage 1
-CHNGTILE_PIPERAISE2	= $25	; Pipe raise (RAS) Stage 2
-CHNGTILE_PIPERAISE3	= $26	; Pipe raise (RAS) Stage 3
-CHNGTILE_PIPERAISE4	= $27	; Pipe raise (RAS) Stage 4
+CHNGTILE_PIPERAISE1	= $24	; Pipe raise (SB) Stage 1
+CHNGTILE_PIPERAISE2	= $25	; Pipe raise (SB) Stage 2
+CHNGTILE_PIPERAISE3	= $26	; Pipe raise (SB) Stage 3
+CHNGTILE_PIPERAISE4	= $27	; Pipe raise (SB) Stage 4
 ; ...
 CHNGTILE_FENCEROT1	= $30	; Fence rotation 1/3
 CHNGTILE_FENCEROT2	= $31	; Fence rotation 2/3
@@ -2104,7 +2104,7 @@ OBJSTATE_POOFDEATH	= 8	; "Poof" Death (e.g. Piranha death)
 	Objects_QSandCtr:	.ds 8	; $06EB-$06F2 When enemy has fallen into quicksand, increments until $90 which deletes it
 
 	Player_ReverseGrav:	.ds 1	; When set, Player reverse gravity (due to many, many dependencies, expecting exactly $01 to set reverse gravity)
-	Objects_ReverseGrav:	.ds 8	; $06F4-$06FB Object with reverse gravity (RAS)
+	Objects_ReverseGrav:	.ds 8	; $06F4-$06FB Object with reverse gravity (SB)
 
 	LevelJctBQ_Flag:	.ds 1	; Set to '1' while in a Big Question block area, locks horizontal scrolling
 	Level_JctBackupTileset:	.ds 1	; Level Junction tileset backup
@@ -2652,7 +2652,7 @@ LevCP_End
 	Map_Entered_Y:		.ds 2	; $7976-$7977 (Mario/Luigi) Stores the Y value when you enter a level; this is the Y used if you complete the level
 	Map_Entered_XHi:	.ds 2	; $7978-$7979 (Mario/Luigi) Hi byte for Map_Entered_X
 	Map_Entered_X:		.ds 2	; $797A-$797B (Mario/Luigi) Same as Map_Entered_Y, only for X
-	Map_Previous_World:	.ds 2	; $797C-$797D (Mario/Luigi) World Player is on (RAS)
+	Map_Previous_World:	.ds 2	; $797C-$797D (Mario/Luigi) World Player is on (SB)
 	Map_Previous_Y:		.ds 2	; $797E-$797F (Mario/Luigi) Stores the previous Y you were "safe" at; this is the Y you go back to if you die
 	Map_Previous_XHi:	.ds 2	; $7980-$7981 (Mario/Luigi) Same as Map_Previous_Y, only for XHi
 	Map_Previous_X:		.ds 2	; $7982-$7983 (Mario/Luigi) Same as Map_Previous_Y, only for X
@@ -2973,7 +2973,7 @@ MCOMP_SCOIN2	= %00000010	; Bit 1 - Star Coin 2 collected
 MCOMP_SCOIN1	= %00000100	; Bit 2 - Star Coin 1 collected
 MCOMP_COMPLETE	= %00010000	; Bit 4 - Level Completed (non-secret/alternate exit)
 MCOMP_SECRET	= %00100000	; Bit 5 - Level Completed (secret/alternate exit)
-	Map_Completions: .ds 128	; RAS 4/16/14 - I count $73 links, leaving a little buffer
+	Map_Completions: .ds 128	; SB 4/16/14 - I count $73 links, leaving a little buffer
 
 	; Holds 8 bits (lining up to the first 8 map objects) per world
 	Map_ObjCompletions:	.ds 10	; NOTE: No map objects in Star Road or World Zero

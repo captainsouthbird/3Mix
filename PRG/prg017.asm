@@ -233,7 +233,7 @@ LoadLevel_Generator_TS4_TS12:
 	.word LoadLevel_LargeIceBlocks		; 52 - Run of large 2x2 ice blocks
 	.word LoadLevel_LittleCloudRun		; 53 - Put in a run of those little smiling Judgem's type clouds
 	.word LoadLevel_Muncher17		; 54 - Long run of munchers
-	.word LoadLevel_LongSMB2Ground		; 55 - Long SMB2 style ground (RAS)
+	.word LoadLevel_LongSMB2Ground		; 55 - Long SMB2 style ground (SB)
 	.word LoadLevel_LargeMushPlat		; 56 - Long mushroom platform (for SMB1 classic style)
 	.word LoadLevel_SkyVert			; 57 - Vertical run of sky tiles (mainly for making large green platforms where they normally can't be)
 	.word LoadLevel_BGBlackSpace	; 58 - Rectangle of black background

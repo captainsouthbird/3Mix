@@ -125,8 +125,8 @@ Level_MinTileUWByQuad:
 	; Which "group" they use is specified by the respective value in ObjectGroup_Attributes2
 Object_TileDetectOffsets:
 
-	; YR = Y offset when reverse gravity (RAS)
-	; YN = Y offset when normal gravity (RAS)
+	; YR = Y offset when reverse gravity (SB)
+	; YN = Y offset when normal gravity (SB)
 	; X = X offset
 
 	; For groups:
@@ -1950,7 +1950,7 @@ PRG000_C975:
 	STX <SlotIndexBackup	 ; Backup current object index -> SlotIndexBackup
 
 	LDA <Player_HaltGame		; If gameplay is halted ...
-	ORA Objects_FrozenTimer,X	; ... or object is frozen (RAS)
+	ORA Objects_FrozenTimer,X	; ... or object is frozen (SB)
 	BNE PRG000_C9B6	 			; ... jump to PRG000_C9B6
 
 	LDA Objects_Timer,X
@@ -4647,10 +4647,10 @@ Level_PrepareNewObject:
 	STA Objects_FlipBits,X
 	STA Objects_Frame,X	
 	STA Objects_ColorCycle,X
-	STA Objects_ReverseGrav,X	; RAS
-	STA Objects_FrozenTimer,X	; RAS
-	STA Objects_IsBehind,X		; RAS
-	STA Objects_StompDisable,X	; RAS
+	STA Objects_ReverseGrav,X	; SB
+	STA Objects_FrozenTimer,X	; SB
+	STA Objects_IsBehind,X		; SB
+	STA Objects_StompDisable,X	; SB
 	STA <Objects_DetStat,X	
 	STA Objects_PlayerHitStat,X
 	STA Objects_Var7,X
@@ -5311,7 +5311,7 @@ PRG000_D789:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Object_StealAdjSprite (RAS)
+; Object_StealAdjSprite (SB)
 ;
 ; SMB3 standard dictates that each of the first five object slots 
 ; total maximum of 6 8x16 sprites.  This function is "mean", unlike 

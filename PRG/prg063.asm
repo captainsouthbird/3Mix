@@ -736,7 +736,7 @@ Music_Sq2NoteOn:
 	TAX			 ; X = A (saving A)
 	LDA SndCur_Level1	 ; 
 	ORA Sound_IsPaused
-	BNE PRG063_E574		 ; If a "level 1" sound is playing or paused (RAS), you can't use Square 2!
+	BNE PRG063_E574		 ; If a "level 1" sound is playing or paused (SB), you can't use Square 2!
 
 	; Level 1 sound is not playing...
 	TXA			 ; A = X (restoring A)
@@ -861,7 +861,7 @@ Music_Sq1NoteOn:
 	LDA SndCur_Player
 	ORA SndCur_Map	
 	ORA Sound_IsPaused
-	BNE PRG063_E625	 ; If Player or Map sounds active or paused (RAS), you can't play on this track!  Jump to PRG063_E625
+	BNE PRG063_E625	 ; If Player or Map sounds active or paused (SB), you can't play on this track!  Jump to PRG063_E625
 	TXA		 ; Restore A
 
 	JSR Sound_Sq1_NoteOn_NoPAPURAMP	; Play note!  Returns 0 if $7e rest was played...

@@ -203,7 +203,7 @@ PRG043_AF9E:
 	.word SObj_DoNothing	; 00: EMPTY / NOT USED (should never get here anyway)
 	.word SObj_Hammer	; 01: Hammer Bro hammer
 	.word SObj_Boomerang	; 02: Boomerangs
-	.word SObj_AltLvlMod	; 03: Alternate level modifier special object (RAS)
+	.word SObj_AltLvlMod	; 03: Alternate level modifier special object (SB)
 	.word SObj_Fireball	; 04: Nipper fireball
 	.word SObj_Fireball	; 05: Piranha fireball
 	.word SObj_Microgoomba	; 06: Micro goombas
@@ -223,7 +223,7 @@ PRG043_AF9E:
 	.word SObj_BlooperKid	; 14: Blooper kid
 	.word SObj_Laser	; 15: Laser
 	.word SObj_Poof		; 16: Poof
-	.word SObj_TouchWarp	; 17: Touch Warp object (RAS)
+	.word SObj_TouchWarp	; 17: Touch Warp object (SB)
 	.word SObj_PokeyBody	; 18: Pokey Body segment
 	.word SObj_Albabomb	; 19: Albatoss bomb!
 

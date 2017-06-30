@@ -2157,7 +2157,7 @@ PRG003_AAD9:
 	.word BoomBoom_SeconaryAttack	; 3: Boom Boom jumps about or flies, depending
 	.word BoomBoom_FinalAttack	; 4: Second hit
 	.word BoomBoom_Death		; 5: Kaboom Death
-	.word BoomBoom_TimeOut		; 6: RAS NEW: Boom Boom just takes care of level end
+	.word BoomBoom_TimeOut		; 6: SB NEW: Boom Boom just takes care of level end
 
 BoomBoom_Init:
 

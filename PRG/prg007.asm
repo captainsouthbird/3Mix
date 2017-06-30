@@ -2551,7 +2551,7 @@ PRG007_BD49:
 	SBC #$00
 	STA <Objects_YHi,X
 
-	; It's ... random! (RAS)
+	; It's ... random! (SB)
 	;LDA RandomN
 	;AND #1
 	;ASL A

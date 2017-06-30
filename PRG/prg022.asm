@@ -1172,9 +1172,9 @@ BonusText_HostGreetPtrL:
 	.byte LOW(BonusGame_UNUSED0_Text)	; 0: UNUSED (Japanese) Give key / coins
 	.byte LOW(BonusGame_Spade_Text)		; 1: Standard Spade Game instruction (OLD position of "Odd" game)
 	.byte LOW(BonusGame_NSpade_Text)	; 2: N-Spade instruction (OLD position of "Even" Game)
-	.byte LOW(BonusGame_BattleStart)	; 3: (RAS) NEW Battle game
-	.byte LOW(BonusGame_BattleStart)	; 4: (RAS) NEW Battle game
-	.byte LOW(BonusGame_LaddersStart)	; 5: (RAS) NEW Ladder game
+	.byte LOW(BonusGame_BattleStart)	; 3: (SB) NEW Battle game
+	.byte LOW(BonusGame_BattleStart)	; 4: (SB) NEW Battle game
+	.byte LOW(BonusGame_LaddersStart)	; 5: (SB) NEW Ladder game
 	.byte LOW(BonusGame_FountainStart)	; 6: UNUSED (Japanese) "If an even number appears, I'll let you play the Card Game."
 	.byte LOW(BonusGame_UNUSED7_Text)	; 7: UNUSED (Japanese) "2, return (?)"
 
@@ -1182,9 +1182,9 @@ BonusText_HostGreetPtrH:
 	.byte HIGH(BonusGame_UNUSED0_Text)	; 0: UNUSED (Japanese) Give key / coins
 	.byte HIGH(BonusGame_Spade_Text)	; 1: Standard Spade Game instruction (OLD position of "Odd" game)
 	.byte HIGH(BonusGame_NSpade_Text)	; 2: N-Spade instruction (OLD position of "Even" game)
-	.byte HIGH(BonusGame_BattleStart)	; 3: (RAS) NEW Battle game
-	.byte HIGH(BonusGame_BattleStart)	; 4: (RAS) NEW Battle game
-	.byte HIGH(BonusGame_LaddersStart)	; 5: (RAS) NEW Ladder game
+	.byte HIGH(BonusGame_BattleStart)	; 3: (SB) NEW Battle game
+	.byte HIGH(BonusGame_BattleStart)	; 4: (SB) NEW Battle game
+	.byte HIGH(BonusGame_LaddersStart)	; 5: (SB) NEW Ladder game
 	.byte HIGH(BonusGame_FountainStart)	; 6: UNUSED (Japanese) "If an even number appears, I'll let you play the Card Game."
 	.byte HIGH(BonusGame_UNUSED7_Text)	; 7: UNUSED (Japanese) "2, return (?)"
 
@@ -1265,7 +1265,7 @@ PRG022_C8A0:
 	.word Bonus_DoHostText	; 7: Giving instructions for Spade/N-Spade (LEGACY: For "Round 2" game)
 	.word Bonus_WaitA0	; 8: Wait $A0 ticks
 	.word Bonus_KTPrizeGame	; 9: Appears to be all that was implemented toward "winning" the Koopa Troopa "Prize" Game
-	.word Bonus_FromBattle	; 10: (RAS) State to support returning from battle; draw full dialog box and transition to state 6
+	.word Bonus_FromBattle	; 10: (SB) State to support returning from battle; draw full dialog box and transition to state 6
 
 Bonus_Init:
 	; Graphics_Queue values $8 to $C, inclusive, build the dialog box
@@ -3885,9 +3885,9 @@ PRG022_D792:
 	.word Card_SelectCard		; 0: Perform cursor movements
 	.word Card_BeginFlip		; 1: Begin card flip
 	.word Card_DoFlip			; 2: Perform card flip
-	.word Card_CheckMatches		; 3: Check for new matches (RAS)
+	.word Card_CheckMatches		; 3: Check for new matches (SB)
 	.word Card_HandleMatch		; 4: Reward the card match
-	.word Card_HandleBowser		; 5: Handle the Bowser card (RAS)
+	.word Card_HandleBowser		; 5: Handle the Bowser card (SB)
 	.word Card_WaitThenExit		; 6: Decrements Card_MoveDelay, then exits to map
 	.word Card_BeginFlip		; 7: Begin card flip (end sqeuence to reveal remaining cards)
 	.word Card_DoFlip			; 8: Perform card flip (end sqeuence to reveal remaining cards)

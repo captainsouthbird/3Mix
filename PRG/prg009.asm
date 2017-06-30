@@ -513,7 +513,7 @@ Vs_GameTypical:
 
 Vs_GameLadder:
 	JSR Vs_PlayerMove	 	; Player movements and collisions with world and eachother
-	JSR Vs_SpawnEnemies	 	; (RAS) Periodically spawn enemies who emerge from the pipes until five exist
+	JSR Vs_SpawnEnemies	 	; (SB) Periodically spawn enemies who emerge from the pipes until five exist
 	JSR Vs_ObjectsUpdateAndDraw	; Update and draw objects
 	RTS		 ; Return
 
@@ -905,7 +905,7 @@ VsPlayer_Normal:
 	LDA Vs_PlayerBumpTimer	 
 	BNE PRG009_A4CF	 ; If Vs_PlayerBumpTimer <> 0, jump to PRG009_A4CF
 
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #(PAD_UP | PAD_DOWN)
 	BEQ PRG009_A4CF	 ; If Player is not pressing up or down, jump to PRG009_A4CF
 
@@ -933,7 +933,7 @@ PRG009_A4CF:
 
 	; Player not climbing ladder...
 
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	BEQ PRG009_A4D8	 ; If Player not pressing anything, jump to PRG009_A4D8
 
 	; Vs_PlayerFlashInv = 0
@@ -960,7 +960,7 @@ PRG009_A4E4:
 	NOP
 
 PRG009_A4EA:
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #(PAD_LEFT | PAD_RIGHT)
 	BEQ PRG009_A546	 ; If Player is not pressing left or right, jump to PRG009_A546
 
@@ -974,7 +974,7 @@ PRG009_A4EA:
 
 	; Player pushed right
 
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #PAD_B
 	BEQ PRG009_A509	 ; If Player did not push B, jump to PRG009_A509
 
@@ -1012,7 +1012,7 @@ PRG009_A51E:
 
 	; Player pushed left
 
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #PAD_B
 	BEQ PRG009_A531	 ; If Player did not push B, jump to PRG009_A531
 
@@ -1127,7 +1127,7 @@ PRG009_A5AD:
 
 	; No POW block occuring
 
-	LDA <Pad_Input	; RAS
+	LDA <Pad_Input	; SB
 	BPL PRG009_A5D1	 ; If Player is NOT pressing A, jump to PRG009_A5D1
 
 	; Play jump sound!
@@ -1155,7 +1155,7 @@ PRG009_A5CE:
 	STA Vs_PlayerYVel,X	 ; Set Player's Y velocity
 
 PRG009_A5D1:
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #(PAD_LEFT | PAD_RIGHT)
 	BNE PRG009_A5ED	 ; If Player is pressing left or right, jump to PRG009_A5ED
 
@@ -1196,7 +1196,7 @@ PRG009_A5FD:
 	AND Vs_PlayerDetStat,X
 	BEQ PRG009_A610	 ; If Player is not moving in direction they're blocked in, jump to PRG009_A610
 
-	AND <Pad_Holding	; RAS
+	AND <Pad_Holding	; SB
 	BEQ PRG009_A60A	 ; If Player is not pressing the same direction as the direction they're blocked in, jump to PRG009_A60A
 
 	; Player is pushing against their blocking direction...
@@ -1263,7 +1263,7 @@ PRG009_A650:
 
 	; Player is moving upward...
 
-	LDY <Pad_Holding	; RAS
+	LDY <Pad_Holding	; SB
 	BMI PRG009_A65C	 ; If Player is pressing A, jump to PRG009_A65C
 
 PRG009_A659:
@@ -1381,7 +1381,7 @@ PRG009_A6D5:
 
 
 VsPlayer_Climbing:
-	LDA <Pad_Holding	; RAS	 
+	LDA <Pad_Holding	; SB	 
 	AND #(PAD_UP | PAD_DOWN)
 	BEQ PRG009_A6FE	 ; If Player is pressing neither up nor down, jump to PRG009_A6FE
 
@@ -1405,7 +1405,7 @@ PRG009_A6F6:
 	STA Vs_PlayerX,X	; Update Player X
 
 PRG009_A6FE:
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #(PAD_UP | PAD_DOWN)
 	BEQ PRG009_A734	 ; If Player is pressing neither up nor down, jump to PRG009_A734
 
@@ -1445,7 +1445,7 @@ PRG009_A72E:
 	INC Vs_PlayerClimbFrame,X	 ; Vs_PlayerClimbFrame++
 
 PRG009_A734:
-	LDA <Pad_Holding	; RAS
+	LDA <Pad_Holding	; SB
 	AND #(PAD_LEFT | PAD_RIGHT)
 	STA <Temp_Var1	 ; Player pressing left/right -> Temp_Var1
 
@@ -1722,7 +1722,7 @@ PRG009_A868:
 	AND #$04
 	BEQ PRG009_A8E7	 ; If Player is not on floor, jump to PRG009_A8E7
 
-	LDA <Pad_Input	; RAS
+	LDA <Pad_Input	; SB
 	AND #PAD_B
 	BEQ PRG009_A8E7	 ; If Player is NOT pressing B, jump to PRG009_A8E7
 

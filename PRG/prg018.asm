@@ -838,7 +838,7 @@ PRG018_A7AF:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; LoadLevel_VMinipipe (RAS)
+; LoadLevel_VMinipipe (SB)
 ;
 ; Inserts a 1-16 height double-ended vertical minipipe
 ; For vertical pipe maze levels only!

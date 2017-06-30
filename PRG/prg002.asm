@@ -1833,7 +1833,7 @@ PRG002_A9D2:
 	LDA <Player_HaltGame
 	BNE PRG002_A9C1	 ; If gameplay is halted, jump to PRG002_A9C1 (RTS)
 
-	; Lift accelerates to -$08 (RAS)
+	; Lift accelerates to -$08 (SB)
 	LDA <Objects_YVel,X
 	SUB #$04
 	CMP #-$08
@@ -3759,7 +3759,7 @@ Toad_Speak:
 	JSR DynJump
 
 	; THESE MUST FOLLOW DynJump FOR THE DYNAMIC JUMP TO WORK!!
-	.word Toad_HaltPlayer	; RAS
+	.word Toad_HaltPlayer	; SB
 	.word Toad_DrawDiagBox
 	.word Toad_DoToadText
 	.word Toad_CastleEnder	; SB: Only do anything if castle Toad (i.e. wait and exit)
@@ -5659,7 +5659,7 @@ PRG002_BF4B:
 	STA Level_TimerEn
 	STA EndCard_Flag	 ; Flag end level card as grabbed
 
-	; Card moves down (RAS)
+	; Card moves down (SB)
 	LDA #$28
 	STA <Objects_YVel,X
 

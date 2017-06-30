@@ -950,7 +950,7 @@ PRG030_C118:
 PipeEnter_XYOffs:
 	.byte 16,   0	; right
 	.byte  0,   0	; left
-	.byte  0,  32	; up	<-- not applied if Player is small (rev grav) [RAS]
+	.byte  0,  32	; up	<-- not applied if Player is small (rev grav) [SB]
 	.byte  0, -16	; down	<-- not applied if Player is small (normal grav)
 
 

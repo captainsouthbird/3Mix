@@ -59,7 +59,7 @@ Inventory_DoHilites:
 	STA InvHilite_Item 	; Hilite on first column
 	STA InvStart_Item	; Start on first row, first item
 
-	LDA #24	; RAS	 
+	LDA #24	; SB	 
 	STA InvHilite_X	 	; First item hilited
 
 	LDX #$00	 
@@ -788,7 +788,7 @@ Inventory_ForceUpdate_AndFlip:
 	STA InvFlip_Counter	 	; InvFlip_Counter = 3
 	LDA #$00	 
 	STA InvHilite_Item	 	; InvHilite_Item = 0 (first item highlighted on new row)
-	LDA #24	; RAS
+	LDA #24	; SB
 	STA InvHilite_X			; InvHilite_X = $48 (first item highlighted on new row)
 	RTS		 	; Return...
 
@@ -1730,7 +1730,7 @@ LevelJct_YLHStarts:	.byte $00, $40, $70, $B0, $F0, $41, $71, $81
 	; These define the Vert_Scroll init value
 LevelJct_VertStarts:	.byte $00, $00, $30, $70, $B0, $EF, $EF, $EF
 
-	; RAS
+	; SB
 LevelJct_General_NegCap:
 	; SB: Caps negative Y Hi with both 'Y' and 'A' at zero
 	LDA #0
@@ -1953,7 +1953,7 @@ LevelJct_GenericExit:
 	; ... and is never vertical
 	STA Level_7Vertical	; Level_7Vertical = 0
 	
-	; ... and no reverse player gravity (RAS)
+	; ... and no reverse player gravity (SB)
 	STA Player_ReverseGrav
 
 	; And several other constants:

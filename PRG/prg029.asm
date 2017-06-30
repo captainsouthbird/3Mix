@@ -412,7 +412,7 @@ PRG029_CF88:
 
 PRG029_D010:
 
-	; RAS
+	; SB
 	LDA Player_ReverseGrav
 	BEQ PDraw_NoRevGrav	; If Player is not reversed gravity, jump to PDraw_NoRevGrav
 
@@ -495,7 +495,7 @@ PRG029_D036:
 	STA Sprite_RAM+$10,X
 	STA Sprite_RAM+$14,X
 	
-	; RAS
+	; SB
 	ADD #16
 	STA Sprite_RAM+$00,X
 	STA Sprite_RAM+$04,X
