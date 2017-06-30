@@ -433,8 +433,8 @@ ObjP19:	.byte $53, $53
 ObjP1A:	.byte $59, $5B
 ObjP1C:	.byte $75, $77
 ObjP1E:	.byte $5D, $5D
-ObjP1F:	.byte $E1, $E1, $E5, $E5	; RAS: SMW+ style "piranha topper" vine growth
-ObjP20:	.byte $49, $4F, $49, $4F	; RAS: Formerly $49, $4F, $4D, $4F
+ObjP1F:	.byte $E1, $E1, $E5, $E5	; SB: SMW+ style "piranha topper" vine growth
+ObjP20:	.byte $49, $4F, $49, $4F	; SB: Formerly $49, $4F, $4D, $4F
 ObjP21:	
 	.byte $91, $93, $95, $97
 	.byte $A1, $A3, $A5, $A7
@@ -557,7 +557,7 @@ ObjInit_BounceDU:
 
 	STA Objects_ReverseGrav,X
 
-	; RAS: If reverse gravity and downward direction, need to push Player away 
+	; SB: If reverse gravity and downward direction, need to push Player away 
 	; a little bit or else he gets stuck for some reason
 	LDA Player_BounceDir
 	BEQ ObjInit_BounceDU_NoRev
@@ -606,7 +606,7 @@ PRG001_A4C6:
 Bouncer_PUp:	.byte $00, $00, OBJ_POWERUP_FIREFLOWER, OBJ_POWERUP_SUPERLEAF, OBJ_POWERUP_STARMAN
 		.byte OBJ_POWERUP_MUSHROOM, OBJ_GROWINGVINE, OBJ_POWERUP_1UP
 Bouncer_PUp_SS:	
-		.byte OBJ_POWERUP_STARMAN, OBJ_POWERUP_STARMAN, OBJ_POWERUP_STARMAN	; RAS: New: Super suits
+		.byte OBJ_POWERUP_STARMAN, OBJ_POWERUP_STARMAN, OBJ_POWERUP_STARMAN	; SB: New: Super suits
 Bouncer_PUp_SS_End
 
 Bounce_TileReplacements:	
@@ -621,7 +621,7 @@ Bounce_TileReplacements:
 
 	; Power-up X or Y velocity upon emerging from the bounce block
 Bouncer_PUpVel:	.byte $00, -$40, -$40, -$30, -$20, -$10, $00, $10, $20, $30, $40
-		.byte -$20, -$20, -$20	; RAS: New: Super suits
+		.byte -$20, -$20, -$20	; SB: New: Super suits
 
 
 ObjNorm_BounceDU:
@@ -861,7 +861,7 @@ BounceBlock_Tile:
 	.byte $77, $77	; 2 ("Metal plate" post-? block hit)
 	.byte $75, $75	; 3 (used for empty brick)
 	.byte $79, $7B	; 4 (typical Note Block)
-	.byte $77, $77	; 5 (wood)	; RAS: "Metal plate" because I needed patterns!
+	.byte $77, $77	; 5 (wood)	; SB: "Metal plate" because I needed patterns!
 	.byte $75, $75	; 6 (used for brick with coins)
 	.byte $7B, $7B	; 7 (UNUSED, would be for desert's breakable pipeworks tile!)
 
@@ -1042,7 +1042,7 @@ ObjInit_StarOrSuit:
 	LDY #$10	
 	LDA Player_BounceDir
 	BEQ PRG001_A7BF	 
-	LDY #0		; RAS: Old value was -$38; not really needed since star will bounce anyway
+	LDY #0		; SB: Old value was -$38; not really needed since star will bounce anyway
 
 	; Delay until rise
 	LDA #$3d
@@ -1052,7 +1052,7 @@ PRG001_A7BF:
 	STY <Objects_YVel,X	 ; Set object's Y velocity
 	STY <Objects_DetStat,X	 ; I think this is a mistake?  They probably meant to clear it?
 
-	; RAS: Star Man uses this routine stock, other super suits will do something different...
+	; SB: Star Man uses this routine stock, other super suits will do something different...
 
 	JSR PowerUp_BounceXVel	 ; Bounce off wall
 
@@ -1180,7 +1180,7 @@ ObjHit_StarOrSuit:
 	ORA #MUS2A_INVINCIBILITY
 	STA Sound_QMusic2
 
-	; RAS: I like the "power up" sound with the Starman!
+	; SB: I like the "power up" sound with the Starman!
 	LDA #SND_LEVELPOWER
 	STA Sound_QLevel1
 
@@ -1210,7 +1210,7 @@ PRG001_A818:
 	INY		 ; Y++ (valid Player_QueueSuit value)
 	STY Player_QueueSuit	 ; Queue changing to this suit!
 
-	; RAS: New effect: Store previous power up
+	; SB: New effect: Store previous power up
 	LDA <Player_Suit
 	STA <Player_OldSuit
 
@@ -1249,7 +1249,7 @@ ObjInit_PUpMush:
 	LDA #$10	
 	STA Objects_Timer2,X	 ; Object's timer 2 = 16
 
-	; RAS: This is probably used by the Big ? block which CAN spawn mushroom/flower/star for some reason
+	; SB: This is probably used by the Big ? block which CAN spawn mushroom/flower/star for some reason
 	LDA PUp_StarManFlash
 	BEQ PRG001_A852	 ; If flashing is NOT active, jump to PRG001_A852
 
@@ -1629,7 +1629,7 @@ ObjInit_FireFlower:
 	LDA #$10
 	STA Objects_Timer2,X	 ; Fire flower's timer 2 = $10
 
-	; RAS: This is probably used by the Big ? block which CAN spawn mushroom/flower/star for some reason
+	; SB: This is probably used by the Big ? block which CAN spawn mushroom/flower/star for some reason
 	LDA PUp_StarManFlash
 	BEQ PRG001_A9C8	 ; If flashing is NOT active, jump to PRG001_A852
 
@@ -1687,7 +1687,7 @@ PRG001_A9F6:
 
 
 ObjHit_FireFlower:
-	; RAS: Always charge to fire power (modern rule)
+	; SB: Always charge to fire power (modern rule)
 
 	LDA <Player_Suit
 	CMP #$02
@@ -1701,7 +1701,7 @@ ObjHit_FireFlower:
 	LDA #$03
 	STA Player_QueueSuit
 
-	; RAS: New effect: Store previous power up
+	; SB: New effect: Store previous power up
 	LDA <Player_Suit
 	STA <Player_OldSuit
 
@@ -2059,7 +2059,7 @@ PRG001_AC22:
 
 ObjHit_SuperLeaf:
 
-	; RAS: Always charge to Raccoon Mario (modern rule)
+	; SB: Always charge to Raccoon Mario (modern rule)
 
 	LDA <Player_Suit
 	CMP #$03
@@ -2083,7 +2083,7 @@ PRG001_AC40:
 	LDA #$04
 	STA Player_QueueSuit
 
-	; RAS: New effect: Store previous power up
+	; SB: New effect: Store previous power up
 	LDA <Player_Suit
 	STA <Player_OldSuit
 
@@ -2152,7 +2152,7 @@ PRG001_AC86:
 
 PRG001_AC92:
 
-	; RAS: SMW+ style "piranha topper" vine growth
+	; SB: SMW+ style "piranha topper" vine growth
 	LDA <Objects_Y,X
 	AND #$08
 	LSR A
@@ -3277,7 +3277,7 @@ Bowser_VsPlayerXVelNegBit:
 
 
 Bowser_JumpAndLandOnFloor:
-	; RAS: Prevent Bowser from moving too far over and trapping Player at switch
+	; SB: Prevent Bowser from moving too far over and trapping Player at switch
 	LDA <Objects_X,X
 	CMP #$C0
 	BLT BJALOF_NotTooFar
@@ -4329,7 +4329,7 @@ PRG001_BF16:
 
 Bowser_DoorAppear:
 
-	; RAS: NOPE!  No more door; just unlock scrolling
+	; SB: NOPE!  No more door; just unlock scrolling
 
 	; Hold Player in place
 	LDA #$FF
@@ -4403,7 +4403,7 @@ PostBScroll_MoveRight:
 	RTS
 
 
-; RAS: Reverse gravity enemy creators
+; SB: Reverse gravity enemy creators
 ObjInit_RGravEnmy:
 
 	; Change to correct reverse gravity object
@@ -4431,7 +4431,7 @@ ObjInit_CoinSnake:
 	LDA #SND_LEVELVINE
 	STA Sound_QLevel1
 
-	; RAS: Doing this here because we couldn't call it in PRG030
+	; SB: Doing this here because we couldn't call it in PRG030
 	JSR Level_PrepareNewObject
 
 	; Default up
@@ -4734,7 +4734,7 @@ Checkpoint_JustDraw:
 	BNE CPStars_UseGiantAlt
 	
 CPStars_Normal:
-	LDA #$73	; RAS: Changed to make room for flag; not really the same I guess
+	LDA #$73	; SB: Changed to make room for flag; not really the same I guess
 	
 CPStars_UseGiantAlt:
 	STA Sprite_RAM+$01,Y
@@ -5037,7 +5037,7 @@ PipeRaise_WaitUntilOK:
 	;CMP <Horz_Scroll
 	;LDA <Objects_XHi,X
 	;SBC <Horz_Scroll_Hi
-	;BNE PipeRaise_NotReady	; RAS: If pipe raise is horizontally off-screen, jump to PipeRaise_NotReady
+	;BNE PipeRaise_NotReady	; SB: If pipe raise is horizontally off-screen, jump to PipeRaise_NotReady
 
 	JSR Object_DetermineHorzVis		; Set flags based on which sprites of this object are horizontally visible
 	JSR Object_DetermineVertVis		; Set flags based on which sprites of this object are vertically visible

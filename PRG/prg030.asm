@@ -956,7 +956,7 @@ PipeEnter_XYOffs:
 
 	; Does common stuff to prepare to enter a pipe!
 PipeEntryPrepare30:
-	; RAS: Reverse gravity support -- reverse pipe up/down if Player is reversed
+	; SB: Reverse gravity support -- reverse pipe up/down if Player is reversed
 	LDA Player_ReverseGrav
 	BEQ PipeEntry_NoRev
 
@@ -1108,7 +1108,7 @@ Level_Initialize30:
 	LDA #SPR_HFLIP
 	STA <Player_FlipBits	 ; Player_FlipBits = $40 (face right)
 
-	; RAS: Checkpoint override if Level_SelXStart < 0 (means use existing Player_X)
+	; SB: Checkpoint override if Level_SelXStart < 0 (means use existing Player_X)
 	LDY Level_SelXStart
 	BMI Checkpoint_NoSetX
 
@@ -1633,7 +1633,7 @@ Bobomb_BustBrickFX:
 	CMP <Horz_Scroll
 	LDA Level_BlockChgXHi
 	SBC <Horz_Scroll_Hi
-	BNE Bobomb_DoneBusting	; RAS: If tile change is horizontally off-screen, jump to ActSwBB_SoundOnly
+	BNE Bobomb_DoneBusting	; SB: If tile change is horizontally off-screen, jump to ActSwBB_SoundOnly
 
 	JSR BrickBust_MoveOver30	 ; If a brick is busting in slot 1, move it to slot 2
 
@@ -1961,7 +1961,7 @@ ActSwBB_BustAnother:
 	CMP <Horz_Scroll
 	LDA Level_ActSwXHi
 	SBC <Horz_Scroll_Hi
-	BNE ActSwBB_SoundOnly	; RAS: If tile change is horizontally off-screen, jump to ActSwBB_SoundOnly
+	BNE ActSwBB_SoundOnly	; SB: If tile change is horizontally off-screen, jump to ActSwBB_SoundOnly
 
 	JSR BrickBust_MoveOver30	 ; If a brick is busting in slot 1, move it to slot 2
 

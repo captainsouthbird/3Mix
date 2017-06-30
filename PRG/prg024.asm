@@ -823,7 +823,7 @@ PRG024_A82B:
 
 	LDA PPU_STAT
 
-	; RAS: Horz scroll!
+	; SB: Horz scroll!
 	LDA <Title_HorzScroll
 	STA PPU_SCROLL
 
@@ -1095,7 +1095,7 @@ PRG024_AB04:
 	LDA #%00011000
 	STA <PPU_CTL2_Copy	; Show BG + sprites
 
-	; RAS: Queue title song!
+	; SB: Queue title song!
 	JSR TitleMusic_Queue
 
 	LDA #$03
@@ -1207,7 +1207,7 @@ PrepConfigMenu_Loop:
 	LDA #%00011110
 	STA <PPU_CTL2_Copy	; Show BG + sprites
 
-	; RAS: Queue title song!
+	; SB: Queue title song!
 	JSR TitleMusic_Queue
 
 	; Load curtain graphics
@@ -2033,7 +2033,7 @@ Title_ConfigMenu:
 	;AND #PAD_START
 	;BEQ PRG024_AD9C	 ; If Player is NOT pressing START, jump to PRG024_AD9C
 
-	; RAS: Stop music
+	; SB: Stop music
 	LDA #MUS1_STOPMUSIC
 	STA Sound_QMusic1
 
@@ -2625,7 +2625,7 @@ PRG024_B2C3:
 PRG024_B2DE:
 	LDY <Title_CurMLIndex	; Y = Mario [0] or Luigi [1]
 	LDA Title_ObjMLFrame,Y	; Get their current sprite index
-	CMP #$FF		; RAS: Currently not implementing "kicking out" frames, this code will probably be dead
+	CMP #$FF		; SB: Currently not implementing "kicking out" frames, this code will probably be dead
 	BNE PRG024_B307	 	; If current sprite is not $0D (kicking outward), jump to PRG024_B307
 
 	; The kicking sprite needs one of the sprites in front for the outward foot!
@@ -2993,7 +2993,7 @@ Ending_Normal:
 	STA LevCP_ActiveID
 	
 	; Pretend we have all star coins so they don't generate
-	; RAS: Bleh, none show up in the ending anyway, and this
+	; SB: Bleh, none show up in the ending anyway, and this
 	; introduces a bug of "free star coins!!" regardless of 
 	; what you actually obtained, so NO!
 	;LDA #$01
@@ -3266,7 +3266,7 @@ TitleMusic_Queue:
 	LDA SndCur_Music2
 	BNE TitleMusic_Queue_NotNeeded
 	
-	; RAS: Queue title song!
+	; SB: Queue title song!
 	LDA #MUS2B_TITLE
 	STA Sound_QMusic2
 

@@ -43,10 +43,10 @@ PRG028_A033:
 
 Sound_Process:
 
-	; RAS: Page 39 now handles sound effects!
+	; SB: Page 39 now handles sound effects!
 	LDA #MMC3_8K_TO_PRG_C000	; Changing PRG ROM at C000
 	STA MMC3_COMMAND 		; Set MMC3 command
-	LDA #39					; RAS: New, extended sound bank
+	LDA #39					; SB: New, extended sound bank
 	STA MMC3_PAGE	 		; Set MMC3 page
 
 	; Queue + Play all sounds in...
@@ -57,7 +57,7 @@ Sound_Process:
 
 Sound_ProcessMusicOnly:
 
-	; RAS: Enable inverted music -- except Set 1 songs
+	; SB: Enable inverted music -- except Set 1 songs
 	LDA SndCur_Music1
 	BNE Music_NoInvert
 	
@@ -78,12 +78,12 @@ Music_NoInvert:
 	; Introduce the appropriate music bank
 	LDA #MMC3_8K_TO_PRG_C000	; Changing PRG ROM at C000
 	STA MMC3_COMMAND 		; Set MMC3 command
-	LDA Music_MusBank		; RAS: New, extended music bank
+	LDA Music_MusBank		; SB: New, extended music bank
 	STA MMC3_PAGE	 		; Set MMC3 page
 
 	JSR Sound_PlayMusic	 ; Music
 
-	; RAS: "Music_RestH_Off" is now a flag for faster music play; it does not offset 
+	; SB: "Music_RestH_Off" is now a flag for faster music play; it does not offset 
 	; rest anymore because that's just not very compatible...
 	LDA Music_RestH_Off
 	BEQ Sound_NoSpeed
@@ -127,7 +127,7 @@ MusSeg .macro
 
 M12ASH .func \1-Music_Set1_Set2A_Headers	; "Music Set 1/2A Segment Header Offset"
 
-	; RAS: Refactored to use .word pointers so we can have more headers...
+	; SB: Refactored to use .word pointers so we can have more headers...
 	; Each "index" of music is tied to a header of a "segment" of music.  Some segments are
 	; reused where repetitious musical notes exist.  The segment headers are apparently not
 	; stored in any particular order.  This table connects an index to a header:
@@ -260,7 +260,7 @@ Music_Set2A_Ends:
 Music_Set2A_Loops:
 	.byte $08, $0A, $0C, $2E, $12, $32, $0F, $15, $16, $17, $35, $1A, $1E, $1F, $24
 
-	; RAS: New: Bank of song
+	; SB: New: Bank of song
 Music_Set1_Bank:
 	.byte  36,  36,  36,  36,  36,  36,  36,  36
 	
@@ -339,7 +339,7 @@ PatS8:	.byte $50, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $5
 
 	.byte $15, $07, $C8, $E8, $E0, $03, $D0, $F4
 
-	; RAS: Refactored to use .word pointers so we can have more headers...
+	; SB: Refactored to use .word pointers so we can have more headers...
 	; Each "index" of music is tied to a header of a "segment" of music.  Some segments are
 	; reused where repetitious musical notes exist.  The segment headers are apparently not
 	; stored in any particular order.  This table connects an index to a header:
@@ -486,7 +486,7 @@ Music_Set2B_Ends:
 Music_Set2B_Loops:
 	.byte $01, $07, $09, $0C, $10, $13, $18, $1B, $1F, $31, $28, $45, $32, $36,   0
 
-	; RAS: New: Bank of song
+	; SB: New: Bank of song
 Music_Set2B_Bank:
 	.byte  31,  31,  31,  31,  31,  31,  31,  31,  31,  31,  31,  38,  36,  33,  33
 
@@ -729,7 +729,7 @@ M2CSegHedrB1:	MusSeg $40, MRCSegData0E, $8D, $55, $00, $B3
 M2CSegHedrB2:	MusSeg $40, MRCSegData0F, $00, $55, $00, $9F
 M2CSegHedrB3:	MusSeg $40, MRCSegData10, $00, $1F, $00, $3D
 
-	; RAS: New Set 3 music
+	; SB: New Set 3 music
 
 	; Music in Set 3 is played by "index", which is a segment of music.
 	; The index always advances, though what that index actually represents
@@ -747,20 +747,20 @@ Music_Set2C_Ends:
 Music_Set2C_Loops:
 	.byte $01, $0A, $00, $23, $2A, $5C, $40, $47, $54, $67, $72, $39, $7C, $20, $94, $A3
 
-	; RAS: New: Bank of song
+	; SB: New: Bank of song
 Music_Set2C_Bank:
 	.byte  32,  32,  32,  32,  33,  34,  33,  31,  34,  34,  31,  32,  35,  36,  37,  37
 
 
 
 
-; RAS: New: Set extended music bank, and also bring it into the picture
+; SB: New: Set extended music bank, and also bring it into the picture
 SndMus_SetExtBank:
-	STA Music_MusBank		; RAS: New, extended music bank
+	STA Music_MusBank		; SB: New, extended music bank
 
 	LDA #MMC3_8K_TO_PRG_C000	; Changing PRG ROM at C000
 	STA MMC3_COMMAND 		; Set MMC3 command
-	LDA Music_MusBank		; RAS: New, extended music bank
+	LDA Music_MusBank		; SB: New, extended music bank
 	STA MMC3_PAGE	 		; Set MMC3 page
 
 	RTS

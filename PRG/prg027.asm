@@ -52,7 +52,7 @@ PRG027_A052:
 	LDA Player_RescuePrincess
 	BNE Ending_SkipWorldMus
 
-	; RAS: World Victory!
+	; SB: World Victory!
 	LDA #MUS2B_SMB1VICTORY
 	STA Sound_QMusic2
 
@@ -1832,7 +1832,7 @@ PProj_NoHalt:
 	LDY Player_ReverseGrav
 	BEQ PlayerProj_YVel_NoRev
 
-	; RAS: If Player is under reverse gravity, invert the YVel
+	; SB: If Player is under reverse gravity, invert the YVel
 	JSR Negate
 
 PlayerProj_YVel_NoRev:
@@ -2271,7 +2271,7 @@ PRG027_A52D:
 
 	JMP PRG027_A566
 
-	; RAS: Removed thaw code just for needed space
+	; SB: Removed thaw code just for needed space
 
 	;LDY Level_TilesetIdx
 	;CPY #$0b
@@ -2330,7 +2330,7 @@ PRG027_A579:
 Jmp_PRG027_A637:
 	JMP PRG027_A637	 ; Jump to PRG027_A637 ("Poof" away, fireball..)
 
-Fireball_BounceAdj:	.word -2, 2	; RAS: Not-reverse-gravity and reverse gravity fireball bounce adjustment
+Fireball_BounceAdj:	.word -2, 2	; SB: Not-reverse-gravity and reverse gravity fireball bounce adjustment
 
 PRG027_A586:
 
@@ -2462,7 +2462,7 @@ PRG027_A5DC:
 	CMP #2
 	BEQ PRG027_A637		; Boomerang (former hammer) now uses this detection code, but just poof
 
-	; RAS: Retooling to work more like Player's retrieval of slopes so fireballs
+	; SB: Retooling to work more like Player's retrieval of slopes so fireballs
 	; can properly utilize ceiling slopes $10+
 	LDA #LOW(Slope_LUT)
 	STA <Level_GndLUT_L
@@ -2514,7 +2514,7 @@ PRG027_A633:
 
 
 Fireball_SlopeChk_Rev:
-	; RAS: Under reverse gravity, we use the "ceiling" component instead
+	; SB: Under reverse gravity, we use the "ceiling" component instead
 	LDA [Level_GndLUT_L],Y
 	LSR A
 	LSR A
@@ -2560,7 +2560,7 @@ PRG027_A648:
 	LDA Obj2Obj_EnByState,X
 	BNE PRG027_A667	 ; If this state does not support object-to-object (object-to-Projectile), jump to PRG027_A667 (Forget it!)
 
-	; RAS: Sort of inline version of Object_CalcAttrFlagOff, done for 'X' instead of 'Y'
+	; SB: Sort of inline version of Object_CalcAttrFlagOff, done for 'X' instead of 'Y'
 	; because that's how this loop was coded... needed to support extended objects!
 	LDX Level_ObjectID,Y	; X = object's ID
 	CPX #OBJ_EXTBANK_BEGIN
@@ -2600,7 +2600,7 @@ Projectile_BBoxY:	.byte $18, $18, $28, $18, $18, $18, $18, $18, $18, $18, $20, $
 Projectile_BBoxX:	.byte $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $18, $10, $10
 
 
-	; RAS: List of objects that are ice-immune (Penguin Suit)
+	; SB: List of objects that are ice-immune (Penguin Suit)
 	; Not my preferred way to go, but "cheaper" than a full 256 byte LUT?
 Projectile_IceImmunity:
 	.byte OBJ_BOSS_BOWSER

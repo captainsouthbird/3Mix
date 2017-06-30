@@ -5,10 +5,10 @@
 ;     -> NES mode enabled
 ;---------------------------------------------------------------------------
 
-	; RAS: Moved from bank 0
+	; SB: Moved from bank 0
 	; This table grants a couple (dis)abilities to certain
 	; power-ups; specifically:
-	; Bit 0 (1) = Able to fly/flutter (Raccoon tail wagging); RAS: specific disable for Rabbit Mario near PRG008_AC9E
+	; Bit 0 (1) = Able to fly/flutter (Raccoon tail wagging); SB: specific disable for Rabbit Mario near PRG008_AC9E
 	; Bit 1 (2) = NOT able to slide on slopes
 PowerUp_Ability:
 	;     Small, Big, Fire, Leaf, Penguin, Rabbit, Hammer
@@ -327,7 +327,7 @@ PRG008_A224:
 	JMP PRG008_ROM_Change_C000	 ; Jump to PRG008_ROM_Change_C000 (switch C000 back to page 0 and return)
 
 
-	; RAS: Retooled this subroutine to be generic page changer
+	; SB: Retooled this subroutine to be generic page changer
 	; Formerly PChg_C000_To_29 and PChg_C000_To_0
 PRG008_ROM_Change_C000:
 	; Change page @ C000 to 'A'
@@ -441,7 +441,7 @@ PRG008_A3C9:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Player_Update:
 
-	; RAS: Added junction request so that the Touch Warp
+	; SB: Added junction request so that the Touch Warp
 	; Special Object doesn't execute junction at a bad
 	; time (from that location caused only a half-jct)
 	LDA Level_JctCtl_Req
@@ -504,7 +504,7 @@ PRG008_A3FA:
 	CMP #$03
 	BGS PRG008_A472_fix 	; If Level_GetWandState >= 3 (got the wand!), jump to PRG008_A472
 
-	; RAS: Reverse gravity will actually kill if you're off the top instead
+	; SB: Reverse gravity will actually kill if you're off the top instead
 	LDA Player_ReverseGrav
 	BNE Player_FallAndDie_Rev
 
@@ -627,7 +627,7 @@ PRG008_A472:
 	JSR Player_DoVibration		; Shake the screen when required to do so!
 	;JSR Player_SetSpecialFrames	; Set special Player frames
 	;JSR Player_Draw29	 	; ... and if you get through all that, draw the Player!!
-	JSR_THUNKC 29, Player_SetSpecialFramesAndDraw	; RAS: Combined above two
+	JSR_THUNKC 29, Player_SetSpecialFramesAndDraw	; SB: Combined above two
 	
 	LDA #$00
 	STA Player_XVelAdj	 ; Player_XVelAdj = 0
@@ -656,7 +656,7 @@ Player_PowerUpdate:
 	JMP_THUNKC 29, Player_PowerUpdate29
 
 	
-	; RAS: Pushed out into bank 30 to make room
+	; SB: Pushed out into bank 30 to make room
 Level_SetPlayerPUpPal:
 
 	JMP_THUNKC 30, Level_SetPlayerPUpPal30
@@ -759,7 +759,7 @@ Level_CheckIfTileUnderwater:
 	AND FloatLevel_StatCheck,X
 	BNE PRG008_A6A8	 ; If bit is set, jump to PRG008_A6A8
 
-	; RAS: Ghost house override; no tiles in $E2+ will be "underwater"
+	; SB: Ghost house override; no tiles in $E2+ will be "underwater"
 	LDA Level_TilesetIdx
 	CMP #4
 	BNE Player_NotGHUWChk	; If this is not a Ghost House, jump to Object_NotGHUWChk
@@ -959,7 +959,7 @@ PRG008_A743:
 	STA Player_Behind_En	; Default enable with being behind the scenes
 	BEQ PRG008_A77E	 	; If Player is not behind the scenes, jump to PRG008_A77E
 
-	; RAS: No longer time limited
+	; SB: No longer time limited
 
 	;LDA <Counter_1
 	;LSR A	
@@ -974,7 +974,7 @@ PRG008_A743:
 	LDA <Temp_Var1
 	CMP #$41
 	BEQ PRG008_A77B
-	CMP #TILE2_BLACK	; RAS: Supporting being behind the fence
+	CMP #TILE2_BLACK	; SB: Supporting being behind the fence
 	BEQ PRG008_A77B
 	CMP #TILE1_SKY
 	BEQ PRG008_A77B
@@ -1022,7 +1022,7 @@ PRG008_A77E:
 	LDA #$01
 	STA Player_LowClearance
 
-	; RAS: This is too buggy, and I gave up on the shifting maze concept, so fuck it
+	; SB: This is too buggy, and I gave up on the shifting maze concept, so fuck it
 
 	;LDX Level_AScrlSelect
 	;CPX #4
@@ -1200,11 +1200,11 @@ Door1_OK:
 	CMP #$01
 	BEQ PRG008_A83F	 ; If tile is DOOR1, jump to PRG008_A83F
 
-	; RAS: Also the old "final door" is now a door door
+	; SB: Also the old "final door" is now a door door
 	LDA #TILE2_ENDDOOR_LR
 	SUB <Temp_Var1
 	CMP #4
-	BGE PRG008_A86C	; RAS: If not one of the ex-final door tiles, jump to PRG008_A86C
+	BGE PRG008_A86C	; SB: If not one of the ex-final door tiles, jump to PRG008_A86C
 
 PRG008_A83F:
 
@@ -1481,7 +1481,7 @@ Player_YVelOK:
 PRG008_A940:
 	JSR Player_CommonGroundAnims	 ; Perform common ground animation routines
 
-	; RAS: Not doing Kuribo's shoe special logic this way...
+	; SB: Not doing Kuribo's shoe special logic this way...
 
 	;LDA Player_Kuribo
 	;BEQ PRG008_A94C	 ; If Player is not wearing Kuribo's shoe, jump to PRG008_A94C
@@ -1595,7 +1595,7 @@ CheckTile_IsClimbable:
 	CMP #2
 	BNE VineClimb_NotFort	; If tileset <> 2 (Fortress), jump to VineClimb_NotFort
 	
-	; Fortress only -- RAS: NEW climb the hanging globe thing
+	; Fortress only -- SB: NEW climb the hanging globe thing
 	PLA		; Restore tile
 	PHA		; Save again (in case we need it)
 	SUB #TILE2_HANGGLOBE_TOP
@@ -2162,7 +2162,7 @@ PlayerJump_NormalSound:
 	BEQ PRG008_AC6C	 ; If Player is wearing penguin suit, jump to PRG008_AC6C
 
 	; Otherwise, mark as mid air AND backflipping
-	;STA Player_Flip	; RAS: Does anyone like this really?
+	;STA Player_Flip	; SB: Does anyone like this really?
 	STA <Player_InAir
 
 	LDA #$00
@@ -2273,12 +2273,12 @@ PRG008_ACD9:
 	AND #$01	 
 	BEQ PRG008_ACEF	 	; If this power up does not have flight, jump to PRG008_ACEF
 
-	; RAS: Refactored logic; now you can just hold 'A' instead of mash 'A' to fly/flutter
+	; SB: Refactored logic; now you can just hold 'A' instead of mash 'A' to fly/flutter
 	LDA <Pad_Holding
 	AND #PAD_A
 	BEQ PRG008_ACEF	 	; If Player is not holding 'A', jump to PRG008_ACEF
 
-	; RAS: Player is holding 'A'...
+	; SB: Player is holding 'A'...
 	LDA <Player_WagCount
 	BNE PRG008_ACEF		; Loop Player_WagCount
 
@@ -2738,7 +2738,7 @@ Player_DoClimbAnim:
 	LDA Player_IsClimbing
 	BEQ PRG008_B035	 ; If Player is NOT climbing, jump to PRG008_B035 (RTS)
 
-	; RAS: Supporting "behind the scenes" alternate climb frame; now it's 2 different climb frames
+	; SB: Supporting "behind the scenes" alternate climb frame; now it's 2 different climb frames
 	LDA <Player_Suit
 	ASL A				; x 2
 	ADD Player_Behind	; Assuming this will only ever be 0/1
@@ -2792,7 +2792,7 @@ Player_AnimTailWag:
 	CMP #SND_PLAYERJUMP
 	BEQ PRG008_B05D	 ; If jump sound is NOT queued, jump to PRG008_B05D
 
-	; RAS: New logic -- Player must either be flying or falling to play wag
+	; SB: New logic -- Player must either be flying or falling to play wag
 	LDA Player_FlyTime
 	BNE PATW_PlayWag	; If Player is flying, definitely play wag
 	
@@ -2806,7 +2806,7 @@ PATW_PlayWag:
 	STA Sound_QLevel1
 
 PRG008_B05D:
-	; RAS: Reset Player_TailCount when it reaches zero (for holding 'A' and continous flutter)
+	; SB: Reset Player_TailCount when it reaches zero (for holding 'A' and continous flutter)
 	LDA Player_TailCount
 	BNE PRG008_B062
 
@@ -2925,7 +2925,7 @@ PRG008_B0C5:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Player_TailAttackAnim:
 	LDA Player_DisTailAtk
-	BNE Player_DisableTailAtk	; RAS: If Player_DisTailAtk is set, jump to Player_DisableTailAtk
+	BNE Player_DisableTailAtk	; SB: If Player_DisTailAtk is set, jump to Player_DisableTailAtk
 
 	LDA <Pad_Holding
 	AND #PAD_DOWN
@@ -2986,7 +2986,7 @@ PRG008_B109:
 
 Player_DisableTailAtk:
 
-	; RAS: Disable tail attack briefly
+	; SB: Disable tail attack briefly
 	LDA #0
 	STA Player_DisTailAtk
 
@@ -3315,7 +3315,7 @@ PRG008_B258:
 	SUB #$30
 	BCS PRG008_B284	 ; If there was no borrow, jump to PRG008_B284
 
-	; Minimum vertical scroll delta is -4 (RAS: Bumped to -4 so reverse gravity falls keep up with Player)
+	; Minimum vertical scroll delta is -4 (SB: Bumped to -4 so reverse gravity falls keep up with Player)
 	CMP #-4
 	BGE PRG008_B274	 ; If difference is -4 or above, jump to PRG008_B274
 
@@ -3396,7 +3396,7 @@ PRG008_B2AB:
 	SUB #$30
 	BCS PRG008_B2F9	 ; If no borrow occurred, jump to PRG008_B2F9
 
-	; Minimum vertical scroll delta value is -4 (RAS: Bumped to -4 so reverse gravity falls keep up with Player)
+	; Minimum vertical scroll delta value is -4 (SB: Bumped to -4 so reverse gravity falls keep up with Player)
 	DEC Level_VertScrollH
 	CMP #-4
 	BGE PRG008_B2D8
@@ -3517,7 +3517,7 @@ TileAttrAndQuad_OffsFlat:
 
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: NEW REVERSE GRAVITY OFFSETS
+	; SB: NEW REVERSE GRAVITY OFFSETS
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TileAttrAndQuad_OffsFlat_Rev:
@@ -3574,7 +3574,7 @@ TileAttrAndQuad_OffsFlat_Sm:
 
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: NEW REVERSE GRAVITY OFFSETS
+	; SB: NEW REVERSE GRAVITY OFFSETS
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	; Small or ducking moving downward - Left half
@@ -3621,7 +3621,7 @@ TileAttrAndQuad_OffsSloped:
 	.byte $0C, $0D	; in-front upper
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: NEW REVERSE GRAVITY OFFSETS
+	; SB: NEW REVERSE GRAVITY OFFSETS
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TileAttrAndQuad_OffsSloped_Rev:
@@ -3651,7 +3651,7 @@ TileAttrAndQuad_OffsSloped_Sm:
 	.byte $17, $0D	; in-front upper
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: NEW REVERSE GRAVITY OFFSETS
+	; SB: NEW REVERSE GRAVITY OFFSETS
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	; Small or ducking - Left half
@@ -3673,7 +3673,7 @@ TileAttrAndQuad_OffsSlopeEdge:
 	.byte $20, $0B	; Left half
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: NEW REVERSE GRAVITY OFFSETS
+	; SB: NEW REVERSE GRAVITY OFFSETS
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TileAttrAndQuad_OffsSlopeEdgR:
@@ -3690,7 +3690,7 @@ PRG008_B3B0:	.byte $04, $0D
 	; If $01, this is treated as a "not floor" tile, which means to watch out
 	; for the Player to hit his head rather than track the sloped floor...
 	;
-	; RAS: New value of $02 means ALWAYS treat as non-floor (in this case,
+	; SB: New value of $02 means ALWAYS treat as non-floor (in this case,
 	; used for index 0 / BG tiles to prevent reverse gravity from treating
 	; them like some kind of floor) and $80 to indicate always treat as
 	; floor (in this case, to protect index 3 / solid square tiles and
@@ -3912,7 +3912,7 @@ Player_DetectSolids:
 
 
 PRG008_B47E:
-	; RAS: Refactored to do away with unnecessary constant in PRG000)
+	; SB: Refactored to do away with unnecessary constant in PRG000)
 	LDA #LOW(Slope_LUT)
 	STA <Level_GndLUT_L
 
@@ -3929,7 +3929,7 @@ PRG008_B47E:
 	BEQ PRG008_B4A2	 ; If Level_Tileset = 14 (Underground style), jump to PRG008_B4A2
 
 	; Non-sloped levels use this:
-	; RAS: Unused, and still wrong, but same wrong as SMB3 (just getting rid of unnecessary constant in PRG000)
+	; SB: Unused, and still wrong, but same wrong as SMB3 (just getting rid of unnecessary constant in PRG000)
 
 	LDA #LOW(Level_LayPtrOrig_AddrH)
 	STA <Level_GndLUT_L
@@ -3955,7 +3955,7 @@ PRG008_B4A5:
 
 PRG008_B4B2:
 
-	; RAS: Switch to reverse gravity offsets if needed
+	; SB: Switch to reverse gravity offsets if needed
 	LDA Player_ReverseGrav
 	BEQ Player_TileOffs_NoRev
 
@@ -4182,7 +4182,7 @@ PRG008_B57E:
 
 PRG008_B59C:
 
-	; RAS: Floor lock code, need "reverse" version
+	; SB: Floor lock code, need "reverse" version
 	LDA Player_ReverseGrav
 	BNE Player_HitFloor_Reverse
 
@@ -4210,7 +4210,7 @@ PRG008_B5B2:
 	STA <Player_InAir ; Player NOT mid air
 	STA <Player_YVel  ; Halt Player vertically
 
-	; RAS: SMW style tallying when invincible
+	; SB: SMW style tallying when invincible
 	LDA Player_StarInv
 	BNE PRG008_B5BB		; If Player has Star Man, do not reset kill tally, jump to PRG008_B5BB (RTS)
 
@@ -4280,7 +4280,7 @@ Level_DoCommonSpecialTiles:
 	CMP Level_Tile_GndL,X
 	BNE PRG008_B604	 ; If Player is not touching an ice block, jump to PRG008_B604
  
-	; RAS: This code just makes digging in sand annoying, so fuck it
+	; SB: This code just makes digging in sand annoying, so fuck it
  
 	;LDA <Player_X
 	;ADD #5
@@ -4472,7 +4472,7 @@ ExSwitch_Press:
 	RTS
 
 Collect_CheckStarCoin:
-	; RAS: Detect star coin
+	; SB: Detect star coin
 	LDY Level_Tileset
 	SUB Level_StarCoinByTileset,Y	; Subtract star coin for THIS tileset
 	CMP #3
@@ -4523,14 +4523,14 @@ Level_DigSand_Poof:
 	; appear, if any:
 	; 0 = None, 1 = Mushroom/Flower, 2 = Mushroom/Leaf, 3 = Star, 4 = Coin, 5 = Coin/Star
 	; 6 = brick behavior (i.e. bump/smash), 7 = Vine, 8 = 10 coin,  = 1-up, A = P-Switch
-	; RAS: 	C = Rabbit (??) Suit, D = Penguin (Peng??) Suit, E = Hammer Suit
+	; SB: 	C = Rabbit (??) Suit, D = Penguin (Peng??) Suit, E = Hammer Suit
 	; LATP = Level_ActionTiles powerup
 	; Note that this array should match elements with the LATR_'s below!
 LATP_PowerUps:
 LATP_GNote:	.byte $00
 LATP_HNote:	.byte $00
 LATP_Notes:	.byte $00, $01, $02, $03
-LATP_Woodblocks:.byte $0C, $0D, $0E, $0F	; RAS: These are additional [?] blocks now
+LATP_Woodblocks:.byte $0C, $0D, $0E, $0F	; SB: These are additional [?] blocks now
 LATP_QBlocks:	.byte $01, $02, $03, $04, $05, $04, $00, $06, $01, $02, $03, $04, $05, $08, $09, $07, $0A
 LATP_InvisCoin:	.byte $04, $09, $00
 LATP_InvisNote:	.byte $00
@@ -5139,7 +5139,7 @@ LATP_CoinCommon:
 
 	; Special routine which gets a coin above a ? block, if one is present!
 LATP_GetCoinAboveBlock:
-	; RAS: Bug: If you bump a P-Switch induced "temporary brick" beneath
+	; SB: Bug: If you bump a P-Switch induced "temporary brick" beneath
 	; another temporary brick, you'll get a "coin" (because they really
 	; are still coin blocks!)  This worked in original SMB3 as well.  In
 	; any case, if P-Switch is active, cancel this logic!
@@ -5186,7 +5186,7 @@ Player_TailAttack_Offsets: ; (Y and X)
 	.byte 28, -6	; Player not horizontally flipped
 	.byte 28, 21	; Player horizontally flipped
 
-	; RAS: New reverse gravity offsets
+	; SB: New reverse gravity offsets
 	.byte 4, -6	; Player not horizontally flipped
 	.byte 4, 21	; Player horizontally flipped
 
@@ -5335,7 +5335,7 @@ PRG000_B9D8:	; <-- go back up from here
 
 PRG008_B9E5:
 
-	; RAS: Switch to reverse gravity offsets if needed
+	; SB: Switch to reverse gravity offsets if needed
 	LDA Player_ReverseGrav
 	BEQ Player_TileSlope_NoRev
 
@@ -5380,7 +5380,7 @@ PRG008_B9F4:
 	CMP #$04
 	BEQ PRG008_BA58_fix	 ; If slope "shape" = 4 (wall), jump to PRG008_BA58
 
-	; RAS: If Player is reversed gravity, "unsloped ceiling" (8) is actually our
+	; SB: If Player is reversed gravity, "unsloped ceiling" (8) is actually our
 	; "unsloped floor", so we need to check 7 instead...
 
 	PHA 	; Save slope shape value
@@ -5420,7 +5420,7 @@ PRG008_BA1B:
 	INX	; X = 1 (slope at head)
 	LDA Level_Tile_Slope,X	 ; Get this slope "shape"
 
-	; RAS: If Player is reversed gravity, "unsloped floor" (7) is actually our
+	; SB: If Player is reversed gravity, "unsloped floor" (7) is actually our
 	; "unsloped ceiling", so we need to check 8 instead...
 
 	PHA 	; Save slope shape value
@@ -5573,7 +5573,7 @@ PRG008_BA69:
 
 PRG008_BA73:
 
-	; RAS: Switch to reverse gravity offsets if needed
+	; SB: Switch to reverse gravity offsets if needed
 	LDY Player_ReverseGrav
 	BEQ Player_TileSlopeHF_NoRev
 
@@ -5647,7 +5647,7 @@ PRG008_BABC:
 	LDX #$00	 ; X = 0
 	LDY Level_Tile_Slope	 ; Y = Level_Tile_Slope (slope "shape" index at feet)
 	LDA Slope_IsNotFloorShape,Y
-	EOR Player_ReverseGrav		; RAS: If reversed, floors are ceilings, and vice versa [some exceptions]
+	EOR Player_ReverseGrav		; SB: If reversed, floors are ceilings, and vice versa [some exceptions]
 	BMI PRG008_BAC7	 ; If bit 7 set, force as floor, jump to PRG008_BAC7
 	BEQ PRG008_BAC7	 ; If 0 (this is a floor slope tile), jump to PRG008_BAC7
 
@@ -5657,7 +5657,7 @@ PRG008_BABC:
 PRG008_BAC7:
 
 	LDA <Player_X		 
-	ADD TileAttrAndQuad_OffsSloped+1	; RAS: Reverse gravity not needed here, though this is an evil hardcode
+	ADD TileAttrAndQuad_OffsSloped+1	; SB: Reverse gravity not needed here, though this is an evil hardcode
 	AND #$0f	 
 	STA <Temp_Var1		 ; Temp_Var1 = (Player_X + [TileAttrAndQuad_OffsSloped+1]) & $0F (offset locked across tile)
 
@@ -5710,7 +5710,7 @@ PRG008_BAF4:
 	LDX #4		; X = 4
 	LDY #(TileAttrAndQuad_OffsSlopeEdge - TileAttrAndQuad_OffsSloped)
 
-	; RAS: Switch to reverse gravity offsets if needed
+	; SB: Switch to reverse gravity offsets if needed
 	LDA Player_ReverseGrav
 	BEQ Player_SlopeEdge_NoRev
 
@@ -5760,7 +5760,7 @@ PRG008_BB27:
 
 	; Ceiling slope impact
 
-	; RAS: Use "floor" slope if we're reverse gravity
+	; SB: Use "floor" slope if we're reverse gravity
 	LDA Player_ReverseGrav
 	BEQ Player_CeilSlope_NoRev
 
@@ -5824,7 +5824,7 @@ PRG008_BB52:
 	
 PRG008_BB5F:
 
-	; RAS: Player offset must be applied the OTHER way (i.e. subtraction)
+	; SB: Player offset must be applied the OTHER way (i.e. subtraction)
 	LDA Player_ReverseGrav
 	BNE Player_CeilSlopeOffset_Rev
 	
@@ -5897,7 +5897,7 @@ L32PP_NoFlag:
 
 	; Get difference between Player and ground slope height
 
-	; RAS: Use "ceiling" slope if we're reverse gravity
+	; SB: Use "ceiling" slope if we're reverse gravity
 	LDA Player_ReverseGrav
 	BEQ Player_FloorSlopeHChk_NoRev
 
@@ -5932,7 +5932,7 @@ PRG008_BB7E:
 	;LDA #2
 	;STA Player_Slippery
 
-	; RAS: Use "ceiling" slope if we're reverse gravity
+	; SB: Use "ceiling" slope if we're reverse gravity
 	LDA Player_ReverseGrav
 	BEQ Player_FloorSlope_NoRev
 
@@ -6544,7 +6544,7 @@ PRG008_BE2E:
 
 PRG008_BE31:
 
-	; RAS: Removed -- no more special white block support
+	; SB: Removed -- no more special white block support
 
 	;LDA Level_TilesetIdx
 	;CMP #$00
@@ -6711,7 +6711,7 @@ SandSpeedChk_NotNeg:
 
 PRG008_BEE5:
 
-	; RAS: Old Toad House code removed
+	; SB: Old Toad House code removed
 
 	RTS		 ; Return
 
@@ -6802,7 +6802,7 @@ PRG008_BFAC:
 ;
 ; Applies Player's velocity for X or Y (depending on register 'X')
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; RAS: Applying reverse velocity for reverse gravity
+	; SB: Applying reverse velocity for reverse gravity
 Player_ApplyRevVelocity:
 	LDA <Player_XVel,X
 	NEG

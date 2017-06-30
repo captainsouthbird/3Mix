@@ -32,7 +32,7 @@ Level_SlopeSetByQuad:
 	; Slope_LUT table that follows...
 
 Level_SlopeQuad00:
-	; Tile $1C+ (RAS: Used to be $25)
+	; Tile $1C+ (SB: Used to be $25)
 	.byte $03, $03, $08, $05, $06, $11, $12, $13, $14		; <-- Only took 25 years to put these in!
 	.byte $01, $07, $02, $0C, $0D, $0E, $0F, $07, $03, $03, $03, $03, $03, $03, $07, $04
 	.byte $07, $04, $04, $03, $03, $03, $03, $03, $07, $04, $07, $04, $04, $04, $04, $04
@@ -93,7 +93,7 @@ Slope_ObjectVel_Effect:
 	; $80 disables response to this slope
 	.byte $00, -$02,  $02,  $00,  $00, -$02,  $02,  $00	; $00-$07
 	.byte $00,  $80,  $00,  $80, -$01, -$01,  $01,  $01	; $08-$0F
-	.byte $00, -$01, -$01,  $01,  $01			; $10-$14 (RAS: These were missing in native SMB3!)
+	.byte $00, -$01, -$01,  $01,  $01			; $10-$14 (SB: These were missing in native SMB3!)
 
 	; This defines 4 values per Level_Tileset, with each of those values
 	; belonging to a tile "quadrant" (i.e. tiles beginning at $00, $40,
@@ -444,7 +444,7 @@ Object_AttrFlags:
 	.byte OAT_BOUNDBOX14 | OAT_WEAPONIMMUNITY | OAT_HITNOTKILL	; Object $B2 - OBJ_FIREJET_UPSIDEDOWN
 	.byte OAT_BOUNDBOX01	; Object $B3
 
-	; RAS: NEW extended objects BEGIN!
+	; SB: NEW extended objects BEGIN!
 Object_AttrFlags_Ext:
 	.byte OAT_BOUNDBOX09 | OAT_FIREIMMUNITY | OAT_HITNOTKILL	; Object $E0 - OBJ_BOSS_MOUSER
 	.byte OAT_BOUNDBOX09 | OAT_WEAPONIMMUNITY | OAT_FIREIMMUNITY	; Object $E1 - OBJ_BOSS_BOWSERJR
@@ -492,7 +492,7 @@ SprRamOffsets:
 	; least everything is somewhat visible
 	.byte $40, $E8, $58, $D0, $70, $B8, $88, $A0, $40, $E8, $58, $D0, $70, $B8, $88
 
-	; RAS: Required because extended objects don't immediately follow the others
+	; SB: Required because extended objects don't immediately follow the others
 Object_CalcAttrFlagOff:
 	LDY Level_ObjectID,X	 ; Y = Object ID 
 	CPY #OBJ_EXTBANK_BEGIN
@@ -1008,7 +1008,7 @@ OWD_Not32PP:
 PRG000_C5EC:
 	; Slope response
 
-	; RAS: Retooling to work more like Player's retrieval of slopes so enemies
+	; SB: Retooling to work more like Player's retrieval of slopes so enemies
 	; can properly utilize ceiling slopes $10+
 	LDA #LOW(Slope_LUT)
 	STA <Level_GndLUT_L
@@ -1034,7 +1034,7 @@ PRG000_C5EC:
 	LDA Objects_ReverseGrav,X
 	BEQ Object_WorldDetect_SlopeNoRev	; If object is NOT under reverse gravity, jump to Object_WorldDetect_SlopeNoRev
 
-	; RAS: Reverse gravity slope calculation
+	; SB: Reverse gravity slope calculation
 	LDA [Level_GndLUT_L],Y
 	LSR A
 	LSR A
@@ -1201,7 +1201,7 @@ PRG000_C67E:
 	RTS		 ; Return
 
 
-	; RAS: Reversed object floor limit check
+	; SB: Reversed object floor limit check
 Object_WorldDetect_FHChkRev:
 	LDA <Objects_Y,X
 	AND #$0f	 ; Object's tile-relative vertical position
@@ -1247,7 +1247,7 @@ PRG000_C69C:
 
 Object_SlopeFlats_Rev:
 
-	; RAS: Corrections for inverted world
+	; SB: Corrections for inverted world
 	LDA <Objects_Y,X
 	AND #$f0
 	ADD #16
@@ -1293,7 +1293,7 @@ Object_GetAttrAndMoveTiles:
 	CMP #TILE1_WFALLMID
 	BEQ PRG000_C6D0
 
-	; RAS: Ghost house override; no tiles in $E2+ will be "underwater"
+	; SB: Ghost house override; no tiles in $E2+ will be "underwater"
 	LDA Level_TilesetIdx
 	CMP #4
 	BNE Object_NotGHUWChk	; If this is not a Ghost House, jump to Object_NotGHUWChk
@@ -1373,7 +1373,7 @@ PRG000_C6FD:
 
 	STA <Temp_Var1
 	LSR A		; Value * 4
-	ADD <Temp_Var1	; Value * 12 (RAS: Adding additional reverse gravity offsets)
+	ADD <Temp_Var1	; Value * 12 (SB: Adding additional reverse gravity offsets)
 
 	PHA		; Save it
 	TAY		; -> 'Y' (use respective Object_TileDetectOffsets group Row 1)
@@ -1527,7 +1527,7 @@ PRG000_C7B1:
 	LDA Player_PartDetEn
 	BEQ PRG000_C7D9	 ; If Player_PartDetEn is not set, jump to PRG000_C7D9
 
-	BPL Object_DetectTile_NoFixedFC	; RAS: If fixed ceiling mode is NOT enabled on Player_PartDetEn, jump to Object_DetectTile_NoFixedFC
+	BPL Object_DetectTile_NoFixedFC	; SB: If fixed ceiling mode is NOT enabled on Player_PartDetEn, jump to Object_DetectTile_NoFixedFC
 
 	LDA <Objects_Y,X	 
 	ADD Object_TileDetectOffsets+1,Y	; Adding tile detection offset to Object's Y
@@ -1571,7 +1571,7 @@ PRG000_C7D9:
 	LDA Objects_ReverseGrav,X
 	BEQ Object_ODT_NoRev	; If object's gravity is not reversed, jump to Object_DetectTile_NoRev
 
-	; RAS: Under reverse gravity, use reverse gravity Y offset
+	; SB: Under reverse gravity, use reverse gravity Y offset
 	LDA <Objects_Y,X
 	ADD Object_TileDetectOffsets,Y		; Adding tile detection Y offset to Object's Y
 
@@ -1731,7 +1731,7 @@ PRG000_C85C:
 	LDA Objects_ReverseGrav,X
 	BEQ Object_ODTV_NoRev	; If object's gravity is not reversed, jump to Object_DetectTile_NoRev
 
-	; RAS: Under reverse gravity, use reverse gravity Y offset
+	; SB: Under reverse gravity, use reverse gravity Y offset
 	LDA <Objects_Y,X
 	ADD Object_TileDetectOffsets,Y		; Adding tile detection Y offset to Object's Y
 
@@ -2104,7 +2104,7 @@ PRG000_CA40:
 	RTS		 ; Return
 
 	; Breaks up every 36 object IDs to make smaller jump tables
-	; RAS: Does not handle new extended bank objects @ $E0+
+	; SB: Does not handle new extended bank objects @ $E0+
 ObjectID_BaseVals:
 	.byte $00, $24, $48, $6C, $90
 
@@ -2121,7 +2121,7 @@ Object_DoStateAction:
 	CMP #$08
 	BEQ PRG000_CA81	 ; If this object's state = 8 ("Poof" Dying), jump to PRG000_CA81
 
-	; RAS: NEW extended bank objects!
+	; SB: NEW extended bank objects!
 	LDA Level_ObjectID,X	; Get object ID
 	CMP #OBJ_EXTBANK_BEGIN
 	BLT Object_DoStateAction_NotExt	; If this ID is not high enough to be one of the extended bank objects, jump to Object_DoStateAction_NotExt
@@ -2723,7 +2723,7 @@ PRG000_CCF7:
 	BCC PRG000_CD46	 ; Semi-randomly jump to PRG000_CD46
 
 	LDA Objects_ColorCycle,Y 
-	BNE PRG000_CD46	; RAS: New feature; if color cycling, object is invincible to this, and jump to PRG000_CD46
+	BNE PRG000_CD46	; SB: New feature; if color cycling, object is invincible to this, and jump to PRG000_CD46
 
 Object_ShellAction:
 	JSR ObjectToObject_HitTest 
@@ -2792,7 +2792,7 @@ PRG000_CD46:
 	;CMP #OBJ_BIGGREENTROOPA
 	;BGE PRG000_CD80	 ; If the object ID >= OBJ_BIGGREENTROOPA (why not use Objects_IsGiant?!), jump to PRG000_CD80
 	LDA Objects_IsGiant,X
-	BNE PRG000_CD80		; RAS: Fixed ;)
+	BNE PRG000_CD80		; SB: Fixed ;)
 
 	LDA Level_NoStopCnt
 	LSR A	
@@ -3242,7 +3242,7 @@ PRG000_CF49:
 	LDA <Player_YVel
 	STA <Objects_YVel,X
 
-	; RAS: Match Player's gravity setting too
+	; SB: Match Player's gravity setting too
 	LDA Player_ReverseGrav
 	CMP Objects_ReverseGrav,X
 	BEQ ObjectHeld_GravMatch
@@ -3574,7 +3574,7 @@ PRG000_D0A9:
 
 	JSR Object_ApplyYVel_NoLimit	 ; Apply Y velocity without limit
 
-	; RAS: Kicked SMB2 objects should ignore detecting world
+	; SB: Kicked SMB2 objects should ignore detecting world
 	LDA Objects_State,X	
 	CMP #OBJSTATE_KICKED
 	BNE Move_NotKicked	; If not kicked, jump to Move_NotKicked
@@ -3976,7 +3976,7 @@ PRG000_D218:
 	; OR Player is mid-air...
 	; OR Player is sliding...
 
-	; RAS: If Player and object gravities mismatch, you just can't stomp them, sorry!
+	; SB: If Player and object gravities mismatch, you just can't stomp them, sorry!
 	LDA Objects_ReverseGrav,X
 	EOR Player_ReverseGrav
 	BNE Jmp_HoldKickOrHurtPlayer
@@ -4301,7 +4301,7 @@ Object_SetShellState:
 	LDA Objects_ReverseGrav,X
 	BEQ Object_SetShell_NoRev
 
-	; RAS: If object is under reverse gravity, set vertical flip on the object
+	; SB: If object is under reverse gravity, set vertical flip on the object
 	LDA Objects_FlipBits,X
 	ORA #SPR_VFLIP
 	STA Objects_FlipBits,X
@@ -4405,7 +4405,7 @@ ObjHalt_DoNothing:
 LevelEvent_DoNothing:
 	RTS		 ; Return
 
-	; RAS: Jump point for initializing reverse gravity ground troops and other things that change ID at init
+	; SB: Jump point for initializing reverse gravity ground troops and other things that change ID at init
 ObjState_InitPageMismatch:
 	STA PAGE_A000
 	JSR PRGROM_Change_A000
@@ -4418,7 +4418,7 @@ ObjState_Initializing:
 
 	INC Objects_State,X	 	; Set object state to 2 (Normal run)
 
-	; RAS: Exposing this so I can have my reverse-gravity enemies chain initialize
+	; SB: Exposing this so I can have my reverse-gravity enemies chain initialize
 ObjState_Initializing_Call:
 	JSR Object_SetPaletteFromAttr	; Set object's palette
 
@@ -5515,7 +5515,7 @@ Player_BoundBox:
 	.byte 4,  8, 17, 13	; small/ducking
 	.byte 3, 10,  5, 25	; otherwise
 
-	; RAS: New reverse gravity offsets
+	; SB: New reverse gravity offsets
 	.byte 4,  8,  0, 13	; small/ducking
 	.byte 3, 10,  0, 25	; otherwise
 
@@ -5585,7 +5585,7 @@ PRG000_D83D:
 
 PRG000_D862:
 
-	; RAS: If gravity is reversed, use new offsets
+	; SB: If gravity is reversed, use new offsets
 	LDY Player_ReverseGrav
 	BEQ Player_BBox_NoRev
 
@@ -5735,7 +5735,7 @@ PRG000_D8EB:
 	STA Sound_QPlayer
 
 	; 100+ points pop up
-	; RAS: SMW tally up behavior!
+	; SB: SMW tally up behavior!
 	LDA Kill_Tally
 	INC Kill_Tally
 	ADD #$05
@@ -5970,7 +5970,7 @@ Player_GetHurt:
 	BNE PRG000_DA32	 ; If Player is in Kuribo's shoe, jump to PRG000_DA32
 
 	LDA <Player_Suit
-	CMP #PLAYERSUIT_FIRE		; RAS: Change this to "PLAYERSUIT_SUPERSUITBEGIN" and you restore Japanese version's "always shrink" code!!
+	CMP #PLAYERSUIT_FIRE		; SB: Change this to "PLAYERSUIT_SUPERSUITBEGIN" and you restore Japanese version's "always shrink" code!!
 	BLS PRG000_DA4E	 ; If Player is Big or small, jump to PRG000_DA4E
 
 	; Higher level power-up suits...
@@ -5984,7 +5984,7 @@ Player_GetHurt:
 	ORA #SND_PLAYERPIPE
 	STA Sound_QPlayer
 
-	LDA #$02	; Return to Big (RAS: Would be small in Japanese version!!)
+	LDA #$02	; Return to Big (SB: Would be small in Japanese version!!)
 	JMP PRG000_DA44	 ; Jump to PRG000_DA44
 
 PRG000_DA32:
@@ -6125,7 +6125,7 @@ Die_NotGameover:
 
 PRG000_DAAE:
 	; Ensure Player_FlipBits is correct?
-	; RAS: May be a cosmetic bugfix for player coming out of a somersault
+	; SB: May be a cosmetic bugfix for player coming out of a somersault
 	; (see jump to PRG000_DAAE) and getting hit, but I'm not really sure...
 	LDA <Player_FlipBits
 	AND #$7f
@@ -6636,7 +6636,7 @@ Object_ApplyYVel_NoLimit:
 	ADD #(Objects_YVel - Objects_XVel)
 	TAX		 ; Offset to Y velocities
 
-	LDY #(Objects_YVel - Objects_XVel)	; RAS: For offsetting Object_[X/Y]VelCarry
+	LDY #(Objects_YVel - Objects_XVel)	; SB: For offsetting Object_[X/Y]VelCarry
 
 	LDA Objects_ReverseGrav - (Objects_YVel - Objects_XVel),X
 	BEQ Object_ApplyYVel_NoRev	; If this object is not under reverse gravity, jump to Object_ApplyYVel_NoRev
@@ -6664,7 +6664,7 @@ Object_ApplyYVel_Done:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; $DCE4
 Object_ApplyXVel:
-	LDY #0	; RAS: For offsetting Object_[X/Y]VelCarry
+	LDY #0	; SB: For offsetting Object_[X/Y]VelCarry
 	JSR Object_AddVelFrac
 	STA Object_XVelCarry	 ; Set to '1' if fractional part rolled over
 
@@ -6693,14 +6693,14 @@ PRG000_DCFA:
 ;
 ; Adds the 4.4FP velocity to X or Y of object
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Object_AddVelFrac_Rev:	; RAS: For reverse gravity
+Object_AddVelFrac_Rev:	; SB: For reverse gravity
 	LDA <Objects_XVel,X	; Get (Y) Velocity
 	PHA			; Save it
 	JSR Negate		; Negate 
 	STA <Objects_XVel,X	; Set reversed (Y) Velocity
 
 	JSR Object_AddVelFrac	; Add velocity in reverse
-	STA Object_YVelCarry	; Set to '1' if fractional part rolled over (RAS: Assuming 'Y' because this is reverse gravity, reverse on Y axis)
+	STA Object_YVelCarry	; Set to '1' if fractional part rolled over (SB: Assuming 'Y' because this is reverse gravity, reverse on Y axis)
 
 	PLA			; Restore prior velocity
 	STA <Objects_XVel,X	; Get (Y) Velocity

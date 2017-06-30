@@ -6,7 +6,7 @@
 ;---------------------------------------------------------------------------
 
 
-	; RAS: Purged empty
+	; SB: Purged empty
 
 
 	; This defines a table of lookups that point to the start of
@@ -210,7 +210,7 @@ PRG029_CED7:
 
 	DEC Player_StarInv	 ; Player_StarInv--
 
-	; RAS: Supporting SMW style invincibility Kill Tally
+	; SB: Supporting SMW style invincibility Kill Tally
 	BNE PRG029_CEEA	; If Star Man has not worn off yet, jump to PRG029_CEEA
 
 	; Since invincibility has worn off, don't count as stomping kill tally
@@ -758,7 +758,7 @@ Player_CoinHeavNoRev:
 	LDA #$d0
 	STA Level_CoinHeav
 
-	; RAS: If Level_PipeNotExit is NOT set, let's exit to map instead!
+	; SB: If Level_PipeNotExit is NOT set, let's exit to map instead!
 
 Player_CoinHeavExecute:
 	LDA Level_PipeNotExit
@@ -806,7 +806,7 @@ PRG029_D224:
 	LDA Player_Grow
 	BEQ PRG029_D257	 ; If Player is not transforming into "Super", jump to PRG029_D257
 
-	; RAS: Values of $30+ are the "new power up effect"
+	; SB: Values of $30+ are the "new power up effect"
 	CMP #$30
 	BGE Player_NewPUpEffect
 
@@ -872,7 +872,7 @@ PRG029_D257:
 
 PRG029_D26B:
 
-	; RAS: Now supporting a little air time while doing the end level run-off
+	; SB: Now supporting a little air time while doing the end level run-off
 	LDA #$14
 	STA <Player_XVel	; Player_XVel = $14
 
@@ -1072,7 +1072,7 @@ PRG029_D31B:
 
 AirshipCtl_LandOnDeck:
 
-	; RAS: Disabling this requirement so I can use it elsewhere
+	; SB: Disabling this requirement so I can use it elsewhere
 	;LDA Level_AScrlConfig
 	;BEQ PRG029_D33D	 ; If autoscroll not enabled, jump to PRG029_D33D
 
@@ -1457,7 +1457,7 @@ Pipe_Move_Down:
 	LDA #$30
 	STA <Player_YVel 	; Player_YVel = $30 
 
-	; RAS: I'm overriding my override! (In Player_ApplyYVelocity)
+	; SB: I'm overriding my override! (In Player_ApplyYVelocity)
 	LDA Level_PipeMove
 	PHA
 	LDA #0
@@ -1612,12 +1612,12 @@ PRG029_D58A:
 	; Common termination point when exiting inter-level vertical pipe
 	STA <Vert_Scroll ; Update Vert_Scroll
 
-	LDA #$00	; Level_PipeExitDir = 1 (exiting up) (RAS: Starting 1 less for rev grav trick)
+	LDA #$00	; Level_PipeExitDir = 1 (exiting up) (SB: Starting 1 less for rev grav trick)
 
 	LDY <Player_YVel
 	BMI PRG029_D598	 	; If Player_YVel < 0, jump to PRG029_D598
 
-	ADD #1	 ; Otherwise, Level_PipeExitDir = 2 (exiting down) (RAS: Starting 1 less for rev grav trick)
+	ADD #1	 ; Otherwise, Level_PipeExitDir = 2 (exiting down) (SB: Starting 1 less for rev grav trick)
 
 PRG029_D598:
 	EOR Player_ReverseGrav	; Reverse gravity will swap up/down exit direction
@@ -1677,7 +1677,7 @@ PipeTransit_YDelta:	.byte 2, -2	; Y Deltas while moving through pipes (down and 
 PipeTransit_XDelta:	.byte 2, -2	; X Deltas while moving through pipes (right and left)
 
 	; Sets Level_PipeExitDir appropriately based on direction
-Level_PipeExitDirTable:	.byte $02, $03, $01, $00	; RAS: These are all -1 from stock SMB3 for reverse gravity sense
+Level_PipeExitDirTable:	.byte $02, $03, $01, $00	; SB: These are all -1 from stock SMB3 for reverse gravity sense
 
 PRG029_D5DC:
 
@@ -2516,7 +2516,7 @@ FixAttr_OffScreen:
 
 PRG029_DC82:
 
-	; RAS: New feature: If bit 7 is set, also update the attributes after setting the tile!
+	; SB: New feature: If bit 7 is set, also update the attributes after setting the tile!
 	; Note this will only work correctly with "TileChng_OneTile" events, so be nice plz
 	AND #$80
 	BEQ TileChng_Normal
@@ -2532,7 +2532,7 @@ PRG029_DC82:
 	CMP <Horz_Scroll
 	LDA Level_BlockChgXHi
 	SBC <Horz_Scroll_Hi
-	BNE FixAttr_OffScreen	; RAS: If tile change is horizontally off-screen, jump to FixAttr_OffScreen (RTS)
+	BNE FixAttr_OffScreen	; SB: If tile change is horizontally off-screen, jump to FixAttr_OffScreen (RTS)
 
 	JMP TileChng_OneTile_FixAttr	; Now patch the attributes!
 
@@ -2673,7 +2673,7 @@ TileChng_OneTile:
 	CMP <Horz_Scroll
 	LDA Level_BlockChgXHi
 	SBC <Horz_Scroll_Hi
-	BNE TileChng_OffScreen	; RAS: If tile change is horizontally off-screen, jump to TileChng_OffScreen
+	BNE TileChng_OffScreen	; SB: If tile change is horizontally off-screen, jump to TileChng_OffScreen
 
 	; X *= 4 (index into OneTile_ChangeToPatterns)
 	TXA
@@ -2877,7 +2877,7 @@ CBig_GiantBlock_BrickRestore:
 	.byte $00, $00, $04, $30, $31, $32, $33
 	.byte $00
 
-	; RAS: Provides a "raising pipe" a la Paper Mario
+	; SB: Provides a "raising pipe" a la Paper Mario
 	; Still pushes as much data as the above entries,
 	; but starts at different offsets going down to
 	; provide a "raising up" effect...
@@ -3082,7 +3082,7 @@ TileChng_OneTile_FixAttr:
 	LDA #0
 	STA <Temp_Var6
 
-	; RAS: Due to the shape of the nametable (256 x 240), this makes it not evenly divisible by 32
+	; SB: Due to the shape of the nametable (256 x 240), this makes it not evenly divisible by 32
 	; in the total vertical size.  This means if we're working with a tile that is on the lower 
 	; screen, we must subtract 1 row to remain properly aligned to the tile grid!
 	LDA Level_BlockChgYHi
@@ -3113,7 +3113,7 @@ FixAttr_Lower:
 	AND #%11101110
 	SUB #$10
 
-	; RAS: Fixing a fringe situation here...
+	; SB: Fixing a fringe situation here...
 	BCS FixAttr_InitNoCarry	; First off, if we haven't wrapped backward (i.e. this didn't happen: Y=$00 -> Y=$F0), jump to FixAttr_InitNoCarry
 
 	; The only time we do anything is if we're on the second row of the bottom screen, which is $10x...
@@ -3610,7 +3610,7 @@ PRG008_A523:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Player_SetSpecialFramesAndDraw
 ;
-; RAS: Used to be Player_SetSpecialFrames and a call made to
+; SB: Used to be Player_SetSpecialFrames and a call made to
 ; Player_Draw29 afterward; moved here because space problems.
 ;
 ; Set one of the "special" frames, i.e. "spread eagle" running,
@@ -3826,7 +3826,7 @@ PRG029_AF69:
 	CMP #$03
 	BNE PRG029_AF87	; If Player is not Raccoon, jump to PRG029_AF87
 
-	; RAS: Old logic, not portable due to bank change
+	; SB: Old logic, not portable due to bank change
 	;TAX		 ; Power up -> 'X'
 
 	;LDA PowerUp_Ability,X

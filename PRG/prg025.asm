@@ -20,7 +20,7 @@ Video_Upd_Table2:
 	.word Title_FadeIn_2		; $04 - Title screen colors fade in part 2
 	.word Title_FadeIn_3		; $05 - Title screen colors fade in part 3
 	.word Title_FadeIn_4		; $06 - Title screen colors fade in part 4
-	.word Title_ClearPressStart	; $07 - RAS: Removed
+	.word Title_ClearPressStart	; $07 - SB: Removed
 
 	; The title screen -- this is too complicated/large to load in one single buffer
 	; instance, so it is broken up across several frames in chunks.  Maybe I could

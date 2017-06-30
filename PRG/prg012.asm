@@ -204,7 +204,7 @@ PRG012_A462:
 	LDA Map_Tile_Layouts+1,Y
 	STA <Temp_Var2		
 	
-	; RAS: Temp_Var3 will track which World Zero lock bit we're on, if applicable
+	; SB: Temp_Var3 will track which World Zero lock bit we're on, if applicable
 	; This takes up the upper 4 bits of map object completions
 	LDA #%00010000
 	STA <Temp_Var3
@@ -220,7 +220,7 @@ PRG012_A498:
 	BEQ PRG012_A4C1	 	; If it's $FF (terminator), jump to PRG012_A4C1
 	STA [Map_Tile_AddrL],Y	; Copy byte to RAM copy of tiles
 	
-	; RAS: Special -- world zero locks
+	; SB: Special -- world zero locks
 	CMP #TILE_ROCKBREAKH
 	BNE MRWC_NotROCKBREAKH
 	
@@ -400,7 +400,7 @@ MapCompletion_CompleteTile:
 	STY <Temp_Var4	 ; Y -> Temp_Var4
 	STA <World_Map_Tile	 ; -> World_Map_Tile
 
-	; RAS: Check if this is a primary level tile
+	; SB: Check if this is a primary level tile
 	AND #$F0
 	BNE MarkComp_NotPrimary
 
@@ -614,7 +614,7 @@ PRG012_B1A1:
 	JMP Map_EnterByCheckpoint
 	
 Map_CheckOtherCP:
-	; RAS: If the other player was in this level and died, the opposite player can
+	; SB: If the other player was in this level and died, the opposite player can
 	; pick it up where he left off... rather than replaying the whole level. Also
 	; avoids an awkward scenario where both players have died in an attempt and
 	; have mismatched Star Coin collections on the checkpoint.
@@ -673,7 +673,7 @@ Map_CPNotValidAtLoad:
 
 	JMP Map_NotEnteringByCheckpoint
 	
-	; RAS: Since I moved bonus maps out to TS19, that can't be coded in the map anymore,
+	; SB: Since I moved bonus maps out to TS19, that can't be coded in the map anymore,
 	; so these tiles are explicit overrides!
 Map_Bonus_Tiles:
 	.byte TILE_TOADHOUSE, TILE_ALTTOADHOUSE, TILE_QBLOCK
@@ -856,7 +856,7 @@ MEBCP_NoCoin:
 PRG012_B262:
 
 	; Falling into King's room...
-	; RAS: Now World [X] Complete screen!!
+	; SB: Now World [X] Complete screen!!
 
 	LDA #LOW(KNG1L)
 	STA <Level_LayPtr_AddrL
@@ -1084,7 +1084,7 @@ PRG012_B384:
 	LDA World_Map_X,Y	
 	STA Map_Entered_X,Y	
 	;LDA Map_UnusedPlayerVal2,Y	
-	LDA World_Num	; RAS: Now a world backup!
+	LDA World_Num	; SB: Now a world backup!
 	STA Map_Previous_World,Y	
 
 	LDA #19

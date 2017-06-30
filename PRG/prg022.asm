@@ -1298,7 +1298,7 @@ Bonus_Init:
 	; NOTE: This breaks the original Odd/Even game!  For Odd/Even to work the way
 	; it was originally intended (sort of), always jump to PRG022_C8EF!
 
-	; RAS: New implementation...
+	; SB: New implementation...
 	CPY #BONUS_ARENA_KEY1
 	BEQ BonusBattle_HideDie	 ; If this is the Battle game, jump to BonusBattle_HideDie
 	CPY #BONUS_ARENA_KEY2
@@ -1326,7 +1326,7 @@ PRG022_C8E6:
 
 	JSR BonusBattle_HideDie
 
-	; RAS: Bonus_DieCnt needs to be non-zero due to a check later on (FIXME necessary??)
+	; SB: Bonus_DieCnt needs to be non-zero due to a check later on (FIXME necessary??)
 	INC Bonus_DieCnt
 	
 	RTS
@@ -1336,7 +1336,7 @@ BonusBattle_HideDie:
 	LDA #$f8
 	STA <BonusDie_Y
 
-	; RAS: Clear Bonus_DieCnt
+	; SB: Clear Bonus_DieCnt
 	LDA #0
 	STA Bonus_DieCnt
 
@@ -3628,7 +3628,7 @@ Card_InitGame:
 
 Card_InitDeck:
 
-	; RAS: Never an in-progress game
+	; SB: Never an in-progress game
 	;LDA Map_NSpadeInProg
 	;BNE PRG022_D668	 ; If you already have an N-Spade game in progress from before, jump to PRG022_D668
 
@@ -4012,7 +4012,7 @@ Card_HandleMatch:
 	JSR Card_MatchPairReward	 ; Give reward
 
 	LDA Map_NSpadeMatches
-	CMP #$07		; RAS: 7 now since "bad" pairs don't count
+	CMP #$07		; SB: 7 now since "bad" pairs don't count
 	BNE PRG022_D83D	 ; If Map_NSpadeMatches <> 7, jump to PRG022_D83D (RTS)
 
 	; 7 matches means the game is complete
@@ -4034,7 +4034,7 @@ Card_HandleMatch:
 PRG022_D83D:
 	RTS		 ; Return
 
-; RAS: No longer performing this state!
+; SB: No longer performing this state!
 
 Card_HandleBowser:
 	; Card_FlipFrame = 0
@@ -4096,7 +4096,7 @@ Card_ResetState6:
 
 Card_WaitThenExit:
 
-	; RAS: Flip over remaining cards
+	; SB: Flip over remaining cards
 	LDX #0		; X = 0
 CardOtherMatch_Loop:
 	; Make sure the card we're considering is not already matched to another card
@@ -4406,7 +4406,7 @@ PRG022_D9A9:
 	LDA #$20
 	STA Graphics_BufCnt
 
-	; RAS: Not using this ... for now
+	; SB: Not using this ... for now
 
 	;LDA <Temp_Var12
 	;CMP #CARD_1UP
@@ -4689,7 +4689,7 @@ Card_CheckForMatch:
 
 	; Two cards are flipped, look for new matches
 
-	; RAS: New system -- check the card you flipped against all other cards
+	; SB: New system -- check the card you flipped against all other cards
 	; Cards which are flipped over have bit 7 set (old)
 	; Cards which are already matched have bit 6 set (NEW!)
 	LDX #17			; X = 17 (considering all cards)
@@ -5152,13 +5152,13 @@ Bonus_FromBattle:
 	LDA #MUS1_COURSECLEAR
 	STA Sound_QMusic1
 
-	; RAS: Cheating a bit, need the dialog box reconstructed
+	; SB: Cheating a bit, need the dialog box reconstructed
 	JSR Bonus_Init
 
-	; RAS: This flags the end of Round 2
+	; SB: This flags the end of Round 2
 	INC Bonus_DieCnt
 
-	; RAS: When dialog box is complete, state will be "11" (which is invalid in this case)
+	; SB: When dialog box is complete, state will be "11" (which is invalid in this case)
 	; but otherwise we just RTS until it's ready....
 	LDA Bonus_GameState
 	CMP #11

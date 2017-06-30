@@ -5,7 +5,7 @@
 ; Updates Special Objects and they draw as they will
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; RAS: New -- option flags for special objects
+; SB: New -- option flags for special objects
 
 ; Definition of "Priority special object": 
 ; Special objects with important gameplay functions; uses a wide horizontal-off 
@@ -159,11 +159,11 @@ SpecialObj_RemoveInd:
 
 SObj_PrioSpecObj_OffChk:
 
-	; RAS: In vertical levels, we'll actually not bother removing Priority Special Objects
+	; SB: In vertical levels, we'll actually not bother removing Priority Special Objects
 	LDA Level_7Vertical
 	BNE PRG043_AF9E
 
-	; RAS: Priority Special Objects actually have an "X Hi" component because it needs to span the screen
+	; SB: Priority Special Objects actually have an "X Hi" component because it needs to span the screen
 	; This is stored in Var3, so we need to do an alternate "still on-screen" check
 
 	; Semi-randomly jump to PRG043_AF9E (continue with Special Obj processing)
@@ -227,7 +227,7 @@ PRG043_AF9E:
 	.word SObj_PokeyBody	; 18: Pokey Body segment
 	.word SObj_Albabomb	; 19: Albatoss bomb!
 
-PUpCoin_Patterns:	.byte $49, $4F, $49, $4F	; RAS: Formerly $49, $4F, $4D, $4F
+PUpCoin_Patterns:	.byte $49, $4F, $49, $4F	; SB: Formerly $49, $4F, $4D, $4F
 PUpCoin_Attributes:	.byte SPR_PAL3, SPR_PAL3 | SPR_HFLIP, SPR_PAL3, SPR_PAL3
 
 SObj_Laser:
@@ -1275,7 +1275,7 @@ SObj_KuriboShoe:
 	JSR SObj_GetSprRAMOffChkVScreen
 
 	; Set left sprite attribute
-	LDA #$02	; RAS: Hardcoding, no point to useless LUT (LostShoe_Attribute)
+	LDA #$02	; SB: Hardcoding, no point to useless LUT (LostShoe_Attribute)
 	STA Sprite_RAM+$02,Y
 
 	STA Sprite_RAM+$06,Y	 ; Set attributes on right sprite
@@ -1285,7 +1285,7 @@ SObj_KuriboShoe:
 	ASL A
 	TAX
 
-	; RAS: Hardcoding these, no point to a useless LUT (LostShoe_Pattern)
+	; SB: Hardcoding these, no point to a useless LUT (LostShoe_Pattern)
 
 	; Pattern for left fly off sprite
 	LDA #$A9
@@ -1311,7 +1311,7 @@ SObj_Draw16x16:
 
 	RTS		 ; Return
 
-	; RAS: Draw 16x16 with visibility checks
+	; SB: Draw 16x16 with visibility checks
 SObj_Draw16x16WithViz:
 	JSR SObj_Draw16x16
 

@@ -74,7 +74,7 @@ Inventory_DoHilites:
 	;TAX		 	; X = A (InvStart_Item + offset)
 	;LDA Inventory_Items,X	; Get this item -> A
 
-	; RAS: What used to be inventory index is now selection index because of quantity system
+	; SB: What used to be inventory index is now selection index because of quantity system
 	ADD #1	; Correct item offset
 
 	JMP InvItem_SetColor 	; Jump to InvItem_SetColor
@@ -169,11 +169,11 @@ Flip_TopBarInv:
 	vaddr $2B00
 	.byte $03, $FC, $A0, $A1
 
-	; RAS: New: Item quantities
+	; SB: New: Item quantities
 	vaddr $2B03
 	.byte (Flip_TopBarInv_End - Flip_TopBarInv_Start)
 
-Flip_TopBarInv_Start:	; RAS: New, start of quantities for runtime modification
+Flip_TopBarInv_Start:	; SB: New, start of quantities for runtime modification
 	;      Item 1         Item 2         Item 3         Item 4         Item 5
 	.byte $F0, $F0, $A1, $F0, $F0, $A1, $F0, $F0, $A1, $F0, $F0, $A1, $F0, $F0, $A1
 
@@ -426,7 +426,7 @@ InvCard_Tile_Layout:
 	.byte $FE, $FE, $FE, $FE	; No Star Coin
 	.byte $2E, $2F, $3E, $3F	; Star Coin
 
-	; RAS: No other star coin types
+	; SB: No other star coin types
 	;.byte $E4, $E6, $E7, $E8	; Flower
 	;.byte $AC, $AD, $AE, $AF	; Star
 
@@ -464,7 +464,7 @@ PRG026_A2E4:
 	BNE PRG026_A2E4	 	; While Y <> end of update data, loop!
 
 	; *** MAGIC 12 OFFSET ***
-	; RAS: Refactored to use Inventory_PatEditOff instead of magic 12
+	; SB: Refactored to use Inventory_PatEditOff instead of magic 12
 
 	LDA InvFlip_Frame
 	CMP #14
@@ -513,7 +513,7 @@ PRG026_A30C:
 	STA InvFlip_Counter	; InvFlip_Counter = 0
 	RTS		 	; Return!
 
-	; RAS: 
+	; SB: 
 	; Offsets to start of cards/items by Inventory_Open
 Inventory_PatEditOff:	
 	.byte (Flip_MidTStatCards_Start - Flip_MidTStatCards)	; Inventory_Open = 0
@@ -548,7 +548,7 @@ Inventory_DrawItemsOrCards:
 PRG026_A344:
 	; Inventory is opening!  Set up for inventory items!
 
-	LDA #1	; RAS: Inventory is quantity based, always want to start at 1 (Mushroom)
+	LDA #1	; SB: Inventory is quantity based, always want to start at 1 (Mushroom)
 
 	ADD InvStart_Item	; Offset to the starting item
 	STA <Temp_Var14		; Store this into Temp_Var14 (offset to first pattern in item layout)
@@ -574,7 +574,7 @@ PRG026_A355:
 PRG026_A366:
 	LDY <Temp_Var14	; Starting item/card offset
 
-	; RAS: In quantity inventory style, we actually display incremental pictures
+	; SB: In quantity inventory style, we actually display incremental pictures
 	; So if inventory is open, we want incremental pictures, not lookup vals
 	LDA InvFlip_Frame
 	AND #$08
@@ -795,15 +795,15 @@ Inventory_ForceUpdate_AndFlip:
 PRG026_A436:
 	; Neither B nor START pressed
 
-	; RAS: Removed up/down handling since quantity system doesn't need it!
+	; SB: Removed up/down handling since quantity system doesn't need it!
 
-	LDY #$00		; RAS: Inventory offset, former 2P specific offsets removed
+	LDY #$00		; SB: Inventory offset, former 2P specific offsets removed
 	LDX Player_Current	; X = Player_Current
 
 	;LDA Inventory_Items,Y
 	;BNE PRG026_A4A7		; If first item is not empty, jump to PRG026_A4A7
 
-	; RAS: Quantity system doesn't care, always jump to PRG026_A4A7
+	; SB: Quantity system doesn't care, always jump to PRG026_A4A7
 	JMP PRG026_A4A7
 
 
@@ -840,7 +840,7 @@ PRG026_A4D9:
 	LDA InvHilite_Item
 	ADD InvStart_Item
 
-	; RAS: What used to be inventory index is now selection index because of quantity system
+	; SB: What used to be inventory index is now selection index because of quantity system
 	ADD #1	; Correct item offset
 
 	JSR InvItem_SetColor 	; Otherwise, set the color...
@@ -855,7 +855,7 @@ PRG026_A4FC:
 	LDA InvHilite_Item
 	ADD InvStart_Item
 
-	; RAS: What used to be inventory index is now selection index because of quantity system
+	; SB: What used to be inventory index is now selection index because of quantity system
 	ADD #1
 
 	JMP Inv_UseItem	 ; Use item and don't come back!
@@ -890,7 +890,7 @@ Inv_UseItem:
 
 	TAX
 
-	; RAS: If item slot is empty, do nothing
+	; SB: If item slot is empty, do nothing
 	LDA Inventory_Items,X
 	BNE Inv_UseItem_OK
 
@@ -899,7 +899,7 @@ Inv_UseItem:
 Inv_UseItem_OK:
 
 	TXA
-	; RAS: What used to be inventory index is now selection index because of quantity system
+	; SB: What used to be inventory index is now selection index because of quantity system
 	ADD #1
 
 	JSR DynJump	 		; Dynamic jump based on item used
@@ -969,7 +969,7 @@ Inv_UseItem_Powerup:
 	ADD InvStart_Item
 
 	TAX
-	INX	; RAS: What used to be inventory index is now selection index because of quantity system
+	INX	; SB: What used to be inventory index is now selection index because of quantity system
 	
 	CMP #1
 	BGE Inv_UseItem_NotGeneralPal	; If using a Fire Flower or better, jump to Inv_UseItem_NotGeneralPal
@@ -1024,12 +1024,12 @@ PRG026_A60B:
 	LDA <World_Map_X,X
 	STA <MapPoof_X	
 
-Inv_UseItem_Deduct:	; RAS: Former Inv_UseItem_ShiftOver, but we're a quantity system now
+Inv_UseItem_Deduct:	; SB: Former Inv_UseItem_ShiftOver, but we're a quantity system now
 	LDA InvHilite_Item
 	ADD InvStart_Item
 	TAX			; X = InvHilite_Item + InvStart_Item
 
-	; RAS: Quantity is so much simpler...
+	; SB: Quantity is so much simpler...
 	DEC Inventory_Items,X
 
 	JSR Inventory_ForceUpdate_AndFlip	; Forces Inventory to flip back over
@@ -1135,7 +1135,7 @@ PRG026_A6D2:
 	STA <MapPoof_Y
 	STA <Temp_Var1	; Temp_Var1 = MapPoof_Y
 
-	; RAS: Going to "cheat" a little... we'll assume that the locks
+	; SB: Going to "cheat" a little... we'll assume that the locks
 	; are only ever opened in order and just set the next bit...
 	LDY #4	; Bits 4-7 control the locks
 Map_WZeroLock_UnlockLoop:
@@ -1341,7 +1341,7 @@ PRG026_A876:
 	LDA InvStart_Item
 	ADD InvHilite_Item	; A = InvStart_Item + InvHilite_Item
 
-	; RAS: What used to be inventory index is now selection index because of quantity system
+	; SB: What used to be inventory index is now selection index because of quantity system
 	ADD #1	; Correct item offset
 	TAX
 
@@ -1469,7 +1469,7 @@ PRG026_A936:
 	LDA #$00
 	STA PPU_CTL2	 	; Disable display
 	STA Level_AScrlConfig	; Level_AScrlConfig = 0
-	STA Player_Behind	; RAS: Needed since I changed how this works
+	STA Player_Behind	; SB: Needed since I changed how this works
 
 	; Stop Update_Select activity temporarily
 	INC UpdSel_Disable
@@ -1644,12 +1644,12 @@ LevelJct_BigQuestionBlock:
 
 	AND #$0f	 ; Lower 4 bits of Level_JctYLHStart
 	
-	; RAS: NOTE: If I ever implemented something reverses gravity at the
+	; SB: NOTE: If I ever implemented something reverses gravity at the
 	; start of a level, this code would be correct to have here...
 	; If, very specifically, I had a level init with a pipe entry action
 	; AND reverse gravity at least. Probably not gonna happen!
 	
-	; RAS: Reverse gravity flips this
+	; SB: Reverse gravity flips this
 	;SUB #1
 	;EOR Player_ReverseGrav
 	;ADD #1
@@ -1732,7 +1732,7 @@ LevelJct_VertStarts:	.byte $00, $00, $30, $70, $B0, $EF, $EF, $EF
 
 	; RAS
 LevelJct_General_NegCap:
-	; RAS: Caps negative Y Hi with both 'Y' and 'A' at zero
+	; SB: Caps negative Y Hi with both 'Y' and 'A' at zero
 	LDA #0
 	TAY
 	BEQ LevelJct_General_Cont	; Jump (technially always) to LevelJct_General_Cont
@@ -1749,7 +1749,7 @@ PRG026_AA8A:
 	BEQ PRG026_AA9A	 	; If level is not vertical, jump to PRG026_AA9A
 
 	LDY <Player_YHi	; Y = Player_YHi
-	BMI LevelJct_General_NegCap	; If Player_YHi < 0, jump to LevelJct_General_NegCap (RAS: Fixes negative Player_YHi underflow)
+	BMI LevelJct_General_NegCap	; If Player_YHi < 0, jump to LevelJct_General_NegCap (SB: Fixes negative Player_YHi underflow)
 
 	LDA <Player_Y	; A = Player_Y
 
@@ -1760,7 +1760,7 @@ LevelJct_General_Cont:
 
 PRG026_AA9A:
 
-	; RAS: This fixes doors junctioning on the edge of the screen
+	; SB: This fixes doors junctioning on the edge of the screen
 	LDA #$80
 	STA <Player_SpriteX
 
@@ -1795,7 +1795,7 @@ PRG026_AA9A:
 
 	AND #$0f	 ; Lower 4 bits of Level_JctYLHStart
 	
-	; RAS: Reverse gravity flips this
+	; SB: Reverse gravity flips this
 	SUB #1
 	EOR Player_ReverseGrav
 	ADD #1
@@ -1893,7 +1893,7 @@ PRG026_AB0E:
 	; Common (regular and vertical level) continue point...
 	JSR Jct_FixScroll	; Fix scrolling ranges for jumped-to Player position
 
-	; RAS: Bug fix for junctioning into right edge of level
+	; SB: Bug fix for junctioning into right edge of level
 	JSR Level_FetchHeaderSize	; Fetch size from header of destination level
 	CMP <Horz_Scroll_Hi
 	BNE Jct_NoScrollFix		; If Player is not junctioning to last screen of level, jump to Jct_NoScrollFix
@@ -3027,14 +3027,14 @@ PRG026_B0EC:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; StatusBar_Fill_MorL
 ;
-; Simply puts the correct <M> or <L> (RAS: or <T>) in the status bar
+; Simply puts the correct <M> or <L> (SB: or <T>) in the status bar
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 PRG026_B104:
-	.byte $74, $75, $76, $77, $60, $61  ; Two tiles each, for <M> or <L> (RAS: or <T>), respectively
+	.byte $74, $75, $76, $77, $60, $61  ; Two tiles each, for <M> or <L> (SB: or <T>), respectively
 
 StatusBar_Fill_MorL:
 
-	; RAS: Now based on character selection, not player index!
+	; SB: Now based on character selection, not player index!
 	LDA Player_Current
 	TAX
 	LDA Player_Character,X

@@ -299,9 +299,9 @@ ObjectGroup03_PatTableSel:
 	.byte OPTS_SETPT5 | $4E	; Object $87 - OBJ_FIREBRO
 	.byte OPTS_SETPT6 | $4F	; Object $88 - OBJ_ORANGECHEEP
 	.byte OPTS_SETPT5 | $0A	; Object $89 - OBJ_CHAINCHOMP
-	.byte OPTS_NOCHANGE	; Object $8A - OBJ_SHYGUY_GREEN (RAS: Done manually in ObjInit_ShyGuy)
-	.byte OPTS_NOCHANGE	; Object $8B - OBJ_SHYGUY_RED (RAS: Done manually in ObjInit_ShyGuy)
-	.byte OPTS_NOCHANGE	; Object $8C - OBJ_NINJI (RAS: Done manually in ObjInit_ShyGuy)
+	.byte OPTS_NOCHANGE	; Object $8A - OBJ_SHYGUY_GREEN (SB: Done manually in ObjInit_ShyGuy)
+	.byte OPTS_NOCHANGE	; Object $8B - OBJ_SHYGUY_RED (SB: Done manually in ObjInit_ShyGuy)
+	.byte OPTS_NOCHANGE	; Object $8C - OBJ_NINJI (SB: Done manually in ObjInit_ShyGuy)
 	.byte OPTS_SETPT5 | 33	; Object $8D - OBJ_FAZZYCRAB
 	.byte OPTS_NOCHANGE	; Object $8E - OBJ_FLAREUP
 	.byte OPTS_SETPT6 | $13	; Object $8F - OBJ_FISHBONE
@@ -2086,7 +2086,7 @@ PRG004_AD74:
 PRG004_AD8D:
 	LDA #$7f	 ; A = $7F
 
-	; RAS: Decision made to always keep Lakitu at a slower rate
+	; SB: Decision made to always keep Lakitu at a slower rate
 	
 	;LDY Level_SlopeEn
 	;BNE PRG004_AD96	 ; If this is a sloped level, jump to PRG004_AD96
@@ -2242,7 +2242,7 @@ PRG004_AE35:
 	; Non-sloped level uses Spiny Egg instead
 	LDA #OBJ_SPINYEGG
 
-	; RAS: Not supporting non-spiny Lakitu
+	; SB: Not supporting non-spiny Lakitu
 	;BGE PRG004_AE58	 ; If Level_SlopeEn >= 0 (i.e. a level with slopes), jump to PRG004_AE58
 
 	; Sloped level uses Green "Dud" Egg
@@ -2409,7 +2409,7 @@ PRG004_AF11:
 
 PRG004_AF1A:
 
-	; RAS: Only certain SMB2 objects need stand-on checks
+	; SB: Only certain SMB2 objects need stand-on checks
 	LDA Level_ObjectID,X
 	CMP #OBJ_SHYGUY_GREEN
 	BEQ ShyGuy_StandOnCheck
@@ -2961,7 +2961,7 @@ BulletBill_FlipBits:	.byte SPR_HFLIP, $00
 
 ObjNorm_BulletBill:
 
-	; RAS: Custom pattern bank enforcement (Bowser Jr compatibility hack)
+	; SB: Custom pattern bank enforcement (Bowser Jr compatibility hack)
 	LDA Objects_Var6,X
 	BEQ BulletBill_PT6
 	
@@ -3088,7 +3088,7 @@ PRG004_B1D3:
 
 	JSR GroundTroop_DrawNormal	; Draw Bullet Bill
 
-	; RAS: Custom pattern bank enforcement (Bowser Jr compatibility hack)
+	; SB: Custom pattern bank enforcement (Bowser Jr compatibility hack)
 	LDA Objects_Var6,X
 	BEQ BulletBill_SpriteNormal
 
@@ -3476,7 +3476,7 @@ PRG004_B384:
 	LDA GroundTroop_XVel,Y
 	STA <Objects_XVel,X
 
-	; RAS: Hack to allow other toggling frames
+	; SB: Hack to allow other toggling frames
 	;LDA Objects_Frame,X
 	;AND #%11111110
 	;PHA
@@ -3727,7 +3727,7 @@ Troopa_FootByEvenOddFrame:
 
 GroundTroop_Draw:
 
-	; RAS: Moved this up so it can be recycled
+	; SB: Moved this up so it can be recycled
 	LDA Objects_Var1,X
 	BEQ GroundTroop_DrawCommon	 ; If Var1 = 0, jump to PRG004_B4CC
 
@@ -4927,7 +4927,7 @@ PRG004_B9F9:
 PRG004_BA02:
 
 	; Become a freed Chain Chomp!
-	LDA #$00	; RAS: Removed, should clean this up..
+	LDA #$00	; SB: Removed, should clean this up..
 	STA Level_ObjectID,X
 
 	; Var7 = 4
@@ -5078,7 +5078,7 @@ PRG004_BAB2:
 	CMP #$32
 	BNE PRG004_BAC8	 ; If Var1 <> $32, jump to PRG004_BAC8
 
-	; RAS: Object removed, sorry
+	; SB: Object removed, sorry
 	;JSR ChainChomp_BreakFree	 ; Chain Chomp breaks free!
 
 PRG004_BAC8:

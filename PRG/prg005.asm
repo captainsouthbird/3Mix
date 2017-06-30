@@ -272,17 +272,17 @@ ObjectGroup04_PatTableSel:
 	.byte OPTS_SETPT6 | $4F	; Object $91 - OBJ_TWIRLINGPLATCWNS
 	.byte OPTS_SETPT6 | $4F	; Object $92 - OBJ_TWIRLINGPLATCW
 	.byte OPTS_SETPT6 | $4F	; Object $93 - OBJ_TWIRLINGPERIODIC
-	.byte OPTS_NOCHANGE	; Object $94 - OBJ_SPARK_CW (RAS: Done manually in ObjNorm_Spark)
-	.byte OPTS_NOCHANGE	; Object $95 - OBJ_SPARK_CCW (RAS: Done manually in ObjNorm_Spark)
-	.byte OPTS_NOCHANGE	; Object $96 - OBJ_SPARK_CW_FAST (RAS: Done manually in ObjNorm_Spark)
-	.byte OPTS_NOCHANGE	; Object $97 - OBJ_SPARK_CCW_FAST (RAS: Done manually in ObjNorm_Spark)
+	.byte OPTS_NOCHANGE	; Object $94 - OBJ_SPARK_CW (SB: Done manually in ObjNorm_Spark)
+	.byte OPTS_NOCHANGE	; Object $95 - OBJ_SPARK_CCW (SB: Done manually in ObjNorm_Spark)
+	.byte OPTS_NOCHANGE	; Object $96 - OBJ_SPARK_CW_FAST (SB: Done manually in ObjNorm_Spark)
+	.byte OPTS_NOCHANGE	; Object $97 - OBJ_SPARK_CCW_FAST (SB: Done manually in ObjNorm_Spark)
 	.byte OPTS_SETPT5 | $1F	; Object $98 - OBJ_CLIMBINGKOOPA_G
 	.byte OPTS_SETPT5 | $1F	; Object $99 - OBJ_CLIMBINGKOOPA_R
 	.byte OPTS_SETPT5 | $1F	; Object $9A - OBJ_CLIMBINGKOOPA_GB
 	.byte OPTS_SETPT5 | $1F	; Object $9B - OBJ_CLIMBINGKOOPA_RB
 	.byte OPTS_NOCHANGE	; Object $9C
 	.byte OPTS_SETPT6 | $37	; Object $9D - OBJ_FIREJET_UPWARD
-	.byte OPTS_NOCHANGE	; Object $9E - OBJ_PODOBOO (RAS: Done manually in ObjNorm_Podoboo)
+	.byte OPTS_NOCHANGE	; Object $9E - OBJ_PODOBOO (SB: Done manually in ObjNorm_Podoboo)
 	.byte OPTS_SETPT5 | $0E	; Object $9F - OBJ_PARABEETLE
 	.byte OPTS_SETPT6 | $4F	; Object $A0 - OBJ_GREENPIRANHA
 	.byte OPTS_SETPT6 | $4F	; Object $A1 - OBJ_GREENPIRANHA_FLIPPED
@@ -3257,7 +3257,7 @@ PRG005_AF4F:
 	JSR Object_ApplyXVel	 	; Apply X velocity
 
 	; Arrow platform is always X Hi = 0 (arrow platforms are only going to work in "vertical" levels)
-	; RAS: Not necessarily anymore...
+	; SB: Not necessarily anymore...
 	;LDA #$00
 	;STA <Objects_XHi,X
 
@@ -3415,9 +3415,9 @@ ArrowPlat_Draw:
 	JSR Object_CalcSpriteXY_NoHi
 
 	LDA Level_7Vertical
-	BEQ ArrowPlat_HVisCheck		; RAS: If level is NOT vertical, jump to ArrowPlat_HVisCheck
+	BEQ ArrowPlat_HVisCheck		; SB: If level is NOT vertical, jump to ArrowPlat_HVisCheck
 
-	; RAS: Interesting that this was here originally, like they were considering handling
+	; SB: Interesting that this was here originally, like they were considering handling
 	; horizontal visibility but dropped it; perhaps the arrow lifts didn't always just
 	; blindly wrap the screen?  (We'll keep the behavior for vertical nonetheless.)
 	LDA #$00
@@ -3467,7 +3467,7 @@ PRG005_B059:
 	STA <Temp_Var1
 
 PRG005_B062:
-	; RAS: Handle horizontal visibility
+	; SB: Handle horizontal visibility
 	ASL Objects_SprHVis,X
 	BCS ArrowPlat_SkipSpr
 
@@ -3529,7 +3529,7 @@ PRG005_B0A0:
 	RTS		 ; Return
 
 ArrowPlat_CheckWorldCollide:
-	; RAS: Not handling world tile collisions in non-vertical mode
+	; SB: Not handling world tile collisions in non-vertical mode
 	LDA Level_7Vertical
 	BNE ArrowPlat_CheckWorldCollideV	; If this is a vertical level, jump to ArrowPlat_CheckWorldCollideV
 	
@@ -4787,7 +4787,7 @@ PRG005_B873:
 
 	LDA Level_Objects-1,Y	 ; Get object ID
 
-	; RAS: NEW: Extended bank objects
+	; SB: NEW: Extended bank objects
 	CMP #OBJ_EXTBANK_BEGIN
 	BLT PRG005_B89C		; If this is NOT an extended bank object, jump to PRG005_B89C	
 	JMP ObjSpawn_StdBegin		; Otherwise, jump to ObjSpawn_StdBegin
@@ -4960,7 +4960,7 @@ PRG005_B913:
 	CMP #OBJ_ENDLEVELCARD
 	BNE ObjSpawn_NotGoal	 ; If object ID <> OBJ_ENDLEVELCARD, jump to ObjSpawn_NotGoal
 
-	; RAS: Changing to 5 to avoid bounce blocks glitching out
+	; SB: Changing to 5 to avoid bounce blocks glitching out
 	; Will remove power-ups but oh well
 	LDX #$05	 ; X = 5
 	BNE PRG005_B91E	 ; Jump (technically always) to PRG005_B91E (skip looking for empty slot, force 5)
@@ -4969,7 +4969,7 @@ ObjSpawn_NotGoal:
 	CMP #OBJ_CHECKPOINT
 	BNE ObjSpawn_NotCP2
 	
-	; RAS: Checkpoint gets priority in slot 6.
+	; SB: Checkpoint gets priority in slot 6.
 	; This may screw up bounce blocks, so beware.
 	LDX #$06
 	BNE PRG005_B91E	 ; Jump (technically always) to PRG005_B91E (skip looking for empty slot, force 6)
@@ -5096,7 +5096,7 @@ PRG005_B969:
 
 PRG005_B988:
 
-	; RAS: Table moved out of common space PRG000 to PRG009 to make room
+	; SB: Table moved out of common space PRG000 to PRG009 to make room
 	; But that makes it inaccessible here, so made a thunk subroutine...
 	;LDA AScroll_HorizontalInitMove,Y
 	;STA Level_AScrlVar	 ; -> Level_AScrlVar
@@ -5314,10 +5314,10 @@ PRG005_BB30:
 	STX <Temp_Var2		 ; Backup object index -> Temp_Var2
 	STA <Temp_Var1		 ; Backup pixel X position -> Temp_Var1
 
-	; RAS: Fixing bug here, using object ID like it should
+	; SB: Fixing bug here, using object ID like it should
 	LDA Level_Objects-2,Y
 	
-	; RAS: NEW: Extended bank objects
+	; SB: NEW: Extended bank objects
 	CMP #OBJ_EXTBANK_BEGIN
 	BGE PRG005_BB5F		; If this is an extended bank object, jump to PRG005_BB5F
 	
@@ -6175,7 +6175,7 @@ PRG005_BF55:
 
 PRG005_BF70:
 
-	; RAS: Spawn all Alt Level Mods and Touch Warps immediately and permanently
+	; SB: Spawn all Alt Level Mods and Touch Warps immediately and permanently
 	JSR LevReset_VSpawnSpecs
 
 	; This loop spawns all objects which should be visible at the initial
@@ -6353,7 +6353,7 @@ ObjPrioSpecObj_SObjIDs:	.byte SOBJ_ALTLEVELMOD, SOBJ_TOUCHWARP, SOBJ_FENCECTL
 
 ObjPrioSpecObj_Init:
 
-	; RAS: Priority Special Object creation
+	; SB: Priority Special Object creation
 	; If we find an empty special object slot, great.
 	; If we don't, we'll FORCE into one!!
 
@@ -6389,7 +6389,7 @@ PrioSpecObj_SearchEmpty_None:
 	AND #$07
 	TAY
 
-	; RAS: Obviously if you're being silly and put too many priority special objects together,
+	; SB: Obviously if you're being silly and put too many priority special objects together,
 	; this will cause the software to freeze.  Don't do that, be sensible, okay??
 PrioSpecObj_SearchEmpty_Chk:
 	; But it'd be dumb to step on another Priority Special Object, right?

@@ -26,7 +26,7 @@ Vs_CardAwardLives:
 
 	JSR PRG009_A026
 
-	; RAS: This code is dead anyway since this won't be used for 2P Vs anymore!
+	; SB: This code is dead anyway since this won't be used for 2P Vs anymore!
 
 	;LDX #(Inventory_Cards2 - Inventory_Cards)	; Offset to Luigi's cards 
 	LDX #0
@@ -355,7 +355,7 @@ PRG009_A204:
 	DEY		; Y--
 	BNE PRG009_A204	; While Y <> 0, loop
 
-	; RAS: This now flags if Player died in the battle
+	; SB: This now flags if Player died in the battle
 	LDA #0
 	STA Map_PlayerLost2PVs
 
@@ -417,7 +417,7 @@ PRG009_A269:
 	JSR PRG009_A287
 	TAY		 ; Y = This object's Temp_Var1 value
 
-	; RAS: Put "+5" to give room for regular enemies to spawn.. because fuck classic play
+	; SB: Put "+5" to give room for regular enemies to spawn.. because fuck classic play
 
 	; Set hiding spot for coin
 	LDA Vs_HiddenCoinX,Y
@@ -630,7 +630,7 @@ Vs_PlayerPopCard:
 	LDA Vs_CurIndex
 	BEQ PRG009_A38E	 ; If Player is Mario, jump to PRG009_A38E
 
-	; RAS: This code is dead anyway since this won't be used for 2P Vs anymore!
+	; SB: This code is dead anyway since this won't be used for 2P Vs anymore!
 
 	; Set Y as offset to Luigi's third card
 	;LDY #(Inventory_Cards2 - Inventory_Cards + 2)
@@ -720,7 +720,7 @@ PRG009_A3DA:
 
 Vs_PlayerMove:
 
-	; RAS: Hack to disable Player 2
+	; SB: Hack to disable Player 2
 	; The game sees it as in normal state, but never updated (X = 0 only)
 
 	LDA #$FF
@@ -834,7 +834,7 @@ VsPlayer_Init:
 
 	BNE PRG009_A491	 ; If more than one tick remains, jump to PRG009_A491 (RTS)
 
-	; RAS: No competition here :)
+	; SB: No competition here :)
 	;INX		 ; X++ (guarenteed non-zero)
 	;STX Map_PlayerLost2PVs	 ; Flag Player as to not lose a life when we go back to the map
 
@@ -2443,7 +2443,7 @@ PRG009_ABE2:
 
 	JSR Vs_Randomize ; Stir up randomness
 
-	; RAS: Always use P1
+	; SB: Always use P1
 	LDY #0
 
 	;LDA Vs_Random+2
@@ -4039,7 +4039,7 @@ PRG009_B3D4:
 	DEY		 ; Y--
 	BPL PRG009_B3D4	 ; While Y >= 0, loop!
 
-	; RAS: No competition here :)
+	; SB: No competition here :)
 
 	;LDY #$01	 ; Y = 1 (Mario lost)
 	;LDA Vs_PlayerCoins
@@ -4103,7 +4103,7 @@ PRG009_B3FC:
 	LDA #$02
 	STA Vs_PlayerState,Y
 
-	; RAS: New meaning of "Map_PlayerLost2PVs"
+	; SB: New meaning of "Map_PlayerLost2PVs"
 	; Mark Player as having died!
 	INC Map_PlayerLost2PVs
 
@@ -4255,7 +4255,7 @@ Vs_GrabCardObject:
 	LDA <Temp_Var16
 	BEQ PRG009_B4DF	 ; If this is Mario, jump to PRG009_B4DF
 
-	; RAS: This code is dead anyway since this won't be used for 2P Vs anymore!
+	; SB: This code is dead anyway since this won't be used for 2P Vs anymore!
 
 	;LDY #(Inventory_Cards2 - Inventory_Cards)	; Offset to Luigi's cards
 	LDY #0
@@ -5097,7 +5097,7 @@ PRG009_B922:
 	.word AutoScroll_Horizontal		; 1 Same as type zero, except accesses $1x Level_AScrlVar
 	.word AutoScroll_URDiagonal		; 2 Up-right diagonal used in 5-9
 	.word AutoScroll_SpikeCeiling	; 3 Falling spiked ceilings (e.g. World 1 and 2 Mini Fortresses)
-	.word AutoScroll_ShiftingMaze	; 4 RAS: SMW-esque shifting/crushing maze
+	.word AutoScroll_ShiftingMaze	; 4 SB: SMW-esque shifting/crushing maze
 	.word AutoScroll_Floating		; 5 Sinking/rising over water world (e.g. in 3-8)
 
 	; This table is what value (if any) will go into Level_AScrlLoopSel
@@ -6089,14 +6089,14 @@ PRG009_BF42:
 
 	RTS		 ; Return
 
-	; RAS: Compatibility hack so PRG005 can get what it needs
+	; SB: Compatibility hack so PRG005 can get what it needs
 AScroll_Set_Level_AScrlVar:
 	LDA AScroll_HorizontalInitMove,Y
 	STA Level_AScrlVar	 ; -> Level_AScrlVar
 	RTS
 
 
-	; RAS: Moved from PRG000
+	; SB: Moved from PRG000
 ASHIM .func \1-AScroll_Movement-1
 	; This is the initial movement table for horizontal auto scroll levels, minus 1
 	; Level_AScrlLimitSel selects which entry to use, which sets Level_AScrlVar (the actual index value)

@@ -1562,7 +1562,7 @@ Map_NoLoseTurnTiles:
 Map_NoLoseTurnTiles_End
 
 
-	; RAS: Special tiles which "complete" from tiles in this table to matched tile in the next table
+	; SB: Special tiles which "complete" from tiles in this table to matched tile in the next table
 	; Keep in sync with PRG012 Map_Removable_Tiles / Map_RemoveTo_Tiles
 Map_SpecComp_Tiles:	
 	.byte TILE_FORT				; 0
@@ -1589,7 +1589,7 @@ Map_SpecComp_TilesComp:
 	.byte TILE_BOWSERCASTLELRC	; 9
 
 MO_DoLevelClear:
-	; RAS: Forcing pipeways even without pipe tiles
+	; SB: Forcing pipeways even without pipe tiles
 	LDA Map_WasInPipeway
 	BEQ MDLC_WasNotInPipeway
 	
@@ -1740,7 +1740,7 @@ PRG011_AA8C:
 	PLA	; Restore tile value
 	PHA	; Save tile
 
-	; RAS: If tile is $0/1x, it is a "primary level", which we have new "check mark" standard tiles for
+	; SB: If tile is $0/1x, it is a "primary level", which we have new "check mark" standard tiles for
 	AND #$F0
 	CMP #$20
 	BGE Complete_NotPrimaryLevel	; If not a $0/1x tile, jump to Complete_NotPrimaryLevel
@@ -1958,7 +1958,7 @@ PRG011_ABCC:
 	JMP MapObjects_UpdateDrawEnter	 ; Jump to MapObjects_UpdateDrawEnter
 
 
-	; RAS: Made into subroutine for reuse
+	; SB: Made into subroutine for reuse
 	; X = X coordinate on map (e.g. MapPoof_X)
 	; A = Y coordinate on map (e.g. MapPoof_Y)
 Map_DrawTileChange:
@@ -1984,7 +1984,7 @@ Map_DrawTileChange:
 	STA Graphics_Buffer+$02,X
 	STA Graphics_Buffer+$07,X
 
-	; RAS: New: Just get patterns as appropriate instead of hardcoding them PLEASE!
+	; SB: New: Just get patterns as appropriate instead of hardcoding them PLEASE!
 	JSR MapTile_GetPats
 
 	LDX Graphics_BufCnt	 ; X = Graphics_BufCnt
@@ -2076,7 +2076,7 @@ PRG011_ABF9:
 	ASL A
 	TAX		 ; X *= 2
 
-	; RAS: Stupid fixes for an unknown problem
+	; SB: Stupid fixes for an unknown problem
 	BPL Map_PoofIndexNotNeg
 
 	LDX #0
@@ -2466,7 +2466,7 @@ PRG011_AEDF:
 	CMP Map_Object_ActX,Y
 	BNE PRG011_AEFA	 	; If Player's X Lo is not equal to this map object, jump to PRG011_AEFA (do nothing)
 
-	; RAS: This is meant to be "runs into you" code, but since I took
+	; SB: This is meant to be "runs into you" code, but since I took
 	; away skidding on death, I need to have them march in that
 	; situation, otherwise you re-enter immediately on death!
 	LDA Map_ReturnStatus
@@ -4219,7 +4219,7 @@ Map_AnimCHRROM:
 
 Map_DoAnimations:	; $BC29
 	LDX World_Num	; X = World_Num
-	CPX #8	; RAS: World 9
+	CPX #8	; SB: World 9
 	BNE PRG011_BC34	; If not on World 9, jump to PRG011_BC34
 
 	; World 9...

@@ -129,7 +129,7 @@ DMC_MODLEN_LUT:
 	.byte MLEN(DMC01, DMC01_End)	; Sample  0 (DMC01)
 	.byte MLEN(DMC02, DMC02_End)	; Sample  1 (DMC02)
 	.byte MLEN(DMC03, DMC03_End)	; Sample  2 (DMC03)
-	.byte MLEN(DMC02, DMC02_End)	; Sample  3 (DMC02 BAD SAMPLE LENGTH / RAS: Removed, redundant)
+	.byte MLEN(DMC02, DMC02_End)	; Sample  3 (DMC02 BAD SAMPLE LENGTH / SB: Removed, redundant)
 	.byte MLEN(DMC04, DMC04_End)	; Sample  4 (DMC04)
 	.byte MLEN(DMC05, DMC05_End)	; Sample  5 (DMC05)
 	.byte MLEN(DMC05, DMC05_C)	; Sample  6 (DMC05 3/4 length)
@@ -214,7 +214,7 @@ SndMus_QueueSet2C:
 	TAY		 		; Y = A
 	DEY
 
-	; RAS: Set extended music bank and bring it in
+	; SB: Set extended music bank and bring it in
 	LDA Music_Set2C_Bank-1,Y
 	JSR SndMus_SetExtBank
 
@@ -252,9 +252,9 @@ SndMus2C_Next:
 SndMus2C_LoadNext:
 	; Load next "index" (Y) of Music Set 2 song...
 
-	; RAS: Refactored this so we could have more headers!
+	; SB: Refactored this so we could have more headers!
 
-	; RAS: Y -> 2 byte offset
+	; SB: Y -> 2 byte offset
 	TYA
 	ASL A
 	TAY
@@ -311,7 +311,7 @@ PRG063_E364:
 	;;;; 
 SndMus_QueueSet2B:
 	; For queuing any Set 2B music $10 - $F0
-	; RAS: New Set 2C, music $18 - $F8
+	; SB: New Set 2C, music $18 - $F8
 
 	STA SndCur_Music2	; Store which Set 2 song we're playing
 
@@ -321,7 +321,7 @@ SndMus_QueueSet2B:
 	; Save current song request
 	PHA
 
-	; RAS: To access Set 2C
+	; SB: To access Set 2C
 	AND #$04
 	BEQ SndMus_Queue_Not2C	; If not a set 2C song, jump to SndMus_Queue_Not2C
 
@@ -344,7 +344,7 @@ SndMus_Queue_Not2C:
 
 	TAY		 		; Y = A
 
-	; RAS: Set extended music bank and bring it in
+	; SB: Set extended music bank and bring it in
 	LDA Music_Set2B_Bank-1,Y
 	JSR SndMus_SetExtBank
 
@@ -384,9 +384,9 @@ PRG063_E3EB:
 SndMus2B_LoadNext:
 	; Load next "index" (Y) of Music Set 2 song...
 
-	; RAS: Refactored this so we could have more headers!
+	; SB: Refactored this so we could have more headers!
 
-	; RAS: Y -> 2 byte offset
+	; SB: Y -> 2 byte offset
 	TYA
 	ASL A
 	TAY
@@ -536,7 +536,7 @@ SndMus2A_LoadNext:
 	; 2B's lowest index is 08!
 
 	; 'Y' is the next 1/2A index we're going to play
-	; RAS: Y -> 2 byte offset
+	; SB: Y -> 2 byte offset
 	TYA
 	ASL A
 	TAY
@@ -1037,7 +1037,7 @@ Music_NseNoteOn:
 	TAY		 	; Y = A
 
 	LDA Sound_IsPaused
-	BNE Music_PCMTrack	; RAS: If paused, jump straight to Music_PCMTrack
+	BNE Music_PCMTrack	; SB: If paused, jump straight to Music_PCMTrack
 
 	; Note that the normal $7E Note Off is not implemented here; instead, use $01
 
@@ -1242,7 +1242,7 @@ PRG063_E7D1:
 
 PRG063_37D9:
 	ADD #24	 	  ; A += 24 (recover from last subtraction)
-	ADD Music_Invert  ; RAS: Makes inverted music possible!
+	ADD Music_Invert  ; SB: Makes inverted music possible!
 	TAY		  ; Y = A (Y is now the offset into the LUT to get the base frequency for this note)
 
 	; Y should now be a lookup into the note table!
@@ -1321,7 +1321,7 @@ Sound_Tri_NoteOn:
 Square1_Table_Notes:
 	.word $1AB8, $1938, $17CC, $1678, $1534, $1404, $12E4, $11D4, $10D4, $0FE0, $0EFC, $0E24
 
-	; RAS: Invert table
+	; SB: Invert table
 	.word $0E24, $0EFC, $0FE0, $10D4, $11D4, $12E4, $1404, $1534, $1678, $17CC, $1938, $1AB8
 
 PRG063_E851:
@@ -1379,7 +1379,7 @@ Music_RestH_LUT:
 	.byte $03, $03, $04, $04, $06, $09, $08, $08, $0C, $12, $18, $24, $30, $02, $00, $00 ; $80 - $8F
 	.byte $02, $02, $03, $02, $04, $06, $05, $06, $08, $0C, $10, $18, $20		     ; $90 - $9C
 
-	; RAS: Align DMC04 to nearest 64 byte boundary
+	; SB: Align DMC04 to nearest 64 byte boundary
 .AlignDMC04:	DMCAlign .AlignDMC04
 
 DMC04:	.byte $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $B5, $82, $DC
@@ -1633,7 +1633,7 @@ PRG063_F4B3:
 
 	LDA Update_Select	 ; Get the Update_Select value
 
-	; RAS: Refactoring this to a jump table so it's easier to work with!
+	; SB: Refactoring this to a jump table so it's easier to work with!
 	; Nintendo used a $00, $20, $40... $A0 numbering system with Raster_Effect for some reason
 	; So first we must undo that... basically 3 MSb shifted down
 	LSR A
@@ -2002,7 +2002,7 @@ PRG063_F6BC:
 	BNE UpdSel60A0_Cont
 
 UpdSel_NotFixedFC:
-	; RAS: Probably a bit "dirty" to use raw offsets like this, but makes it easier to do
+	; SB: Probably a bit "dirty" to use raw offsets like this, but makes it easier to do
 	; "large characters" (e.g. Big Boo) without activating unwanted auto-scroll stuff.
 	LDA <Horz_Scroll
 	ADD Horz_Scroll_Off32PP
@@ -2163,7 +2163,7 @@ PRG063_F7B0:
 
 	LDA Raster_Effect
 
-	; RAS: Refactoring this to a jump table so it's easier to work with!
+	; SB: Refactoring this to a jump table so it's easier to work with!
 	; Nintendo used a $00, $20, $40... $A0 numbering system with Raster_Effect for some reason
 	; So first we must undo that... basically 3 MSb shifted down
 	LSR A
@@ -2997,7 +2997,7 @@ CardVStartL:	.byte $56, $59, $5C	; Lower half of card
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 StatusBar_Update_Cards:
 
-	LDA #0 ; RAS: Inventory offset, former 2P specific offsets removed
+	LDA #0 ; SB: Inventory offset, former 2P specific offsets removed
 	STA <Temp_Var1	 ; Temp_Var1 = A
 
 	LDA #$02	 
@@ -3053,7 +3053,7 @@ SBDCP_NotComet:
 	LDA CardLR,X	 
 	STA Graphics_Buffer+9,Y	 
 
-	LDX #0	; RAS: Inventory offset, former 2P specific offsets removed
+	LDX #0	; SB: Inventory offset, former 2P specific offsets removed
 
 	LDA <Temp_Var3		; A = Temp_Var3 (offset to current card)
 	STX <Temp_Var3		; Temp_Var3 = X
@@ -3547,7 +3547,7 @@ PRG063_FEC3:
 
 PRG063_FF11:
 
-	; RAS: Reverse gravity up/down reversal!
+	; SB: Reverse gravity up/down reversal!
 	LDA Player_ReverseGrav
 	BEQ ReadJoypad_NotRev
 

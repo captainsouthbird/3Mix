@@ -131,7 +131,7 @@ ObjectGroup01_CollideJumpTable:
 	.word ObjHit_DoNothing		; Object $3E - OBJ_WOODENPLATFORMFLOAT
 	.word ObjHit_DryBones		; Object $3F - OBJ_DRYBONES
 	.word ObjHit_DoNothing		; Object $40 - OBJ_DESERTBONES
-	.word ObjHit_DoNothing		; Object $41 - OBJ_ENDLEVELCARD (RAS: Not using touch anymore)
+	.word ObjHit_DoNothing		; Object $41 - OBJ_ENDLEVELCARD (SB: Not using touch anymore)
 	.word ObjHit_DoNothing		; Object $42 - OBJ_REX_PARTLYSQUASHED
 	.word ObjHit_DoNothing		; Object $43
 	.word ObjHit_DoNothing		; Object $44 - OBJ_WOODENPLATUNSTABLE
@@ -293,7 +293,7 @@ ObjectGroup01_PatTableSel:
 	.byte OPTS_NOCHANGE	; Object $32 - OBJ_BIRDOEGG
 	.byte OPTS_SETPT5 | $0A	; Object $33 - OBJ_NIPPER
 	.byte OPTS_SETPT5 | $05	; Object $34 - OBJ_TOAD
-	.byte OPTS_NOCHANGE	; Object $35 - OBJ_PRINCESS (RAS: Done manually in ObjNorm_Toad)
+	.byte OPTS_NOCHANGE	; Object $35 - OBJ_PRINCESS (SB: Done manually in ObjNorm_Toad)
 	.byte OPTS_SETPT5 | $0E	; Object $36 - OBJ_WOODENPLATFORM
 	.byte OPTS_SETPT5 | $0E	; Object $37 - OBJ_OSCILLATING_HS
 	.byte OPTS_SETPT5 | $0E	; Object $38 - OBJ_OSCILLATING_VS
@@ -791,7 +791,7 @@ PRG002_A3E5:
 
 PRG002_A417:
 
-	; RAS: Site of ancient bug; see notes in original disassembly!
+	; SB: Site of ancient bug; see notes in original disassembly!
 
 	DEX		 ; X--
 	BPL PRG002_A3DA	 ; While X >= 0, loop!
@@ -937,7 +937,7 @@ ObjInit_PipewayCtlr:
 
 	RTS		 ; Return
 
-	; RAS: Merged these tables for ease of use...
+	; SB: Merged these tables for ease of use...
 	;
 	; XHi:
 	; Sets the "Map_Entered_XHi" value based on whether you're coming or going
@@ -965,7 +965,7 @@ ObjInit_PipewayCtlr:
 	; The lower nibble ("right") cooresponds to the pipe on the right side	
 	;
 	; WT:
-	; RAS: NEW!  Target WORLD (Left/Top or Right/Bottom)
+	; SB: NEW!  Target WORLD (Left/Top or Right/Bottom)
 	;
 	; RESV:
 	; Reserved...
@@ -1397,7 +1397,7 @@ Boo_VelLimit:	.byte $05, -$05
 
 ObjInit_Boo:
 
-	; RAS: NEW -- Boos in the dark will chase you perpetually!
+	; SB: NEW -- Boos in the dark will chase you perpetually!
 	; Can't shy away if they can't see you!
 	; ...
 	; So the technical thing is, is a darkness controller present?  
@@ -1430,7 +1430,7 @@ BooCDL_NotDarkCtl:
 
 
 ObjNorm_Boo:
-	; RAS: NEW!  ALWAYS chase if dark!
+	; SB: NEW!  ALWAYS chase if dark!
 	LDY Objects_Var1,X
 	BMI Boo_NoDarknessCtl	; If no darkness controller present, abort!
 	
@@ -1813,7 +1813,7 @@ ObjNorm_InvisibleLift:
 	JSR Object_DeleteOffScreen	 ; Delete object if it falls off-screen
 	JSR Object_CalcSpriteXY_NoHi	 ; Calculate the Sprite X and Sprite Y
 
-	; RAS: Not invisible anymore!
+	; SB: Not invisible anymore!
 	JSR InvisiLift_Draw	 ; Draw the lift
 
 	LDA <Objects_Var5,X
@@ -2558,7 +2558,7 @@ PRG002_AC42:
 
 	STA <Temp_Var1
 	LSR A		; Value * 4
-	ADD <Temp_Var1	; Value * 12 (RAS: Adding additional reverse gravity offsets)
+	ADD <Temp_Var1	; Value * 12 (SB: Adding additional reverse gravity offsets)
 
 	TAY		 	; -> 'Y'
 PRG002_AC50:
@@ -3684,7 +3684,7 @@ Rosalina_KeepGoing:
 	STA <Objects_XVel,X
 
 Toad_NotPrincess:
-	; RAS: Scroll must be aligned before Toad talks
+	; SB: Scroll must be aligned before Toad talks
 	LDA <Horz_Scroll
 	BNE PRG002_B272
 
@@ -3762,7 +3762,7 @@ Toad_Speak:
 	.word Toad_HaltPlayer	; RAS
 	.word Toad_DrawDiagBox
 	.word Toad_DoToadText
-	.word Toad_CastleEnder	; RAS: Only do anything if castle Toad (i.e. wait and exit)
+	.word Toad_CastleEnder	; SB: Only do anything if castle Toad (i.e. wait and exit)
 
 TDiagBox_R1:	.byte $94, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $90, $96
 TDiagBox_R2:	.byte $92, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE, $93
@@ -4070,7 +4070,7 @@ Princess_EndWorld:
 LogPlat_Draw:
 	JSR Object_ShakeAndCalcSprite
 
-	; Do not preserve the H/V flip bits (RAS: Just HFLIP ... ok?)
+	; Do not preserve the H/V flip bits (SB: Just HFLIP ... ok?)
 	LDA <Temp_Var3
 	AND #~SPR_HFLIP
 	STA <Temp_Var3
@@ -5301,7 +5301,7 @@ EndLevelCard_Untouched:
 
 ;PRG002_BB65:
 
-	; RAS: "Card" (now flag) is grabbed by Player going passed it
+	; SB: "Card" (now flag) is grabbed by Player going passed it
 
 	; Trigger when close enough X
 	JSR Object_CalcCoarseXDiff
@@ -5479,7 +5479,7 @@ PRG002_BCC6:
 	CMP #$10	; so really checking if it's around 32 or 33
 	BNE PRG002_BD02	 ; If Player's not there yet, jump to PRG002_BD02
 
-	; RAS: No triple card checks
+	; SB: No triple card checks
 
 	JSR PRG002_BD35	 ; Prepare for exit
 
@@ -5502,7 +5502,7 @@ EndLevelCard_Exit:
 	JSR EndLevelCard_Draw 	; Draw the card
 	JSR EndLevelCard_ClearPlayerIfOff	; Clear Player's sprites as he walks off-screen
 
-	LDY #0	; RAS: Inventory offset, former 2P specific offsets removed
+	LDY #0	; SB: Inventory offset, former 2P specific offsets removed
 
 	LDA Objects_Timer,X
 	BNE PRG002_BD6B	 ; If timer not expired, jump to PRG002_BD6B
@@ -5675,7 +5675,7 @@ PRG002_BF4B:
 	LDA #$04
 	STA <Objects_DetStat,X
 
-	; RAS: No more victory fanfare stuff!
+	; SB: No more victory fanfare stuff!
 
 	; Stop music
 	LDA #MUS1_STOPMUSIC

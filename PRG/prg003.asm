@@ -275,19 +275,19 @@ ObjectGroup02_PatTableSel:
 	.byte OPTS_SETPT6 | $33	; Object $4B - OBJ_BOOMBOOMJUMP
 	.byte OPTS_SETPT6 | $33	; Object $4C - OBJ_BOOMBOOMFLY
 	.byte OPTS_NOCHANGE	; Object $4D
-	.byte OPTS_NOCHANGE	; Object $4E - OBJ_BOSSBIRDO (RAS: Done manually in ObjInit_Birdo)
+	.byte OPTS_NOCHANGE	; Object $4E - OBJ_BOSSBIRDO (SB: Done manually in ObjInit_Birdo)
 	.byte OPTS_SETPT5 | $0A	; Object $4F
 	.byte OPTS_SETPT5 | $36	; Object $50 - OBJ_BOBOMBEXPLODE
 	.byte OPTS_SETPT5 | $12	; Object $51 - OBJ_BOOLOOP
 	.byte OPTS_SETPT5 | $05	; Object $52 - OBJ_TREASUREBOX
 	.byte OPTS_SETPT5 | $12	; Object $53 - OBJ_PODOBOOCEILING
-	.byte OPTS_NOCHANGE	; Object $54 - OBJ_DONUTLIFTSHAKEFALL (RAS: Done manually in ObjNorm_DonutLift)
+	.byte OPTS_NOCHANGE	; Object $54 - OBJ_DONUTLIFTSHAKEFALL (SB: Done manually in ObjNorm_DonutLift)
 	.byte OPTS_SETPT5 | $0B	; Object $55 - OBJ_BOBOMB
 	.byte OPTS_SETPT5 | $5A	; Object $56 - OBJ_PIRANHASIDEWAYSLEFT
 	.byte OPTS_SETPT5 | $5A	; Object $57 - OBJ_PIRANHASIDEWAYSRIGHT
 	.byte OPTS_SETPT5 | $0E	; Object $58 - OBJ_FIRECHOMP
 	.byte OPTS_SETPT5 | $0E	; Object $59 - OBJ_FIRESNAKE
-	.byte OPTS_NOCHANGE	; Object $5A - OBJ_THWOMP (RAS: Done manually in ObjNorm_Thwomp)
+	.byte OPTS_NOCHANGE	; Object $5A - OBJ_THWOMP (SB: Done manually in ObjNorm_Thwomp)
 	.byte OPTS_SETPT5 | $12	; Object $5B - OBJ_THWOMPLEFTSLIDE
 	.byte OPTS_SETPT5 | $12	; Object $5C - OBJ_THWOMPRIGHTSLIDE
 	.byte OPTS_SETPT5 | $12	; Object $5D - OBJ_THWOMPUPDOWN
@@ -1767,7 +1767,7 @@ PRG003_A89D:
 	BNE PRG003_A8D2	 ; If this is an OAT_HITNOTKILL object, deny the hit, jump to PRG003_A8D2
 
 BobombExp_MouserAlwaysOK:
-	; RAS: "Color rotation" invincibility hack
+	; SB: "Color rotation" invincibility hack
 	LDA Objects_ColorCycle,Y
 	BNE PRG003_A8D2
 
@@ -1776,7 +1776,7 @@ BobombExp_MouserAlwaysOK:
 	ORA #SND_PLAYERKICK
 	STA Sound_QPlayer
 
-	; RAS: Check for HP
+	; SB: Check for HP
 	LDA Objects_HitCount,Y
 	BEQ BomOmb_ObjectNoHP
 
@@ -1802,7 +1802,7 @@ BomOmb_ObjectNoHP:
 	LDA #$00
 	STA Objects_XVel,Y
 
-	; RAS: Hack for Mouser
+	; SB: Hack for Mouser
 	LDA Level_ObjectID,Y
 	CMP #OBJ_BOSS_MOUSER
 	BNE BobOmb_KillNotMouser
@@ -1844,7 +1844,7 @@ BobOmb_CalcULOffXY:
 	
 Bobomb_BustBlocks:
 
-	; RAS: NEW: Bobomb busts blocks while exploding!
+	; SB: NEW: Bobomb busts blocks while exploding!
 	; Needed to put it in bank 30 though...
 
 	JMP_THUNKC 30, Bobomb_BustBlocks30
@@ -1901,12 +1901,12 @@ PRG003_A911:
 	LDA #$1e
 	STA RotatingColor_Cnt
 
-	; RAS: Stop the clock
+	; SB: Stop the clock
 	LDA Level_TimerEn
 	ORA #$01
 	STA Level_TimerEn
 
-	; RAS: Alternate exit!
+	; SB: Alternate exit!
 	INC Map_WasAltExit
 
 	; Victory fanfare
@@ -3127,7 +3127,7 @@ PRG003_AFDC:
 	ADD SidePiranha_EndSprXOff,Y
 	STA <Temp_Var2		 ; Temp_Var2 = Sprite X for piranha's remaining bit
 
-	; RAS: They never implemented horizontal check for this, interestingly
+	; SB: They never implemented horizontal check for this, interestingly
 	LDA Objects_SprHVis,X
 	AND HPiranha_MaskBits,Y
 	BNE PRG003_AFFA			; If third sprite is not visible, jump to PRG003_AFFA
@@ -5147,7 +5147,7 @@ ObjNorm_Thwomp:
 
 Thwomp_FenceAltPattern:
 	
-	; RAS: FIXME: I don't remember why I put this in. Was Thwomp in something that shifted?
+	; SB: FIXME: I don't remember why I put this in. Was Thwomp in something that shifted?
 	; It's broken in any case, really messes up Thwomp's return...
 	; If needed, restore, but make a 16-bit restoration position or something
 	

@@ -971,7 +971,7 @@ LL_PowerBlocks_DDComet:
 	.byte TILEA_QBLOCKCOIN2, TILEA_QBLOCKCOIN2, TILEA_QBLOCKCOIN2, TILEA_NOTECOINHEAVEN ; 20 - 23
 	.byte TILEA_PSWITCH ; 24
 
-	; RAS: New ones accessed via entry points
+	; SB: New ones accessed via entry points
 LL_XtraBlocks:
 	.byte TILEA_EXSWITCH
 
@@ -2215,7 +2215,7 @@ PRG014_CFBD:
 LoadLevel_LittleCloudSolidRun:
 	LDX #$01	 	; X = 1 (use TILE1_JCLOUDSOLID)
 
-	BNE PRG014_CFD8		; RAS: Bug fixed
+	BNE PRG014_CFD8		; SB: Bug fixed
 
 PRG014_CFD4:
 	.byte TILE1_JCLOUD, TILE1_JCLOUDSOLID
@@ -2825,7 +2825,7 @@ PRG014_D26E:
 	CMP #TILE1_SKY	
 	BEQ PRG014_D278	 	; If this is a sky tile jump to PRG014_D278
 
-	; RAS: Support vine-to-ground in Underwater
+	; SB: Support vine-to-ground in Underwater
 	LDX Level_Tileset
 	CPX #6
 	BNE LLV2G_NotWater		; If tileset <> 6 (Underwater), jump to LLV2G_NotWater
@@ -2834,7 +2834,7 @@ PRG014_D26E:
 	BEQ PRG014_D278		; If this is a Underwater-world sky tile, jump to PRG014_D278
 	
 LLV2G_NotWater:
-	; RAS: Support vine-to-ground in Sky world
+	; SB: Support vine-to-ground in Sky world
 	LDX Level_Tileset
 	CPX #13
 	BNE PRG014_D282		; If tileset <> 13 (Sky), jump to PRG014_D282 (RTS)
@@ -4224,7 +4224,7 @@ PRG014_D937:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; LoadLevel_BGOrWater
 ;
-; RAS: I was wrong about this originally, it doesn't work "upside
+; SB: I was wrong about this originally, it doesn't work "upside
 ; down", but I made it work upside down because I have use for
 ; Galaxy World that way...
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -4329,7 +4329,7 @@ PRG014_D985:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 LoadLevel_Nothing:
 
-	; RAS: In case I hit this trap because I'm a moron, play music...
+	; SB: In case I hit this trap because I'm a moron, play music...
 	LDA #MUS2A_BONUSGAME
 	STA Sound_QMusic2
 .fixme: JMP .fixme

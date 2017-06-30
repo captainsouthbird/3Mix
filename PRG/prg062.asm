@@ -77,30 +77,30 @@ Video_Upd_Table: ; $803E
 	.word Video_Blackout	; $14 - Blacks out 3 colors, used during end-level triple card match; not sure what for?
 	.word Video_DoGameOver00; $15 - "GAME OVER" Box (horizontal scroll at $00)
 	.word Video_DoGameOver80; $16 - "GAME OVER" Box (horizontal scroll at $80)
-	.word $0000	; $17 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $18 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $19 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1A - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1B - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1C - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1D - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1E - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $1F - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $20 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $21 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $22 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $23 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $24 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $25 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $26 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $27 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $28 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $29 - RAS: Removed, used to be 3CM fanfare, now using flagpole
-	.word $0000	; $2A - RAS: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $17 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $18 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $19 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1A - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1B - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1C - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1D - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1E - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $1F - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $20 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $21 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $22 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $23 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $24 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $25 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $26 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $27 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $28 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $29 - SB: Removed, used to be 3CM fanfare, now using flagpole
+	.word $0000	; $2A - SB: Removed, used to be 3CM fanfare, now using flagpole
 	.word Video_DoW2WZ	; $2B - "WELCOME TO WARP ZONE" banner
-	.word Video_CourseClearH	; $2C - RAS: "COURSE CLEAR" High
+	.word Video_CourseClearH	; $2C - SB: "COURSE CLEAR" High
 	.word Video_CourseClear	; $2D - "COURSE CLEAR"
-	.word $0000	; $2E - RAS: Removed, used to be "YOU GOT A CARD" (and the card space) [for the End Level otherwise]
+	.word $0000	; $2E - SB: Removed, used to be "YOU GOT A CARD" (and the card space) [for the End Level otherwise]
 
 	; The status bar comes in three identical versions with different VRAM start addresses
 	; Might as well make a macro out of that, eh?
@@ -354,7 +354,7 @@ ClearPattern_ByTileset:
 	.byte $FF	; 19 - bonus game intro
 
 
-	; RAS: Starting star coin tile (expecting 2 adjacent)
+	; SB: Starting star coin tile (expecting 2 adjacent)
 Level_StarCoinByTileset:
 	.byte $FF		; 0 - Map
 	.byte TILE1_STARCOIN1	; 1 - Plains
@@ -479,7 +479,7 @@ MapObj_CompleteBit:
 Arena_CompleteBit:
 WorldIntro_CheckBit:	.byte $01, $02, $04, $08, $10, $20, $40, $80
 
-	; The BGM per world (RAS: Removed silly World_BGM_Restore in PRG010)
+	; The BGM per world (SB: Removed silly World_BGM_Restore in PRG010)
 World_BGM:	
 	.byte MUS2A_WORLD1, MUS2A_WORLD2, MUS2A_WORLD3, MUS2A_WORLD4
 	.byte MUS2A_WORLD5, MUS2A_WORLD6, MUS2A_WORLD7, MUS2A_WORLD8
@@ -500,7 +500,7 @@ IntReset_Part2:
 	; Note: This is setting up the address $7F00 @ $00/$01, the last page of SRAM
 	LDY #$00	 ; Y = $00
 	STY <Temp_Var1	 ; <Temp_Var1 = $00
-	LDA #$7D	 ; A = $7D		(RAS: NOT clearing $7E00-$7FFF -- that's my save data now!!)
+	LDA #$7D	 ; A = $7D		(SB: NOT clearing $7E00-$7FFF -- that's my save data now!!)
 	STA <Temp_Var2	 ; <Temp_Var2 = $7D
 
 	; The following loop clears all of $6000 - $7FFF ... a lot of RAM!
@@ -524,7 +524,7 @@ PRG062_8437:
 	LDA #$5a
 	STA Reset_Latch
 
-	; RAS: Removing N-Spade from map
+	; SB: Removing N-Spade from map
 
 	; N-Spade appears every 80,000 points, but the leading zero is fake, so 8000
 
@@ -593,7 +593,7 @@ PRG062_84A0:
 	LDA #$f8
 	STA <Map_UnusedGOFlag
 		
-	; RAS: Get base offset into completions to aid in calculating unique ID
+	; SB: Get base offset into completions to aid in calculating unique ID
 	; Only need to do this if persisting across worlds
 	;LDY World_Num
 	;LDA MapCompletions_Starts,Y
@@ -605,7 +605,7 @@ PRG062_84A0:
 	; Stop Update_Select activity temporarily while we initialize
 	INC UpdSel_Disable
 
-	; RAS: Do NOT clear Map_Completions anymore!!
+	; SB: Do NOT clear Map_Completions anymore!!
 	; The following clears Map_Completions (stores completed levels on the map)
 ;	LDY #$7f	 ; Y = $7F
 ;	LDA #$00	 ; A = $00
@@ -656,7 +656,7 @@ PRG062_84D7:
 	LDA #$16
 	STA PatTable_BankSel+1
 
-	; RAS: Map sprite graphics are now Common/Player/World bound...
+	; SB: Map sprite graphics are now Common/Player/World bound...
 
 	; Common bank
 	LDX #241
@@ -733,7 +733,7 @@ PRG062_8552:
 	LDA Map_Entered_X,X
 	STA <World_Map_X,X
 
-	; RAS: Now a world backup!
+	; SB: Now a world backup!
 	;LDA Map_Previous_World,X
 	;STA <Map_UnusedPlayerVal2,X
 
@@ -871,7 +871,7 @@ PRG062_8617:
 
 PRG062_8625:
 
-	; RAS: Temporary? removal
+	; SB: Temporary? removal
 	LDA World_Num	 
 	CMP #$FF
 	BNE PRG062_8634	 ; If World_Num <> REMOVED, jump to PRG062_8634
@@ -899,7 +899,7 @@ PRG062_8646:
 	LDA Map_DrawPanState
 	BNE PRG062_8646	 	; If some kind of map drawing/panning activity is occurring, loop around
 
-	; RAS: Skipping the whole "World X" intro thing!
+	; SB: Skipping the whole "World X" intro thing!
 
 	LDA Map_Operation
 	BNE PRG062_86A2	 	; If map operation is anything besides zero, jump to PRG062_86A2
@@ -919,7 +919,7 @@ Map_ShowIntro_NotWZero:
 	AND WorldIntro_CheckBit,Y
 	BEQ Map_ShowIntro_OK		; If not already been to this world, jump to Map_ShowIntro_OK
 
-	; RAS: World intro bypass
+	; SB: World intro bypass
 	INC Map_Operation
 	BNE PRG062_86A2		; Jump (technically always) to PRG062_86A2
 
@@ -1154,7 +1154,7 @@ PRG062_8775:
 	STA Map_Entered_X,X
 
 	;LDA <Map_UnusedPlayerVal2,X
-	LDA World_Num	; RAS: Now a world backup!
+	LDA World_Num	; SB: Now a world backup!
 	STA Map_Previous_World,X	
 
 	LDA #$00
@@ -1202,7 +1202,7 @@ PRG062_87BD:
 	LDA <World_Map_X,X	
 	STA Map_Entered_X,X	
 	;LDA <Map_UnusedPlayerVal2,X	
-	LDA World_Num	; RAS: Now a world backup!
+	LDA World_Num	; SB: Now a world backup!
 	STA Map_Previous_World,X	
 
 	LDA #$00
@@ -1436,7 +1436,7 @@ PRG062_891A:
 
 	; Non-2P Mode begin!
 	
-	; RAS: Ending already set the pointers, so skip Map_PrepareLevel
+	; SB: Ending already set the pointers, so skip Map_PrepareLevel
 	LDA Player_RescuePrincess
 	BNE PRG062_892A
 
@@ -1584,7 +1584,7 @@ LL_NoPCometSkip:
 	JSR Fill_Tile_AttrTable_ByTileset	; Load tile attribute tiles by the tileset
 
 
-	; RAS: Checkpoint support: Override values for active checkpoint
+	; SB: Checkpoint support: Override values for active checkpoint
 
 	; 'X' = offset to LevCP values for this Player
 	LDX Player_Current
@@ -1877,9 +1877,9 @@ PRG062_8B03:
 	STX Update_Select	; Set Update_Select
 
 	LDX Player_RescuePrincess
-	BNE Ending_SkipStatusBar	; RAS: Skip status bar for ending sequence (we're putting credits there!)
+	BNE Ending_SkipStatusBar	; SB: Skip status bar for ending sequence (we're putting credits there!)
 	LDX Player_FallToKing
-	BNE Ending_SkipStatusBar	; RAS: Skip status bar for ending sequence (we're putting credits there!)
+	BNE Ending_SkipStatusBar	; SB: Skip status bar for ending sequence (we're putting credits there!)
 
 	JSR Video_Do_Update	; Video update
 
@@ -2433,7 +2433,7 @@ PRG062_8DC3:
 
 	JMP PRG062_8FA8	; Jump to PRG062_8FA8 (proceed back to World Map)
 
-Page0_SafeClear:	; RAS: Used to be inline, broke out for reuse
+Page0_SafeClear:	; SB: Used to be inline, broke out for reuse
 	; Clears page 0 addresses $00-$FD, excluding $69-$74 (?)
 
 	LDY #$fd	 ; Y = $FD
@@ -2511,7 +2511,7 @@ PRG062_8DF4:
 
 	JSR Level_DoAnimations
 
-	; RAS: Don't have this outer system handle pressing START after
+	; SB: Don't have this outer system handle pressing START after
 	; pause anymore so I can handle it in the pause menu instead...
 	LDA Level_PauseFlag
 	BNE Game_ContinuePause
@@ -2846,7 +2846,7 @@ PRG062_9009:
 
 	JSR EndWorldLetter_GenerateText	; Generate the text for the end-of-world letter
 
-	; RAS: Set low scroll
+	; SB: Set low scroll
 	LDA #$EF
 	STA <Vert_Scroll
 
@@ -2895,7 +2895,7 @@ PRG062_9062:
 	STA Player_FallToKing
 	STA Map_ReturnStatus
 	
-	; RAS: Don't want to clear these here!  Messes up the 2P unique world positioning!
+	; SB: Don't want to clear these here!  Messes up the 2P unique world positioning!
 	;STA Map_Prev_XOff,X
 	;STA Map_Prev_XHi,X
 
@@ -3026,16 +3026,16 @@ PRG062_910C:
 	; Player returns to map dead
 
 	;LDY #$02	 ; Y = 2 (Will be the Map_Operation value)
-	LDY #$0B	; Y = $B (RAS: No more skidding!)
+	LDY #$0B	; Y = $B (SB: No more skidding!)
 
-	; RAS: Delaying this a bit so the marching logic can see you died
+	; SB: Delaying this a bit so the marching logic can see you died
 	; Map_ReturnStatus = 0
 	;LDA #$00
 	;STA Map_ReturnStatus
 
 	LDX Player_Current	 ; X = Player_Current
 
-	; RAS: No more skidding!
+	; SB: No more skidding!
 	; Skid backward
 	;LDA #$01
 	;STA Map_Player_SkidBack,X
@@ -3045,12 +3045,12 @@ PRG062_910C:
 
 	DEC Player_Lives,X	; One less life for the Player...
 	
-	; RAS: Disabling map based game over
+	; SB: Disabling map based game over
 	;BMI PRG062_9133	 	; If fell below zero, GAMEOVER!; jump to PRG062_9133
 
 PRG062_9128:
 
-	; RAS: Clear Map_PlayerLost2PVs
+	; SB: Clear Map_PlayerLost2PVs
 	LDA #0
 	STA Map_PlayerLost2PVs
 
@@ -3061,7 +3061,7 @@ PRG062_9128:
 	STY Map_Operation	 ; Map_Operation = 2
 	JMP PRG062_84D7	 	; Jump to PRG062_84D7
 
-	; RAS: Broken into its own function for reuse
+	; SB: Broken into its own function for reuse
 Map_RestorePlayerPos:
 	; Set both Players to their previous map values
 	LDX Total_Players
@@ -3085,7 +3085,7 @@ PRG062_9185:
 
 	LDX Player_Current
 	LDA Map_Previous_World,X
-	STA World_Num	; RAS: Now a world backup!
+	STA World_Num	; SB: Now a world backup!
 
 	RTS
 
@@ -3368,7 +3368,7 @@ PRG062_92B6:
 	STA World_EnterState
 	STA Map_GameOver_CursorY
 
-	; RAS: FIXME Game Over needs work
+	; SB: FIXME Game Over needs work
 
 	;LDY #(Inventory_Coins - Inventory_Cards)	; Y = offset to Mario's coins
 
@@ -3459,7 +3459,7 @@ Level_DoAnimations:
 
 	LDY Level_Tileset
 
-	; RAS: No longer need this exception
+	; SB: No longer need this exception
 	;CPY #$07
 	;BNE PRG062_8E24	 ; If Level_Tileset <> 7 (Toad House), jump to PRG062_8E24
 	;JMP PRG062_8EAD	 ; Toad House's also do not use the standard animations
@@ -3663,7 +3663,7 @@ Battle_PlayerLost:
 
 	JMP PRG062_8FB2	 ; Jump to PRG062_8FB2
 
-	; RAS: Old 2P Vs code; removed because no longer used for competition
+	; SB: Old 2P Vs code; removed because no longer used for competition
 
 	;LDX Map_PlayerLost2PVs
 	;DEX
@@ -3809,7 +3809,7 @@ PRG062_948F:
 	;DEX		 ; X--
 	;BPL PRG062_9491	 ; While X >= 0, loop	<-- BUG! This will fail on the first pass!
 
-	; RAS: Removing N-Spade from map
+	; SB: Removing N-Spade from map
 
 	LDA #$00
 	;STA Map_NSpade_NextScore	 ; Highest byte in the N-Spade score = 0
@@ -4130,7 +4130,7 @@ Bonus_Prize1:
 	BEQ PRG062_962C	; If Player is Mario, jump to PRG062_962C
 
 PRG062_9622:
-	; RAS: This is dead code anyway, maybe redo??
+	; SB: This is dead code anyway, maybe redo??
 
 	; Offset to Luigi's Inventory
 	LDA <Temp_Var16
@@ -4424,7 +4424,7 @@ Level_BG_Pages1:
 	.byte $6E	; 11 Giant world
 	.byte $18	; 12 Ice
 	.byte $38	; 13 Sky
-	.byte $22	; 14 SMW Plains (RAS: Plains rebranded)
+	.byte $22	; 14 SMW Plains (SB: Plains rebranded)
 	.byte $24	; 15 Bonus Room
 	.byte $2C	; 16 Spade (Roulette)
 	.byte $5C	; 17 N-Spade (Card)
@@ -4433,9 +4433,9 @@ Level_BG_Pages1:
 	.byte $F6	; 20 Delfino N&B Blocks
 	.byte $34	; 21 World 8 War Vehicle
 	.byte $28	; 22 Throne Room
-	.byte $80	; 23 SMB2 style (RAS: High-Up rebranded)
-	.byte $84	; 24 Ghost Plains (RAS: Plains rebranded)
-	.byte $48	; 25 Fire and Ice Galaxy (RAS: Hills/Underground rebranded)
+	.byte $80	; 23 SMB2 style (SB: High-Up rebranded)
+	.byte $84	; 24 Ghost Plains (SB: Plains rebranded)
+	.byte $48	; 25 Fire and Ice Galaxy (SB: Hills/Underground rebranded)
 	.byte $4A	; 26 Topmaniac Fortress
 	.byte $76	; 27 Castle Bleck
 
@@ -4454,7 +4454,7 @@ Level_BG_Pages2:
 	.byte $60	; 11 Giant world
 	.byte $60	; 12 Ice
 	.byte $60	; 13 Sky
-	.byte $60	; 14 SMW Plains (RAS: Plains rebranded)
+	.byte $60	; 14 SMW Plains (SB: Plains rebranded)
 	.byte $5E	; 15 Bonus Room
 	.byte $2E	; 16 Spade (Roulette)
 	.byte $5E	; 17 N-Spade (Card)
@@ -4463,9 +4463,9 @@ Level_BG_Pages2:
 	.byte $60	; 20 Delfino N&B Blocks
 	.byte $50	; 21 World 8 War Vehicle
 	.byte $60	; 22 Throne Room
-	.byte $60	; 23 SMB2 style (RAS: High-Up rebranded)
-	.byte $60	; 24 Ghost Plains (RAS: Plains rebranded)
-	.byte $60	; 25 Fire and Ice Galaxy (RAS: Hills/Underground rebranded)
+	.byte $60	; 23 SMB2 style (SB: High-Up rebranded)
+	.byte $60	; 24 Ghost Plains (SB: Plains rebranded)
+	.byte $60	; 25 Fire and Ice Galaxy (SB: Hills/Underground rebranded)
 	.byte $60	; 26 Topmaniac Fortress
 	.byte $60	; 27 Castle Bleck
 
@@ -4496,7 +4496,7 @@ GamePlay_YStart:	.byte $70, $40, $00, $40, $70, $B0, $F0, $80
 GamePlay_VStart:	.byte $EF, $00, $00, $EF, $30, $70, $B0, $EF
 
 	; Available MSD time start values
-GamePlay_TimeStart:	.byte 4, 5, 3, 0	; RAS: Bumped up all by 100 (except the infinite, of course)
+GamePlay_TimeStart:	.byte 4, 5, 3, 0	; SB: Bumped up all by 100 (except the infinite, of course)
 
 	; Available BGMs for levels (16 possible with stock code)
 GamePlay_BGM:
@@ -4530,7 +4530,7 @@ GamePlay_BGM:
 
 GamePlay_InvertMusic:	.byte $00, $18	; Invert disabled/enabled
 
-	; RAS: Used in PRG026 to fetch level size from header; needed to fix a bug,
+	; SB: Used in PRG026 to fetch level size from header; needed to fix a bug,
 	; but actual level data is not available at the moment required...
 Level_FetchHeaderSize:
 	; Change to page where level will be

@@ -85,7 +85,7 @@ Tile_Layout_TS4_TS12:
 	.byte $2D, $08, $E3, $08, $F3, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FB, $FF ; Tiles $F0 - $FF
 
 Tile_Attributes_TS4_TS12:
-	.byte $1F, $4C, $8D, $F0, $2E, $4C, $AD, $F0 ; RAS: Solidity start $8A -> $AD
+	.byte $1F, $4C, $8D, $F0, $2E, $4C, $AD, $F0 ; SB: Solidity start $8A -> $AD
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; LevelLoad_TS4_TS12
@@ -94,7 +94,7 @@ Tile_Attributes_TS4_TS12:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 LevelLoad_TS4_TS12:
 
-	; RAS: Hackish, forces a different clear if level is vertical
+	; SB: Hackish, forces a different clear if level is vertical
 	; To support a vertical mode level, we must not use the
 	; TILE4_SKY_STOPGEN tile, and instead just put TILE4_SKY...
 	
@@ -219,8 +219,8 @@ LoadLevel_Generator_TS4_TS12:
 	.word LoadLevel_TopDecoBlocks		; 38 - Top-Deco Rectangle Right waving water pool
 	.word LoadLevel_TopDecoBlocks		; 39 - Top-Deco Rectangle Water wrong-way BG
 	.word LoadLevel_TopDecoBlocks		; 40 - Top-Deco Rectangle Diamond blocks (not really any deco on top)
-	.word LoadLevel_TopDecoBlocks		; 41 - Top-Deco Rectangle (RAS: SMB2 cave filler)
-	.word LoadLevel_TopDecoBlocks		; 42 - Top-Deco Rectangle (RAS: SMB2 posts)
+	.word LoadLevel_TopDecoBlocks		; 41 - Top-Deco Rectangle (SB: SMB2 cave filler)
+	.word LoadLevel_TopDecoBlocks		; 42 - Top-Deco Rectangle (SB: SMB2 posts)
 	.word LoadLevel_DoNothing		; 43 - UNUSED
 	.word LoadLevel_VTransitPipeRun		; 44 - Vertical in-level transit pipe
 	.word LoadLevel_IceBlocks		; 45 - Run of ice blocks
@@ -269,7 +269,7 @@ LeveLoad_FixedSizeGen_TS4_TS12:
 	.word LoadLevel_SuspensionCableL	;  3 - Left hooked suspension cable
 	.word LoadLevel_FatTrunk		;  4 - Fat trunk
 	.word LoadLevel_Door2			;  5 - Door style 2
-	.word LoadLevel_PlatformPuller		;  6 - RAS: Places sky tile for breaking built-in barrier
+	.word LoadLevel_PlatformPuller		;  6 - SB: Places sky tile for breaking built-in barrier
 	.word LoadLevel_PlatformPuller		;  7 - Platform puller tile
 	.word LoadLevel_VineToGround		;  8 - Constructs a vine from the start down to next non-sky tile
 	.word LoadLevel_StarCoin1		;  9 - Star Coin 1
@@ -362,7 +362,7 @@ PRG017_A53C:
 ; Generates a long run of SMB2 style ground (grass upper, sand lower)
 ; run length of 1-256 of middle, and then a right edge
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-SMB2Ground_Tiles:	.byte TILE4_LARGEWOOD_LL, TILE4_SMB2_GNDTOP	; RAS: The LARGEWOOD will show up as sand with proper graphics
+SMB2Ground_Tiles:	.byte TILE4_LARGEWOOD_LL, TILE4_SMB2_GNDTOP	; SB: The LARGEWOOD will show up as sand with proper graphics
 
 LoadLevel_LongSMB2Ground:
 	LDA LL_ShapeDef

@@ -227,7 +227,7 @@ ArrowLift_Support:
 	; Backup tile -> 'X'
 	TAX
 
-	; RAS: Support arrow lift in non-vertical mode
+	; SB: Support arrow lift in non-vertical mode
 	LDA Level_Tileset
 	SUB #6
 	CMP #3
@@ -359,9 +359,9 @@ PRG007_A146:
 	STA <Objects_Var5,X
 
 	LDA Level_7Vertical
-	BNE ArrowLift_Vert	; RAS: If vertical, jump to ArrowLift_Vert
+	BNE ArrowLift_Vert	; SB: If vertical, jump to ArrowLift_Vert
 
-	; RAS: Non-vertical support...
+	; SB: Non-vertical support...
 	LDA <Player_Y
 	AND #$F0
 	ADD #31
@@ -597,7 +597,7 @@ PRG007_A251:
 	ORA <Player_HaltGame	; ... gameplay is halted ...
 	BNE PRG007_A268	 	; ... then jump to PRG007_A268
 
-	; RAS: Support disabling weapons
+	; SB: Support disabling weapons
 	LDA Player_DisTailAtk
 	BNE Player_DisWeapon 
 
@@ -607,7 +607,7 @@ PRG007_A251:
 	JSR PlayerProj_ThrowWeapon	 ; Player throws weapon, whatever's appropriate
 
 Player_DisWeapon:
-	; RAS: Disable weapons briefly
+	; SB: Disable weapons briefly
 	LDA #0
 	STA Player_DisTailAtk
 
@@ -643,7 +643,7 @@ PRG007_A268:
 	BNE SKF_UseGiantAlt
 	
 SKF_Normal:
-	LDA #$73	; RAS: Changed to make room for flag; not really the same I guess
+	LDA #$73	; SB: Changed to make room for flag; not really the same I guess
 	
 SKF_UseGiantAlt:
 	STA Sprite_RAM+$01,Y
@@ -724,7 +724,7 @@ PRG007_A2E3:
 
 	; Set projectile Y Hi
 	LDA <Player_Y
-	ADD PProj_RYOff,Y	; RAS: Add offset for reverse gravity
+	ADD PProj_RYOff,Y	; SB: Add offset for reverse gravity
 	STA PlayerProj_Y,X
 	LDA <Player_YHi
 	ADC #0	; Apply carry
@@ -778,7 +778,7 @@ PProj_InitYVel:		.byte $30, $00
 PProj_InitXVel:		.byte $03, $30
 PProj_InitCount:	.byte $00, $08
 PProj_RYOff:	
-	; RAS: Y Offset for projectile if Player is under reverse gravity or not
+	; SB: Y Offset for projectile if Player is under reverse gravity or not
 	.byte 0, 17	; Fireball, normal and reverse gravity
 	.byte 8, 8	; Hammer, normal and reverse gravity
 
@@ -1395,7 +1395,7 @@ PRG007_AA4C:
 	;		       10   20   40   80  100  200  400  800 1000 2000 4000 8000 1-up
 Score_PatternLeft:	.byte $FF, $FF, $FF, $FF, $5B, $63, $6B, $6D, $5B, $63, $6B, $6D, $61
 Score_PatternRight:	.byte $5B, $63, $6B, $6D, $59, $59, $59, $59, $59, $59, $59, $59, $6F
-Score_OffsetRight:	.byte $08, $08, $08, $08, $04, $04, $04, $04, $08, $08, $08, $08, $08	; RAS: To support sprite reuse
+Score_OffsetRight:	.byte $08, $08, $08, $08, $04, $04, $04, $04, $08, $08, $08, $08, $08	; SB: To support sprite reuse
 
 	; Score to add (low byte)
 ScoreAdd_L:
@@ -1652,7 +1652,7 @@ PRG007_AB99:
 	; Score Sprite X
 	LDA Scores_X,X
 
-	; RAS: Hack to free a couple patterns in CHR004
+	; SB: Hack to free a couple patterns in CHR004
 	; Use the double-zero for score values 5-8 (100, 200, 400, 800)
 	; by moving it over by 4 instead of 8
 	LDX <Temp_Var1	 ; X = score value
@@ -2048,7 +2048,7 @@ Poof_Patterns7:	.byte $47, $45, $43, $41
 ; Draws and updates the coins which have popped out of blocks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-CoinPUp_Patterns:	.byte $49, $4F, $49, $4F	; RAS: Formerly $49, $4F, $4D, $4F
+CoinPUp_Patterns:	.byte $49, $4F, $49, $4F	; SB: Formerly $49, $4F, $4D, $4F
 CoinPUp_Attributes:	.byte SPR_PAL3, SPR_PAL3 | SPR_HFLIP, SPR_PAL3, SPR_PAL3
 
 CoinPUps_DrawAndUpdate:

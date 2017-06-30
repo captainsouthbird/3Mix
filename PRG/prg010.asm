@@ -1960,7 +1960,7 @@ PRG010_CA2A:
 
 
 MO_Wait8Proceed:
-	; RAS: I made this happen later than it used to around PRG062_910C
+	; SB: I made this happen later than it used to around PRG062_910C
 	LDA #$00
 	STA Map_ReturnStatus
 
@@ -2643,7 +2643,7 @@ Map_EnterSpecialTiles:
 	.byte TILE_DANCINGFLOWER, TILE_HANDTRAP
 Map_EnterSpecialTiles_End
 
-	; RAS: Defines tiles you can step over (even if enterable!)
+	; SB: Defines tiles you can step over (even if enterable!)
 	; $1x tiles are hardcoded in MapTile_CheckBypassable
 Map_BypassTiles:
 	.byte TILE_WORLD5STAR, TILE_QBLOCK, TILE_FORTRUBBLE, TILE_ALTRUBBLE
@@ -2701,7 +2701,7 @@ PRG010_CDEC:
 	TAY		 	; Y = upper 2 bits of map tile shifted down; the "tile quadrant"
 
 
-	; RAS: Removed old blocker code because we're doing faded paths now
+	; SB: Removed old blocker code because we're doing faded paths now
 
 
 	JSR Map_CheckDoMove	; Attempt move
@@ -2721,7 +2721,7 @@ PRG010_CE71:
 PRG010_CE78:
 	; Player is not moving on map...
 
-	; RAS: If Player presses START, open menu
+	; SB: If Player presses START, open menu
 	LDX Player_Current
 	LDA <Controller1Press,X
 	AND #PAD_START
@@ -2738,7 +2738,7 @@ PRG010_CE78:
 	STA Sound_QPause
 
 Map_NoPressStart:
-	; RAS: Disabling old 2P Vs
+	; SB: Disabling old 2P Vs
 	LDA <Pad_Input
 	AND #PAD_A
 	BEQ PRG010_CEE1
@@ -2796,7 +2796,7 @@ PRG010_CEBF:
 	BEQ PRG010_CEE1	 	; If Player is not pressing 'A', jump to PRG010_CEE1
 
 	LDA <World_Map_Tile
-	LDY #(Map_EnterSpecialTiles_End - Map_EnterSpecialTiles - 1)	; RAS: Corrected bug
+	LDY #(Map_EnterSpecialTiles_End - Map_EnterSpecialTiles - 1)	; SB: Corrected bug
 PRG010_CEC9:
 	CMP Map_EnterSpecialTiles,Y
 	BEQ PRG010_CEA7	 	; If this is one of the special enterable tiles, jump to PRG010_CEA7 (enter level!)
@@ -2897,7 +2897,7 @@ PRG010_CEF4:
 	JMP PRG010_CEAC	 		; Jump to PRG010_CEAC
 
 WorldMap_UpdateAndDraw:
-	; RAS: Update star coins, if any
+	; SB: Update star coins, if any
 	LDA Map_UpdStarCoinsCnt
 	BEQ MONorm_NoStarCoins
 
@@ -2914,7 +2914,7 @@ MONorm_NoStarCoins:
 
 	LDY Player_Current 	; Y = Player_Current
 
-	; RAS: Old, unknown code; AFAIK this is unused, but I'll be safe with 0
+	; SB: Old, unknown code; AFAIK this is unused, but I'll be safe with 0
 	;LDA Map_Previous_World,Y	; A = Map_Previous_World
 	LDA #0
 	STA <Temp_Var3		; Stored into Temp_Var3
@@ -3245,7 +3245,7 @@ Map_No_Pan:
 	CMP <Horz_Scroll_Hi	
 	BNE PRG010_D16F	 	; If other Player's marker is not visible, jump to PRG010_D16F
 
-	; RAS: Also need to make sure Players are on the same world!!
+	; SB: Also need to make sure Players are on the same world!!
 	LDA Map_Previous_World,X
 	CMP World_Num
 	BNE PRG010_D16F	 	; If other Player's on a different world, jump to PRG010_D16F
@@ -4050,7 +4050,7 @@ PRG010_D535:
 	RTS		 ; Return
 
 
-; RAS: This lookup table supports the new system of map completions by map link instead of by column/row
+; SB: This lookup table supports the new system of map completions by map link instead of by column/row
 ; This RELIES on the ordering of "ByScrCol" following "ByRowType" to get a proper count of links in the world!
 ; Will work up to 256 total links on all maps
 MapCompletions_Starts:
@@ -4197,7 +4197,7 @@ MarkComp_DoNext:
 
 	JMP MarkComp_Exit
 
-	; RAS: Instead of hardcoding pattern tables, let's just fetch the damn things!
+	; SB: Instead of hardcoding pattern tables, let's just fetch the damn things!
 MapTile_GetPats:
 
 	; World_Map_Tile -> 'Y'
@@ -4227,7 +4227,7 @@ MapTile_GetPats:
 	RTS
 
 
-	; RAS: Function to determine tiles you can step over (even if enterable!)
+	; SB: Function to determine tiles you can step over (even if enterable!)
 MapTile_CheckBypassable:
 	LDX #(Map_BypassTiles_End - Map_BypassTiles - 1)
 
@@ -4940,7 +4940,7 @@ Map_RTH_NotToadHouse:
 
 	RTS
 
-	; RAS: Align DMC07 to nearest 64 byte boundary
+	; SB: Align DMC07 to nearest 64 byte boundary
  .AlignDMC07:	DMCAlign .AlignDMC07
 
 DMC07:
