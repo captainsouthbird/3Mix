@@ -1,0 +1,19 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_BOOMERANGBRO, $1A, $17
+	.byte OBJ_BOOMERANGBRO, $4C, $17
+	.byte OBJ_GOOMBA, $5E, $13
+	.byte OBJ_GOOMBA, $64, $10
+	.byte OBJ_GOOMBA, $6A, $0D
+	.byte OBJ_GOOMBA, $70, $0A
+	.byte OBJ_GOOMBA, $77, $07
+	.byte OBJ_FIREBRO, $82, $18
+	.byte OBJ_PARATROOPAGREENHOP, $8A, $06
+	.byte OBJ_HAMMERBRO, $9D, $08
+	.byte OBJ_PARATROOPAGREENHOP, $9F, $08
+	.byte OBJ_REDTROOPA, $A6, $08
+	.byte OBJ_REDTROOPA, $AC, $05
+	.byte OBJ_REDTROOPA, $AF, $08
+	.byte OBJ_REDTROOPA, $C0, $09
+	.byte OBJ_PARATROOPAGREENHOP, $D9, $08
+	.byte $FF

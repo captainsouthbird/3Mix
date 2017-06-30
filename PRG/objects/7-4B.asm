@@ -1,0 +1,13 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_AUTOSCROLL, $00, $00
+	.byte OBJ_RREDTROOPA, $39, $04
+	.byte OBJ_RGREENTROOPA, $5B, $04
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $60, $08
+	.byte OBJ_OCTOGOOMBA, $63, $0A
+	.byte OBJ_OCTOGOOMBA, $67, $0A
+	.byte OBJ_OCTOGOOMBA, $6B, $0A
+	.byte OBJ_TOUCHWARP, $7A, $02
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $7C, $00
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $80, $00
+	.byte $FF

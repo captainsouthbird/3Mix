@@ -1,0 +1,10 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_GREENCHEEP, $24, $17
+	.byte OBJ_CHECKPOINT, $3E, $16
+	.byte OBJ_GREENPIRANHA, $48, $16
+	.byte OBJ_GREENPIRANHA, $4E, $16
+	.byte OBJ_REDPIRANHA_FLIPPED, $5C, $10
+	.byte OBJ_VENUSFIRETRAP_CEIL, $60, $0C
+	.byte OBJ_REDPIRANHA_FLIPPED, $64, $08
+	.byte $FF

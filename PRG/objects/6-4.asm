@@ -1,0 +1,24 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_GREENCHEEP, $05, $10
+	.byte OBJ_SPINYCHEEP, $0B, $13
+	.byte OBJ_GREENCHEEP, $0E, $0D
+	.byte OBJ_SPINYCHEEP, $10, $14
+	.byte OBJ_LAVALOTUS, $2A, $15
+	.byte OBJ_PINATA, $2A, $09
+	.byte OBJ_LAVALOTUS, $36, $15
+	.byte OBJ_PINATA, $37, $09
+	.byte OBJ_REDTROOPA, $49, $0E
+	.byte OBJ_REDTROOPA, $4D, $0E
+	.byte OBJ_CHECKPOINT, $5A, $0E
+	.byte OBJ_CHEEPCHEEPHOPPER, $64, $0F
+	.byte OBJ_CHEEPCHEEPHOPPER, $76, $0F
+	.byte OBJ_FAZZYCRAB, $7A, $16
+	.byte OBJ_PIPERAISE1, $82, $0F
+	.byte OBJ_GREENCHEEP, $9D, $16
+	.byte OBJ_FAZZYCRAB, $9F, $0C
+	.byte OBJ_FAZZYCRAB, $A6, $09
+	.byte OBJ_GREENCHEEP, $A7, $16
+	.byte OBJ_ACTIONSWITCH, $A9, $03
+	.byte OBJ_ENDLEVELCARD, $B9, $0D
+	.byte $FF

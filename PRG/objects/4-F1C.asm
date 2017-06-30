@@ -1,0 +1,12 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_CLIMBINGKOOPA_G, $02, $07
+	.byte OBJ_CLIMBINGKOOPA_G, $02, $18
+	.byte OBJ_CLIMBINGKOOPA_G, $04, $1F
+	.byte OBJ_CLIMBINGKOOPA_G, $0C, $1F
+	.byte OBJ_CLIMBINGKOOPA_G, $0C, $23
+	.byte OBJ_CLIMBINGKOOPA_G, $08, $28
+	.byte OBJ_CLIMBINGKOOPA_G, $02, $2E
+	.byte OBJ_CLIMBINGKOOPA_G, $05, $34
+	.byte OBJ_CLIMBINGKOOPA_G, $0B, $3F
+	.byte $FF

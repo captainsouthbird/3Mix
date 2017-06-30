@@ -1,0 +1,10 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_GREENPIRANHA_FIRE_X, $02, $11
+	.byte OBJ_GREENPIRANHA_FIRE_X, $0C, $11
+	.byte OBJ_FLYINGREDPARATROOPA, $08, $12
+	.byte OBJ_FLYINGREDPARATROOPA, $06, $12
+	.byte OBJ_SPARK_CW, $07, $24
+	.byte OBJ_SPARK_CCW, $0F, $28
+	.byte OBJ_SPARK_CCW, $0F, $2F
+	.byte $FF

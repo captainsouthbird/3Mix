@@ -1,0 +1,7 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $04, $13
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $04, $13
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $0B, $13
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $0B, $13
+	.byte $FF

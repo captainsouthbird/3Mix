@@ -1,0 +1,37 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_GREENTROOPA, $1E, $18
+	.byte OBJ_GREENTROOPA, $21, $18
+	.byte OBJ_GOOMBA, $29, $18
+	.byte OBJ_GOOMBA, $2B, $18
+	.byte OBJ_GREENPIRANHA, $2F, $15
+	.byte OBJ_GOOMBA, $34, $18
+	.byte OBJ_GOOMBA, $36, $18
+	.byte OBJ_GREENTROOPA, $39, $14
+	.byte OBJ_GREENTROOPA, $40, $18
+	.byte OBJ_GOOMBA, $43, $18
+	.byte OBJ_GOOMBA, $45, $18
+	.byte OBJ_GOOMBA, $47, $18
+	.byte OBJ_GREENPIRANHA, $4B, $15
+	.byte OBJ_GOOMBA, $51, $18
+	.byte OBJ_GOOMBA, $53, $18
+	.byte OBJ_TOUCHWARP, $54, $00
+	.byte OBJ_ALTLEVELMOD, $54, $03
+	.byte OBJ_GOOMBA, $55, $18
+	.byte OBJ_GOOMBA, $65, $18
+	.byte OBJ_ALTLEVELMOD, $68, $04
+	.byte OBJ_GREENPIRANHA, $68, $15
+	.byte OBJ_GOOMBA, $72, $18
+	.byte OBJ_GREENPIRANHA, $74, $17
+	.byte OBJ_GOOMBA, $79, $18
+	.byte OBJ_GREENPIRANHA, $7C, $15
+	.byte OBJ_GREENPIRANHA, $84, $14
+	.byte OBJ_PARATROOPAGREENHOP, $96, $18
+	.byte OBJ_GOOMBA, $A4, $18
+	.byte OBJ_GOOMBA, $A6, $18
+	.byte OBJ_PARATROOPAGREENHOP, $AB, $17
+	.byte OBJ_PARATROOPAGREENHOP, $AE, $18
+	.byte OBJ_GREENPIRANHA, $B4, $16
+	.byte OBJ_GREENTROOPA, $BA, $18
+	.byte OBJ_TOUCHWARP, $CF, $04
+	.byte $FF

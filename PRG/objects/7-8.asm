@@ -1,0 +1,15 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_AUTOSCROLL, $00, $51
+	.byte OBJ_REDTROOPA, $11, $10
+	.byte OBJ_OCTOGOOMBA, $21, $12
+	.byte OBJ_OCTOGOOMBA, $2A, $11
+	.byte OBJ_PARATROOPAGREENHOP, $47, $13
+	.byte OBJ_PARATROOPAGREENHOP, $4C, $11
+	.byte OBJ_OCTOGOOMBA, $52, $10
+	.byte OBJ_GOOMBA, $5A, $11
+	.byte OBJ_GOOMBA, $5C, $11
+	.byte OBJ_PARATROOPAGREENHOP, $71, $14
+	.byte OBJ_VENUSFIRETRAP, $7C, $12
+	.byte OBJ_PARAGOOMBA, $85, $11
+	.byte $FF

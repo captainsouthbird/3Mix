@@ -1,0 +1,15 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_ACTIONSWITCH, $00, $05
+	.byte OBJ_POWERUP_FIREFLOWER, $04, $0A
+	.byte OBJ_CHECKPOINT, $04, $18
+	.byte OBJ_REDTROOPA, $09, $16
+	.byte OBJ_REDTROOPA, $09, $0E
+	.byte OBJ_POKEY, $16, $05
+	.byte OBJ_PARATROOPAGREENHOP, $26, $0C
+	.byte OBJ_PARATROOPAGREENHOP, $26, $14
+	.byte OBJ_OCTOGOOMBA, $32, $10
+	.byte OBJ_POWERUP_FIREFLOWER, $33, $10
+	.byte OBJ_OCTOGOOMBA, $33, $08
+	.byte OBJ_PIPERAISE3, $3D, $13
+	.byte $FF

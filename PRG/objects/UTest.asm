@@ -1,0 +1,12 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $14, $0F
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $14, $14
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $1E, $14
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $1E, $0F
+	.byte OBJ_FIRESNAKE, $24, $0E
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $2F, $19
+	.byte OBJ_FIRESNAKE, $3B, $10
+	.byte OBJ_FIRESNAKE, $4E, $0F
+	.byte OBJ_AUTOSCROLL, $61, $40
+	.byte $FF

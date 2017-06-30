@@ -1,0 +1,10 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_CFIRE_BULLETBILL, $12, $14
+	.byte OBJ_CFIRE_BULLETBILL, $20, $15
+	.byte OBJ_CFIRE_BULLETBILL, $28, $15
+	.byte OBJ_CFIRE_BULLETBILL, $2D, $13
+	.byte OBJ_CHECKPOINT_FORCE, $35, $12
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $3E, $16
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $3E, $10
+	.byte $FF

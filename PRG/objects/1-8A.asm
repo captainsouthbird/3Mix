@@ -1,0 +1,37 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_BUZZYBEATLE, $10, $0A
+	.byte OBJ_GOOMBA, $1A, $0A
+	.byte OBJ_GOOMBA, $1C, $0A
+	.byte OBJ_GOOMBA, $1E, $0A
+	.byte OBJ_GOOMBA, $28, $0A
+	.byte OBJ_GOOMBA, $2A, $0A
+	.byte OBJ_GOOMBA, $2C, $0A
+	.byte OBJ_GREENPIRANHA, $2D, $07
+	.byte OBJ_GREENTROOPA, $32, $0A
+	.byte OBJ_GREENTROOPA, $34, $0A
+	.byte OBJ_GOOMBA, $4A, $0A
+	.byte OBJ_GOOMBA, $4C, $0A
+	.byte OBJ_GOOMBA, $4E, $0A
+	.byte OBJ_GREENPIRANHA, $58, $07
+	.byte OBJ_BUZZYBEATLE, $5C, $0A
+	.byte OBJ_GREENPIRANHA, $5E, $08
+	.byte OBJ_GREENPIRANHA, $69, $07
+	.byte OBJ_GREENPIRANHA, $74, $07
+	.byte OBJ_GOOMBA, $77, $0A
+	.byte OBJ_GOOMBA, $79, $0A
+	.byte OBJ_GOOMBA, $7B, $0A
+	.byte OBJ_GREENTROOPA, $85, $0A
+	.byte OBJ_GREENTROOPA, $87, $0A
+	.byte OBJ_GREENTROOPA, $89, $0A
+	.byte OBJ_GREENTROOPA, $8F, $0A
+	.byte OBJ_GREENTROOPA, $91, $0A
+	.byte OBJ_GOOMBA, $9C, $0A
+	.byte OBJ_GOOMBA, $9E, $0A
+	.byte OBJ_GOOMBA, $A0, $0A
+	.byte OBJ_PARATROOPAGREENHOP, $A8, $08
+	.byte OBJ_PARATROOPAGREENHOP, $BA, $09
+	.byte OBJ_GREENTROOPA, $D4, $0A
+	.byte OBJ_GREENTROOPA, $D6, $0A
+	.byte OBJ_ALTLEVELMOD, $EA, $00
+	.byte $FF

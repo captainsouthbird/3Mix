@@ -1,0 +1,15 @@
+	.byte $01	; Unknown purpose
+
+	.byte OBJ_SHYGUY_RED, $20, $16
+	.byte OBJ_FIREJET_UPWARD, $25, $15
+	.byte OBJ_SHYGUY_RED, $2B, $16
+	.byte OBJ_FIREJET_UPWARD, $34, $12
+	.byte OBJ_FIREJET_UPWARD, $3D, $12
+	.byte OBJ_SHYGUY_RED, $40, $13
+	.byte OBJ_FIREJET_UPWARD, $4C, $0F
+	.byte OBJ_MUSICSET, $5C, $14
+	.byte OBJ_CHECKPOINT_FORCE, $64, $18
+	.byte OBJ_FLYINGGREENPARATROOPA, $75, $19
+	.byte OBJ_FLYINGGREENPARATROOPA, $76, $19
+	.byte OBJ_ALTLEVELMOD, $78, $0F
+	.byte $FF

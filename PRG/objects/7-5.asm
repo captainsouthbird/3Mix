@@ -1,0 +1,15 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_BUZZYBEATLE, $13, $12
+	.byte OBJ_BUZZYBEATLE, $34, $0A
+	.byte OBJ_REDTROOPA, $38, $14
+	.byte OBJ_BUZZYBEATLE, $47, $09
+	.byte OBJ_BUZZYBEATLE, $5D, $0B
+	.byte OBJ_BUZZYBEATLE, $60, $0B
+	.byte OBJ_GOOMBA, $7E, $0B
+	.byte OBJ_REDPIRANHA, $80, $12
+	.byte OBJ_GOOMBA, $80, $0B
+	.byte OBJ_OSCILLATING_HS, $8A, $05
+	.byte OBJ_PARATROOPAGREENHOP, $8A, $11
+	.byte OBJ_PARATROOPAGREENHOP, $8E, $05
+	.byte $FF

@@ -1,0 +1,9 @@
+	.word $0000	; Alternate level layout
+	.word $0000	; Alternate object layout
+	.byte LEVEL1_SIZE_01 | LEVEL1_YSTART_170
+	.byte LEVEL2_BGPAL_00 | LEVEL2_OBJPAL_08 | LEVEL2_XSTART_70
+	.byte LEVEL3_TILESET_00 | LEVEL3_VSCROLL_LOCKED
+	.byte LEVEL4_BGBANK_INDEX(2) | LEVEL4_INITACT_NOTHING
+	.byte LEVEL5_BGM_BOSS | LEVEL5_TIME_300
+
+	.byte $6E, $00, $3C, $0F, $19, $01, $E0, $0D, $97, $0E, $40, $97, $01, $30, $FF

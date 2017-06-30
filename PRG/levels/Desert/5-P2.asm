@@ -1,0 +1,10 @@
+	.word W5P2BL	; Alternate level layout
+	.word W5P2BO	; Alternate object layout
+	.byte LEVEL1_SIZE_02 | LEVEL1_YSTART_180
+	.byte LEVEL2_BGPAL_00 | LEVEL2_OBJPAL_08 | LEVEL2_XSTART_18
+	.byte LEVEL3_TILESET_09 | LEVEL3_VSCROLL_LOCKED | LEVEL3_PIPENOTEXIT
+	.byte LEVEL4_BGBANK_INDEX(9) | LEVEL4_INITACT_NOTHING
+	.byte LEVEL5_BGM_OVERWORLD | LEVEL5_TIME_300
+
+	.byte $11, $19, $0C, $18, $17, $0B, $36, $04, $23, $56, $06, $04, $14, $0E, $B5, $00
+	.byte $13, $0A, $B6, $00, $73, $0A, $C1, $E1, $18, $20, $FF

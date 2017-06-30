@@ -1,0 +1,11 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_CHECKPOINT, $06, $13
+	.byte OBJ_CFIRE_LBOBOMBS, $07, $14
+	.byte OBJ_PARATROOPAGREENHOP, $14, $16
+	.byte OBJ_CFIRE_LBOBOMBS, $1D, $14
+	.byte OBJ_CFIRE_RBOBOMBS, $1D, $14
+	.byte OBJ_PARATROOPAGREENHOP, $28, $16
+	.byte OBJ_CFIRE_LBOBOMBS, $2D, $14
+	.byte OBJ_ENDLEVELCARD, $69, $11
+	.byte $FF

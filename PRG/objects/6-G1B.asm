@@ -1,0 +1,14 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_ACTIONSWITCH, $00, $03
+	.byte OBJ_ALTLEVELMOD, $01, $16
+	.byte OBJ_PIPERAISE1, $01, $12
+	.byte OBJ_ALTLEVELMOD, $16, $05
+	.byte OBJ_GREENPIRANHA, $1C, $12
+	.byte OBJ_GREENPIRANHA_FLIPPED, $1C, $16
+	.byte OBJ_VENUSFIRETRAP, $60, $15
+	.byte OBJ_VENUSFIRETRAP, $65, $15
+	.byte OBJ_VENUSFIRETRAP, $6A, $15
+	.byte OBJ_ALTLEVELMOD, $86, $15
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $87, $0D
+	.byte $FF

@@ -1,0 +1,13 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_REDTROOPA, $1A, $13
+	.byte OBJ_REDTROOPA, $1A, $10
+	.byte OBJ_REDTROOPA, $1A, $0D
+	.byte OBJ_FLYINGREDPARATROOPA, $20, $0D
+	.byte OBJ_REDTROOPA, $43, $0B
+	.byte OBJ_OSCILLATING_V, $47, $12
+	.byte OBJ_OSCILLATING_V, $4D, $12
+	.byte OBJ_WOODENPLATUNSTABLE, $8C, $0E
+	.byte OBJ_WOODENPLATUNSTABLE, $9E, $15
+	.byte OBJ_ENDLEVELCARD, $B8, $0F
+	.byte $FF

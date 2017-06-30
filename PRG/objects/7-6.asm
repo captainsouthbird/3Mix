@@ -1,0 +1,18 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_OCTOGOOMBA, $08, $09
+	.byte OBJ_OCTOGOOMBA, $18, $11
+	.byte OBJ_REDTROOPA, $20, $06
+	.byte OBJ_REDPIRANHA, $22, $17
+	.byte OBJ_REDTROOPA, $24, $0A
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $36, $04
+	.byte OBJ_REDTROOPA, $3C, $0B
+	.byte OBJ_RREDTROOPA, $3F, $12
+	.byte OBJ_REDTROOPA, $45, $12
+	.byte OBJ_CHECKPOINT, $4A, $14
+	.byte OBJ_RREDTROOPA, $51, $16
+	.byte OBJ_REDTROOPA, $54, $0F
+	.byte OBJ_RREDTROOPA, $5E, $0B
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $68, $0A
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $68, $04
+	.byte $FF

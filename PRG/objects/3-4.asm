@@ -1,0 +1,17 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_GOBLIN, $27, $17
+	.byte OBJ_GOBLIN, $38, $17
+	.byte OBJ_ACTIONSWITCH, $69, $02
+	.byte OBJ_PARADRYBONES, $6F, $17
+	.byte OBJ_PARADRYBONES, $74, $14
+	.byte OBJ_PARADRYBONES, $78, $16
+	.byte OBJ_PARADRYBONES, $7E, $14
+	.byte OBJ_PARADRYBONES, $82, $16
+	.byte OBJ_FIREJET_RIGHT, $99, $13
+	.byte OBJ_FIREJET_LEFT, $9C, $11
+	.byte OBJ_FIREJET_UPWARD, $A0, $02
+	.byte OBJ_FIREJET_UPSIDEDOWN, $A6, $01
+	.byte OBJ_ALTLEVELMOD, $AB, $00
+	.byte OBJ_ENDLEVELCARD, $B9, $10
+	.byte $FF

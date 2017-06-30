@@ -1,0 +1,16 @@
+	.byte $01	; Unknown purpose
+
+	.byte OBJ_AUTOSCROLL, $00, $00
+	.byte OBJ_ENEMYSUN, $02, $11
+	.byte OBJ_GOOMBA, $0A, $18
+	.byte OBJ_GOOMBA, $0E, $16
+	.byte OBJ_CFIRE_BULLETBILL, $15, $17
+	.byte OBJ_CFIRE_BULLETBILL, $2C, $16
+	.byte OBJ_REDPIRANHA_FLIPPED, $30, $13
+	.byte OBJ_REDPIRANHA_FLIPPED, $3A, $13
+	.byte OBJ_REDPIRANHA_FLIPPED, $44, $13
+	.byte OBJ_GREENCHEEP, $5B, $16
+	.byte OBJ_GREENCHEEP, $61, $17
+	.byte OBJ_GREENCHEEP, $6B, $18
+	.byte OBJ_GREENCHEEP, $74, $17
+	.byte $FF

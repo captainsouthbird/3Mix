@@ -1,0 +1,23 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_TOPMAN, $09, $12
+	.byte OBJ_TOPMAN, $12, $0E
+	.byte OBJ_TOPMAN, $1F, $12
+	.byte OBJ_CFIRE_BULLETBILL, $20, $11
+	.byte OBJ_CFIRE_BULLETBILL, $2B, $0F
+	.byte OBJ_CFIRE_GRAVITY_REVERSE, $2F, $16
+	.byte OBJ_CFIRE_GRAVITY_NORMAL, $2F, $11
+	.byte OBJ_TOPMAN, $36, $08
+	.byte OBJ_TOPMAN, $3A, $0F
+	.byte OBJ_TOPMAN, $3E, $08
+	.byte OBJ_CHECKPOINT, $42, $16
+	.byte OBJ_CFIRE_BULLETBILL, $49, $16
+	.byte OBJ_CFIRE_BULLETBILL, $51, $14
+	.byte OBJ_CFIRE_BULLETBILL, $58, $16
+	.byte OBJ_TOPMAN, $6D, $0D
+	.byte OBJ_PARATROOPAGREENHOP, $6E, $14
+	.byte OBJ_PARATROOPAGREENHOP, $72, $15
+	.byte OBJ_TOPMAN, $76, $12
+	.byte OBJ_LAUNCHSTAR, $95, $11
+	.byte OBJ_TOPMAN, $99, $11
+	.byte $FF

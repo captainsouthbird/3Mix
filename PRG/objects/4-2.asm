@@ -1,0 +1,15 @@
+	.byte $00	; Unknown purpose
+
+	.byte OBJ_REX, $08, $16
+	.byte OBJ_REDTROOPA, $15, $14
+	.byte OBJ_REDTROOPA, $17, $14
+	.byte OBJ_REDTROOPA, $19, $14
+	.byte OBJ_YOSHI, $1E, $13
+	.byte OBJ_PARATROOPAGREENHOP, $46, $16
+	.byte OBJ_PARATROOPAGREENHOP, $4D, $15
+	.byte OBJ_PARATROOPAGREENHOP, $72, $12
+	.byte OBJ_PARATROOPAGREENHOP, $76, $15
+	.byte OBJ_PARATROOPAGREENHOP, $8A, $14
+	.byte OBJ_GREENPIRANHA, $C1, $16
+	.byte OBJ_ENDLEVELCARD, $E8, $10
+	.byte $FF
